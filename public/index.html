@@ -1,0 +1,22 @@
+<html>
+<h1>Hello</h1>
+
+
+<body>
+
+    <div id="time"></div>
+
+</body>
+
+<script>
+    fetch("/gateway/date/get-time", {
+        method: "post",
+        body: ["hello"]
+    }).then(result => {
+        result.json().then(time => {
+            document.querySelector('#time').innerHTML = time;
+        })
+    })
+</script>
+
+</html>
