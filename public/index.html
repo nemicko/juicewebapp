@@ -1,5 +1,5 @@
 <html>
-<h1>Hello</h1>
+<h1>Voting</h1>
 <head>
     <script src="/js/vue.js"></script>
     <script src="/js/vue-router.js"></script>
@@ -8,20 +8,24 @@
 
 <body>
 <div id="main" style="width:auto; margin:auto">
+<!-- LIST A -->
+    <button v-on:click="isHiddenA = !isHiddenA">Vote A</button>
+    <p>{{ votersA }} voted for: A</p>
 
-    <button v-on:click="isHidden = !isHidden">Vote A</button>
-    <p>{{ voters }} voted for: A</p>
+    <input v-model="currentVotersA" placeholder="Your name" v-on:keyup.enter="addListA" v-if="!isHiddenA">
+    <br>
+    <br>
+<!-- LIST B -->
+    <button v-on:click="isHiddenB = !isHiddenB">Vote B</button>
+    <p>{{ votersB }} voted for: B</p>
 
-    <button v-on:click="isHidden = !isHidden">Vote B</button>
-    <p>{{ voters }} voted for: B</p>
-
-    <input v-model="currentVoters" placeholder="Your name" v-on:keyup.enter="addList" v-if="!isHidden">
+    <input v-model="currentVotersB" placeholder="Your name" v-on:keyup.enter="addListB" v-if="!isHiddenB">
 
 
     <!--<button @click="randomColor()">Vote B</button>-->
 
-    <div v-bind:style="{ color: color }">{{time}}</div>
-
+<!--    <div v-bind:style="{ color: color }">{{time}}</div>
+-->
 </div>
 </body>
 
@@ -32,9 +36,12 @@
             return {
                 time: "test",
                 color: "red",
-                isHidden: true,
-                voters: ["test"],
-                currentVoters: ""
+                isHiddenA: true,
+                isHiddenB: true,
+                votersA: [],
+                votersB: [],
+                currentVotersA: "",
+                currentVotersB: ""
             }
         },
         methods: {
@@ -44,9 +51,13 @@
             async randomColor(){
                 this.color = "#" + Math.round((Math.random()*6)*100000);
             },
-            async addList(){
-                this.voters.push(this.currentVoters);
-                this.currentVoters = ""
+            async addListA(){
+                 this.votersA.push(this.currentVotersA);
+                    this.currentVotersA = ""
+            },
+            async addListB(){
+                  this.votersB.push(this.currentVotersB);
+                    this.currentVotersB = ""
             }
         }
     });
