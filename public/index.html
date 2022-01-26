@@ -3,18 +3,26 @@
 <head>
     <script src="/js/vue.js"></script>
     <script src="/js/vue-router.js"></script>
+    <style></style>
 </head>
 
 <body>
-    <div id="main">
+<div id="main" style="width:auto; margin:auto">
 
-        <button @click="getTime()">Click Me</button>
+    <button v-on:click="isHidden = !isHidden">Vote A</button>
+    <p>{{ voters }} voted for: A</p>
 
-        <div v-bind:style="{ color: color }">{{time}}</div>
+    <button v-on:click="isHidden = !isHidden">Vote B</button>
+    <p>{{ voters }} voted for: B</p>
 
-        <button @click="randomColor()">Change Color</button>
+    <input v-model="currentVoters" placeholder="Your name" v-on:keyup.enter="addList" v-if="!isHidden">
 
-    </div>
+
+    <!--<button @click="randomColor()">Vote B</button>-->
+
+    <div v-bind:style="{ color: color }">{{time}}</div>
+
+</div>
 </body>
 
 <script>
@@ -23,16 +31,22 @@
         data() {
             return {
                 time: "test",
-                color: "red"
+                color: "red",
+                isHidden: true,
+                voters: ["test"],
+                currentVoters: ""
             }
         },
         methods: {
-            async getTime(){
-                const respone = await fetch("/gateway/date/get-time", { method: "post",  body: ["hello"] });
-                this.time = await respone.json();
+            async getInput(){
+                this.time = await response.json();
             },
             async randomColor(){
                 this.color = "#" + Math.round((Math.random()*6)*100000);
+            },
+            async addList(){
+                this.voters.push(this.currentVoters);
+                this.currentVoters = ""
             }
         }
     });
