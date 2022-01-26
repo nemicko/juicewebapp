@@ -1,22 +1,41 @@
 <html>
 <h1>Hello</h1>
-
+<head>
+    <script src="/js/vue.js"></script>
+    <script src="/js/vue-router.js"></script>
+</head>
 
 <body>
+    <div id="main">
 
-    <div id="time"></div>
+        <button @click="getTime()">Click Me</button>
 
+        <div v-bind:style="{ color: color }">{{time}}</div>
+
+        <button @click="randomColor()">Change Color</button>
+
+    </div>
 </body>
 
 <script>
-    fetch("/gateway/date/get-time", {
-        method: "post",
-        body: ["hello"]
-    }).then(result => {
-        result.json().then(time => {
-            document.querySelector('#time').innerHTML = time;
-        })
-    })
+    new Vue({
+        el: '#main',
+        data() {
+            return {
+                time: "test",
+                color: "red"
+            }
+        },
+        methods: {
+            async getTime(){
+                const respone = await fetch("/gateway/date/get-time", { method: "post",  body: ["hello"] });
+                this.time = await respone.json();
+            },
+            async randomColor(){
+                this.color = "#" + Math.round((Math.random()*6)*100000);
+            }
+        }
+    });
 </script>
 
 </html>
