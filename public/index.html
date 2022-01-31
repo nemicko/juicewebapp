@@ -19,9 +19,9 @@
         <td>Vote</td>
         <td>Voters</td>
         </thead>
-        <tr v-for="vote of voters">
-            <td>{{vote.vote}}</td>
-            <td>{{vote.voter}}</td>
+        <tr>
+            <td>{{voters.vote}}</td>
+            <td>{{voters.voter}}</td>
         </tr>
     </table>
 
@@ -34,8 +34,11 @@
             <td><span>{{voters.a[index-1]}}</span></td>
             <td><span>{{voters.b[index-1]}}</span></td>
         </tr>
+        <tr>
+            <td><span>{{voters.a.length}}</span></td>
+            <td><span>{{voters.b.length}}</span></td>
+        </tr>
     </table>
-
 
 </div>
 </body>
@@ -62,7 +65,8 @@
         methods: {
             async vote(vote){
                 const voter = prompt("Please enter your name")
-                if (voter === "") {
+                if (voter === "" || voter.trim() === "") {
+                    alert("empty");
                     return 0;
                 } else if (voter) {
                     // user typed something and hit OK
