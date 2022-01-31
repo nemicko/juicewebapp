@@ -4,6 +4,7 @@ import {DateService} from "./services/date/DateService";
 import {ApplicationConfiguration} from "@juice/juice/core/decorators/ApplicationConfiguration";
 import {Networking} from "@juice/networking/Networking";
 import * as Path from "path";
+import {VotingService} from "./services/vote/VotingService";
 
 @ApplicationConfiguration({
     key: "webapp",
@@ -18,6 +19,7 @@ export class JuiceWebApp implements IJuiceApplication {
     prepare(): any {
         Juice.install(DateService);
         Juice.import(Networking);
+        Juice.install(VotingService);
     }
 
     async ready(): Promise<any> {

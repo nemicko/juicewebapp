@@ -9,10 +9,6 @@ export class ExampleService implements IService{
     @Inject("date")
     date: DateService;
 
-    constructor() {
-
-    }
-
     async onUpdate(options: any): Promise<boolean> {
         this.options =  options;
         return true;

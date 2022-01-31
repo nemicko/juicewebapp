@@ -1,5 +1,5 @@
 <html>
-<h1>Voting</h1>
+<h1>Hello</h1>
 <head>
     <script src="/js/vue.js"></script>
     <script src="/js/vue-router.js"></script>
@@ -8,57 +8,70 @@
 
 <body>
 <div id="main" style="width:auto; margin:auto">
-<!-- LIST A -->
-    <button v-on:click="isHiddenA = !isHiddenA">Vote A</button>
-    <p>{{ votersA }} voted for: A</p>
 
-    <input v-model="currentVotersA" placeholder="Your name" v-on:keyup.enter="addListA" v-if="!isHiddenA">
-    <br>
-    <br>
-<!-- LIST B -->
-    <button v-on:click="isHiddenB = !isHiddenB">Vote B</button>
-    <p>{{ votersB }} voted for: B</p>
+    <h5>Vote</h5>
 
-    <input v-model="currentVotersB" placeholder="Your name" v-on:keyup.enter="addListB" v-if="!isHiddenB">
+    <button id="vote-a" v-on:click="vote('a')">Vote A</button>
 
+    <button id="vote-b" v-on:click="vote('b')">Vote B</button>
 
-    <!--<button @click="randomColor()">Vote B</button>-->
+    <div>{{voters}}</div>
 
-<!--    <div v-bind:style="{ color: color }">{{time}}</div>
--->
+    <table>
+        <thead>
+        <td>Vote</td>
+        <td>Voters</td>
+        </thead>
+        <tr v-for="vote of voters">
+            <td>{{vote.vote}}</td>
+            <td>{{vote.voter}}</td>
+        </tr>
+    </table>
+
+    <table>
+        <thead>
+        <td>Candidate A</td>
+        <td>Candidate B</td>
+        </thead>
+        <tr v-for="vote of voters">
+            <td v-if="vote.vote== 'a'">{{vote.voter}}</td>
+            <td v-else="vote.vote == 'b'">{{vote.voter}}</td>
+        </tr>
+    </table>
+
 </div>
 </body>
 
 <script>
+    let id;
     new Vue({
         el: '#main',
         data() {
             return {
                 time: "test",
                 color: "red",
-                isHiddenA: true,
-                isHiddenB: true,
-                votersA: [],
-                votersB: [],
-                currentVotersA: "",
-                currentVotersB: ""
+                isHidden: true,
+                voters: ["test"],
+                currentVoters: ""
             }
         },
+        mounted: async () => {
+
+        },
         methods: {
-            async getInput(){
-                this.time = await response.json();
+            async vote(vote){
+                const voter = prompt("Please enter your name")
+                await fetch("/gateway/voting/vote", {
+                    method: "post",
+                    body:   JSON.stringify([vote, voter]),
+                    headers: {
+                        "content-type": "application/json"
+                    }
+                });
+                this.voters = await ( await fetch("/gateway/voting/get-votes", {
+                    method: "post"
+                })).json();
             },
-            async randomColor(){
-                this.color = "#" + Math.round((Math.random()*6)*100000);
-            },
-            async addListA(){
-                 this.votersA.push(this.currentVotersA);
-                    this.currentVotersA = ""
-            },
-            async addListB(){
-                  this.votersB.push(this.currentVotersB);
-                    this.currentVotersB = ""
-            }
         }
     });
 </script>
