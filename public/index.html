@@ -19,9 +19,9 @@
         <td>Vote</td>
         <td>Voters</td>
         </thead>
-        <tr>
-            <td>{{voters.vote}}</td>
-            <td>{{voters.voter}}</td>
+        <tr v-for="vote of votersT">
+            <td>{{vote.vote}}</td>
+            <td>{{vote.voter}}</td>
         </tr>
     </table>
 
@@ -54,9 +54,10 @@
                 isHidden: true,
                 voters: {
                     a: [],
-                    b: []
+                    b: [],
                 },
-                currentVoters: ""
+                currentVoters: "",
+                votersT: ["test"],
             }
         },
         mounted: async () => {
@@ -81,6 +82,10 @@
                     }
                 });
                 this.voters = await ( await fetch("/gateway/voting/get-votes", {
+                    method: "post"
+                })).json();
+
+                this.votersT = await ( await fetch("/gateway/voting/get-votes", {
                     method: "post"
                 })).json();
 
