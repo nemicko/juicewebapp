@@ -12,6 +12,11 @@
     <button id="vote-a" v-on:click="vote('a')">Vote A</button>
 
     <button id="vote-b" v-on:click="vote('b')">Vote B</button>
+
+    <button v-on:click="enterCode()">Enter Valid Codes</button>
+
+    <span>{{validCodes}}</span>
+
     <div>{{voters}}</div>
 
     <table>
@@ -24,7 +29,7 @@
             <td>{{vote.voter}}</td>
         </tr>
     </table>
-
+    <br>
     <table>
         <thead>
         <td>Candidate A</td>
@@ -58,13 +63,46 @@
                 },
                 currentVoters: "",
                 votersT: ["test"],
+                validCodes: []
             }
         },
         mounted: async () => {
 
         },
         methods: {
+            async enterCode(){
+                const valid_code = prompt("enter valid codes")
+                await fetch("/gateway/validation/pushValidationCodes", {
+                    method: "post",
+                    body:   JSON.stringify([valid_code]),
+                    headers: {
+                        "content-type": "application/json"
+                    }
+                });
+                this.validCodes = await ( await fetch("/gateway/validation/getValidCodes", {
+                    method: "post"
+                })).json();
+            },
+
             async vote(vote){
+                const entered_code = prompt("enter code")
+                    if (this.validCodes.contains(entered_code)){
+                        await fetch("/gateway/validation/saveUsedCodes", {
+                            method: "post",
+                            body:   JSON.stringify([entered_code]),
+                            headers: {
+                                "content-type": "application/json"
+                            }
+                        });
+                        this.usedCodes = await ( await fetch("/gateway/validation/getUsedCodes", {
+                            method: "post"
+                        })).json();
+                    }
+                    else {
+                        alert("incorrect code");
+                        return 0;
+                    }
+
                 const voter = prompt("Please enter your name")
                 if (voter === "" || voter.trim() === "") {
                     alert("empty");
@@ -74,6 +112,7 @@
                 } else {
                     return 0;
                 }
+
                 await fetch("/gateway/voting/vote", {
                     method: "post",
                     body:   JSON.stringify([vote, voter]),
@@ -81,6 +120,7 @@
                         "content-type": "application/json"
                     }
                 });
+
                 this.voters = await ( await fetch("/gateway/voting/get-votes", {
                     method: "post"
                 })).json();
@@ -103,6 +143,7 @@
                 this.voters = list;
                 console.log(list)
             },
+
         }
     });
 </script>
