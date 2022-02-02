@@ -15,6 +15,8 @@ export class VotingService implements IService{
     options: any;
     votes: [] = [];
 
+
+
     constructor() {
 
     }
@@ -27,6 +29,16 @@ export class VotingService implements IService{
     @Remotable([])
     public async getVotes() {
         return this.votes;
+    }
+
+    @Remotable(["string"])
+    public async validateCode(code)
+    {
+        for (i=0;i<votes.length(); i++){
+            if (votes[i].code != code){
+                this.votingEnab = true;
+            }
+        }
     }
 
     @Remotable(["string", "string"])

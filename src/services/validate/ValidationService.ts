@@ -15,6 +15,7 @@ export class ValidationService implements IService{
     options: any;
     validCodes: [] = [];
     usedCodes: [] = [];
+    votingEnab = false;
 
     constructor() {
 
@@ -32,11 +33,18 @@ export class ValidationService implements IService{
 
     @Remotable([])
     public async getUsedCodes() {
-        return this.validCodes;
+        return this.usedCodes;
     }
 
     @Remotable(["string"])
-    public async pushValidationCodes(valid_code) {
+    public async pushValidationCodes(valid_code)
+    {
+        /*if(this.votingEnab == true){
+            this.validCodes.pop(valid_code)
+        }
+        else {
+            this.validCodes.push(valid_code)
+        }*/
         this.validCodes.push(valid_code)
         return true;
     }

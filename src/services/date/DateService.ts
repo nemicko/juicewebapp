@@ -14,7 +14,7 @@ export class DateService implements IService {
 
     @Remotable(['string'])
     async getTime(name: string){
-        return (new Date()).getHours() + ":" +  (new Date()).getMinutes() + "-" + name;
+        return "Voting ends: " + (new Date()).getDay() + (new Date()).getHours() + ":" +  (new Date()).getMinutes() + new Date() ;
     }
 
     async onUpdate(options: any): Promise<boolean> {
