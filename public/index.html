@@ -87,41 +87,44 @@
             },
 
             async vote(vote){
-                const entered_code = prompt("enter code")
+                const entered_code = prompt("enter your dedicated code")
                     if (this.validCodes.includes(entered_code)){
-                        await fetch("/gateway/validation/save-used-codes", {
+                        await fetch("/gateway/voting/vote", {
                             method: "post",
-                            body:   JSON.stringify([entered_code]),
+                            body:   JSON.stringify([vote,entered_code]),
                             headers: {
                                 "content-type": "application/json"
                             }
                         });
-                        this.usedCodes = await ( await fetch("/gateway/validation/get-used-codes", {
+                        this.voters = await ( await fetch("/gateway/voting/get-votes", {
                             method: "post"
-                        })).json();}
+                        })).json();
+                    }
 
                     else {
                         alert("incorrect code");
                         return 0;
                     }
 
-                const voter = prompt("Please enter your name")
-                if (voter === "" || voter.trim() === "") {
-                    alert("empty");
-                    return 0;
-                } else if (voter) {
-                    // user typed something and hit OK
-                } else {
-                    return 0;
-                }
-
-                await fetch("/gateway/voting/vote", {
-                    method: "post",
-                    body:   JSON.stringify([vote, voter]),
-                    headers: {
-                        "content-type": "application/json"
+                    /*if (this.voters.voter.some(value => this.validCodes.includes(value))){
+                        alert("already used code")
+                        return 0;
                     }
-                });
+
+                voter.some(value => validCodes.includes(value))
+
+                this.voters.forEach(voter => {
+                    if (voter.vote === this.validCodes){
+                        alert("already used code")
+                        return 0;
+                    }})
+
+                for (i = 0; i < this.voters.voter.length; i++) {
+                    if(java.util.Arrays.equals(this.validCodes, this.voters.voter[i])){
+                        alert("already used code")
+                        return 0;
+                    }
+                }*/
 
                 this.voters = await ( await fetch("/gateway/voting/get-votes", {
                     method: "post"
