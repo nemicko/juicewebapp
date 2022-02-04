@@ -32,7 +32,12 @@ export class ValidationService implements IService{
 
     @Remotable([])
     public async getUsedCodes() {
-        return this.validCodes;
+        return this.usedCodes;
+    }
+    @Remotable(["string"])
+    public async removeCodes() {
+        if(this.validCodes == this.usedCodes)
+        return 0;
     }
 
     @Remotable(["string"])
@@ -42,9 +47,15 @@ export class ValidationService implements IService{
     }
 
     @Remotable(["string"])
-    public async saveUsedCodes(entered_code)
+    public async saveUsedCodes(used_code)
     {
-        this.usedCodes.push(entered_code)
+        this.usedCodes.push(used_code)
+        return true;
+    }
+    @Remotable(["string"])
+    public async setUsedCodes(set_code)
+    {
+        this.usedCodes.push(set_code)
         return true;
     }
 

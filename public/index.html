@@ -8,7 +8,8 @@
 </head>
 
 <body>
-<div id="main" style="width:auto; margin:auto">
+<p id="timer"></p>
+<div id="main" style="width:auto; margin:auto;display:none">
 
     <button id="vote-a" v-on:click="vote('a')">Vote A</button>
 
@@ -17,7 +18,7 @@
     <button v-on:click="enterCode()">Enter Valid Codes</button>
 
     <span>{{validCodes}}</span>
-
+    <span>{{usedCodes}}</span>
     <div>{{voters}}</div>
 
     <table>
@@ -52,22 +53,22 @@
 
 <script>
     // Set the date we're counting down to
-    var countDownDate = new Date("Jan 31, 2022 15:56:25").getTime();
+    let countDownDate = new Date("Feb 2, 2022 11:51:25").getTime();
 
     // Update the count down every 1 second
-    var x = setInterval(function() {
+    let x = setInterval(function() {
 
         // Get today's date and time
-        var now = new Date().getTime();
+        let now = new Date().getTime();
 
         // Find the distance between now and the count down date
-        var distance = countDownDate - now;
+        let distance = countDownDate - now;
 
         // Time calculations for days, hours, minutes and seconds
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         // Output the result in an element with id="demo"
         document.getElementById("timer").innerHTML = days + "d " + hours + "h "
@@ -111,72 +112,88 @@
                         "content-type": "application/json"
                     }
                 });
+
                 this.validCodes = await ( await fetch("/gateway/validation/get-valid-codes", {
+                    method: "post"
+                })).json();
+
+                this.usedCodes = await ( await fetch("/gateway/validation/get-used-codes", {
                     method: "post"
                 })).json();
             },
 
             async vote(vote){
                 const entered_code = prompt("enter code")
-                    if (this.validCodes.includes(entered_code)){
-                        await fetch("/gateway/validation/save-used-codes", {
-                            method: "post",
-                            body:   JSON.stringify([entered_code]),
-                            headers: {
-                                "content-type": "application/json"
-                            }
-                        });
-                        this.usedCodes = await ( await fetch("/gateway/validation/get-used-codes", {
-                            method: "post"
-                        })).json();
-                    }
-                    else {
+                this.usedCodes = await (await fetch("/gateway/validation/get-used-codes", {
+                    method: "post"
+                })).json();
+                if(this.usedCodes.includes(entered_code)){
+                    return 0;
+                }
+                else {
+                    if (this.validCodes.includes(entered_code)) {
+
+
+                    } else {
                         alert("incorrect code");
                         return 0;
                     }
-
-                const voter = prompt("Please enter your name")
-                if (voter === "") {
-                    alert ("No input");
-                    return 0;
-                } else if (voter) {
-                    // user typed something and hit OK
-                } else {
-                    return 0;
                 }
+                    const voter = prompt("Please enter your name")
+                    if (voter === "") {
+                        alert("No input");
+                        return 0;
+                    } else if (voter) {
+                        // user typed something and hit OK
+                    } else {
+                        return 0;
+                    }
 
-                await fetch("/gateway/voting/vote", {
+                    await fetch("/gateway/voting/vote", {
+                        method: "post",
+                        body: JSON.stringify([vote, voter]),
+                        headers: {
+                            "content-type": "application/json"
+                        }
+                    });
+
+                    this.voters = await (await fetch("/gateway/voting/get-votes", {
+                        method: "post"
+                    })).json();
+
+                    this.votersT = await (await fetch("/gateway/voting/get-votes", {
+                        method: "post"
+                    })).json();
+
+                    const list = {
+                        a: [],
+                        b: []
+                    }
+
+
+                    this.voters.forEach(vote => {
+                        if (vote.vote === 'a') {
+                            list.a.push(vote.voter)
+                        } else {
+                            list.b.push(vote.voter)
+                        }
+                    })
+
+                    this.voters = list;
+                    console.log(list)
+
+                await fetch("/gateway/validation/save-used-codes", {
                     method: "post",
-                    body:   JSON.stringify([vote, voter]),
+                    body: JSON.stringify([entered_code]),
                     headers: {
                         "content-type": "application/json"
                     }
+
                 });
 
-                this.voters = await ( await fetch("/gateway/voting/get-votes", {
-                    method: "post"
-                })).json();
 
-                this.votersT = await ( await fetch("/gateway/voting/get-votes", {
-                    method: "post"
-                })).json();
 
-                const list = {
-                    a: [],
-                    b: []
-                }
-
-                this.voters.forEach(vote => {
-                    if (vote.vote === 'a'){
-                        list.a.push(vote.voter)
-                    } else {
-                        list.b.push(vote.voter)
-                    }
-                })
-
-                this.voters = list;
-                console.log(list)
-            },
+                },
 
         }
     });
