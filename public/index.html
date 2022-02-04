@@ -3,12 +3,22 @@
 <head>
     <script src="/js/vue.js"></script>
     <script src="/js/vue-router.js"></script>
-    <style></style>
+    <script src="/js/httpVueLoader.js" crossorigin="use-credentials"></script>
+
+    <!-- promise button -->
+    <script type="module" src="/js/vue-promise-btn.umd.js" crossorigin="use-credentials"></script>
+    <link rel="stylesheet"  href="/js/vue-promise-btn.css" crossorigin="use-credentials">
 
 </head>
 
 <body>
 <p id="timer"></p>
+
+<main id="main" class="flex-shrink-0">
+    <router-view></router-view>
+</main>
+
+<!--
 <div id="main" style="width:auto; margin:auto;display:none">
 
     <button id="vote-a" v-on:click="vote('a')">Vote A</button>
@@ -46,12 +56,15 @@
             <td><span>{{voters.b.length}}</span></td>
         </tr>
     </table>
-
-
 </div>
+-->
+
 </body>
 
+<script type="module" src="app.js" crossorigin="use-credentials"></script>
+
 <script>
+    /*
     // Set the date we're counting down to
     let countDownDate = new Date("Feb 2, 2022 11:51:25").getTime();
 
@@ -196,7 +209,7 @@
                 },
 
         }
-    });
+    });*/
 </script>
 
 </html>
