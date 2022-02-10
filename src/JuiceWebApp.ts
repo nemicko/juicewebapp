@@ -6,6 +6,7 @@ import {Networking} from "@juice/networking/Networking";
 import * as Path from "path";
 import {VotingService} from "./services/vote/VotingService";
 import {ValidationService} from "./services/validate/ValidationService";
+import {LoginService} from "./services/login/LoginService";
 
 @ApplicationConfiguration({
     key: "webapp",
@@ -22,6 +23,7 @@ export class JuiceWebApp implements IJuiceApplication {
         Juice.import(Networking);
         Juice.install(VotingService);
         Juice.install(ValidationService);
+        Juice.install(LoginService);
     }
 
     async ready(): Promise<any> {

@@ -7,7 +7,7 @@ const router = new VueRouter({
                 next();
             }},
         { path: '/admin', component: httpVueLoader('/app/admin.vue') },
-        { path: '/voting', component: httpVueLoader('/app/voting.vue') },
+        { path: '/voting/:id', component: httpVueLoader('/app/voting.vue') },
     ]
 });
 
@@ -19,20 +19,6 @@ const app = new Vue({
         return {}
     },
     methods: {
-        async request(jurl, params) {
-            const requestOptions = {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "authentication": localStorage.getItem("token")
-                },
-                body: JSON.stringify(params)
-            };
-            const response = await fetch(window.location.protocol + '/gateway/' + jurl, requestOptions);
-            return await response.json();
-        },
-        authenticate() {
 
-        }
     }
 });

@@ -15,6 +15,8 @@ export class ValidationService implements IService{
     options: any;
     validCodes: [] = [];
     usedCodes: [] = [];
+    votings: [] = [];
+    votingEnab: boolean;
 
     constructor() {
 
@@ -25,33 +27,45 @@ export class ValidationService implements IService{
         return true;
     }
 
+
     @Remotable([])
     public async getValidCodes() {
         return this.validCodes;
+    }
+
+    @Remotable(["string"])
+    public async validateCode(code)
+    {
+        for (int i in this.votings){
+            if (this.votings[i].code != code){
+                this.votingEnab = true;
+            }
+        }
     }
 
     @Remotable([])
     public async getUsedCodes() {
         return this.usedCodes;
     }
-    @Remotable(["string"])
-    public async removeCodes() {
-        if(this.validCodes == this.usedCodes)
-        return 0;
-    }
+
 
     @Remotable(["string"])
-    public async pushValidationCodes(valid_code) {
-        this.validCodes.push(valid_code)
+    public async pushVotings(votingName, votingId,votingChoice, validCodes) {
+        this.votings.push({
+            name: votingName,
+            id: votingId,
+            choice: votingChoice,
+            code: validCodes
+        });
         return true;
     }
 
-    @Remotable(["string"])
-    public async saveUsedCodes(used_code)
-    {
-        this.usedCodes.push(used_code)
-        return true;
+    @Remotable([])
+    public async getVotings() {
+        return this.votings.name;
     }
+
+
     @Remotable(["string"])
     public async setUsedCodes(set_code)
     {
