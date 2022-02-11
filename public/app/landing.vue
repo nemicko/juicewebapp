@@ -9,9 +9,9 @@
       <router-link :to="{ name: 'Admin'}>Admin</router-link>
     </div>-->
 
-    <div v-if="isAdmin === true">
-      <router-link :to="{name : 'Admin'}">Admin</router-link>
-    </div>
+<!--    <div v-if="isAdmin === true">
+      router.push("Admin")
+    </div>-->
 
     <button v-on:click="login()">login</button>
 
@@ -39,6 +39,7 @@ module.exports = {
       } else if (pwd==='1') {
         // reroute to admin.vue
         this.isAdmin = true;
+        this.$router.push({ name: 'Admin' })
       }
       else if (pwd) {
         // user typed something and hit OK
