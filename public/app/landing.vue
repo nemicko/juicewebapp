@@ -10,7 +10,7 @@
     </div>-->
 
     <button v-on:click="login()">login</button>
-    <div>{{loginPerms}}</div>
+    <div>{{ loginPassword }}</div>
 
   </div>
 </template>
@@ -20,17 +20,18 @@
 module.exports = {
   data() {
     return {
-      loginPerms: [],
+      loginPassword: [],
     }
   },
   methods: {
     async login(){
-      const pwd = prompt("enter ur pwd")
+      const pwd = prompt("Enter your password: ")
       if (pwd === "" || pwd.trim() === "") {
         alert("No input");
         return 0;
       } else if (pwd) {
         // user typed something and hit OK
+        this.loginPassword.push(pwd)
       } else {
         return 0;
       }
@@ -42,9 +43,9 @@ module.exports = {
         }
       });
 
-      this.loginPerms = await ( await fetch("/gateway/validation/get-permissions", {
+/*      this.loginPerms = await ( await fetch("/gateway/validation/get-permissions", {
         method: "post"
-      })).json();
+      })).json();*/
 
 
     },

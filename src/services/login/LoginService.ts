@@ -25,7 +25,7 @@ export class LoginService implements IService {
 
 
     @Remotable([])
-    public async getPermissons(pwd)
+    public async getPermissons()
     {
         return this.permissions.perm;
     }
