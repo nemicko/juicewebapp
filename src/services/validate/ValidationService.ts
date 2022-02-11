@@ -78,10 +78,10 @@ export class ValidationService implements IService{
 
 
 
-    @Remotable([])
+/*    @Remotable([])
     public async getVotings() {
         return this.votings.name;
-    }
+    }*/
 
 
 
