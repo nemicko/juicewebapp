@@ -1,3 +1,4 @@
+/*
 import {IService} from "@juice/juice/core/service/IService";
 import {Inject} from "@juice/juice/core/decorators/Inject";
 import {Remotable} from "@juice/juice/core/gateway/Remotable";
@@ -31,3 +32,4 @@ export class LoginService implements IService {
     }
 
 }
+*/

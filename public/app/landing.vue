@@ -10,7 +10,7 @@
     </div>-->
 
     <button v-on:click="login()">login</button>
-    <div>{{ loginPassword }}</div>
+    <div>{{ loginPerms }}</div>
 
   </div>
 </template>
@@ -20,7 +20,7 @@
 module.exports = {
   data() {
     return {
-      loginPassword: [],
+      loginPerms: [],
     }
   },
   methods: {
@@ -31,10 +31,10 @@ module.exports = {
         return 0;
       } else if (pwd) {
         // user typed something and hit OK
-        this.loginPassword.push(pwd)
       } else {
         return 0;
       }
+      console.log(pwd)
       await fetch("/gateway/validation/set-permissions", {
         method: "post",
         body:   JSON.stringify([pwd]),
@@ -43,9 +43,9 @@ module.exports = {
         }
       });
 
-/*      this.loginPerms = await ( await fetch("/gateway/validation/get-permissions", {
+      this.loginPerms = await ( await fetch("/gateway/validation/get-permissions", {
         method: "post"
-      })).json();*/
+      })).json();
 
 
     },

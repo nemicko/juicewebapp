@@ -17,7 +17,7 @@ export class ValidationService implements IService{
     usedCodes: [] = [];
     //votings: [] = [];
     //votingEnab: boolean;
-    permissions: [] = [];
+    permissions: any[] = [];
 
     constructor() {
 
@@ -53,7 +53,7 @@ export class ValidationService implements IService{
     }
 
 
-    @Remotable([])
+    @Remotable(["string"])
     public async setPermissions(pwd)
     {
         if (pwd === '1'){
@@ -62,23 +62,25 @@ export class ValidationService implements IService{
                 perm: 'admin'
             })
         }
-        else if(this.validCodes.includes(pwd)) {
+/*        else if(this.validCodes.includes(pwd)) {
             this.permissions.push({
                 pwd: pwd,
                 perm: 'guest'
             })
-        }
+        }*/
         else
         {
             return 0;
-        }
 
+        }
+        return true;
     }
 
     @Remotable([])
-    public async getPermissions(pwd)
+    public async getPermissions()
     {
-        return this.permissions.perm;
+
+        return this.permissions.map(per => per.perm);
     }
 
 
