@@ -29,10 +29,8 @@
 module.exports = {
   data() {
     return {
-      usedCodes: [],
       isAdmin: false,
       validCodes: [],
-      isValidVoter: false
     }
   },
   methods: {
@@ -49,42 +47,25 @@ module.exports = {
       else if (pwd) {
         // user typed something and hit OK
         //call set function that validates AND if valid sends it to usedCodes array
-
-        await fetch("/gateway/validation/set-used-codes", {
-          method: "post",
-          body:   JSON.stringify([pwd]),
-          headers: {
-            "content-type": "application/json"
-          }
-        });
-
-        this.usedCodes = await ( await fetch("/gateway/validation/get-used-codes", {
-          method: "post"
-        })).json();
-
         this.validCodes = await ( await fetch("/gateway/validation/get-valid-codes", {
           method: "post"
         })).json();
 
-        this.isValidVoter = await ( await fetch("/gateway/validation/get-valid-voter", {
-          method: "post"
-        })).json();
 
-        if(this.isValidVoter && !(this.usedCodes.includes(pwd))) {
+        if(this.validCodes.includes(pwd)) {
+          console.log(this.validCodes)
           await this.$router.push({name: 'Voting'})
+          this.validCodes = this.validCodes.filter(e => e !== pwd)
+          console.log(this.validCodes)
         }
         else {
+          console.log(this.validCodes)
           alert("Wrong code");
         }
       }
       else {
         return 0;
       }
-
-      this.validCodes = await ( await fetch("/gateway/validation/get-valid-codes", {
-        method: "post"
-      })).json();
-
     },
   }
 }
