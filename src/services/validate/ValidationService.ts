@@ -15,6 +15,7 @@ export class ValidationService implements IService{
     options: any;
     validCodes: any [] = [];
     usedCodes: any [] = [];
+    isValidVoter: boolean;
 
     constructor() {
 
@@ -40,9 +41,12 @@ export class ValidationService implements IService{
 
 
     @Remotable(["string"])
-    public async setPermissions(pwd)
+    public async setUsedCodes(pwd)
     {
         if(this.validCodes.includes(pwd)) {
+
+            this.isValidVoter = true;
+            //somehow delete the instance of the code in validCodes
             this.usedCodes.push({
                 pwd: pwd,
                 perm: 'guest'
@@ -57,13 +61,17 @@ export class ValidationService implements IService{
     }
 
     @Remotable([])
-    public async getPermissions()
+    public async getUsedCodes()
     {
-
         return this.usedCodes.map(per => per.perm);
     }
 
 
+    @Remotable([])
+    public async getValidVoter()
+    {
+        return this.isValidVoter;
+    }
 
     /*@Remotable(["string"])
     public async validateCode(code)
@@ -76,12 +84,6 @@ export class ValidationService implements IService{
     }*/
 
 
-
-
-/*    @Remotable([])
-    public async getVotings() {
-        return this.votings.name;
-    }*/
 
 
 

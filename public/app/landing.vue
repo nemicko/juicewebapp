@@ -11,11 +11,14 @@
 
 <!--    <div v-if="isAdmin === true">
       router.push("Admin")
+    </div>
+
+    <div v-if="isValidVoter === true">
+      <router-link :to="{name : 'Voting'}">Voting</router-link>
     </div>-->
 
     <button v-on:click="login()">login</button>
 
-    <div>{{ loginPerms }}</div>
 
 
   </div>
@@ -26,8 +29,10 @@
 module.exports = {
   data() {
     return {
-      loginPerms: [],
+      usedCodes: [],
       isAdmin: false,
+      validCodes: [],
+      isValidVoter: false
     }
   },
   methods: {
@@ -36,29 +41,49 @@ module.exports = {
       if (pwd === "" || pwd.trim() === "") {
         alert("No input");
         return 0;
-      } else if (pwd==='1') {
-        // reroute to admin.vue
+      }
+      else if (pwd==='1') {
         this.isAdmin = true;
-        this.$router.push({ name: 'Admin' })
+        await this.$router.push({name: 'Admin'})
       }
       else if (pwd) {
         // user typed something and hit OK
-      }else {
+        //call set function that validates AND if valid sends it to usedCodes array
+
+        await fetch("/gateway/validation/set-used-codes", {
+          method: "post",
+          body:   JSON.stringify([pwd]),
+          headers: {
+            "content-type": "application/json"
+          }
+        });
+
+        this.usedCodes = await ( await fetch("/gateway/validation/get-used-codes", {
+          method: "post"
+        })).json();
+
+        this.validCodes = await ( await fetch("/gateway/validation/get-valid-codes", {
+          method: "post"
+        })).json();
+
+        this.isValidVoter = await ( await fetch("/gateway/validation/get-valid-voter", {
+          method: "post"
+        })).json();
+
+        if(this.isValidVoter && !(this.usedCodes.includes(pwd))) {
+          await this.$router.push({name: 'Voting'})
+        }
+        else {
+          alert("Wrong code");
+        }
+      }
+      else {
         return 0;
       }
 
-      await fetch("/gateway/validation/set-permissions", {
-        method: "post",
-        body:   JSON.stringify([pwd]),
-        headers: {
-          "content-type": "application/json"
-        }
-      });
-
-      this.loginPerms = await ( await fetch("/gateway/validation/get-permissions", {
+      this.validCodes = await ( await fetch("/gateway/validation/get-valid-codes", {
         method: "post"
       })).json();
-
 
     },
   }

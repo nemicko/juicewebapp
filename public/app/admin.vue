@@ -1,13 +1,12 @@
 <template>
 <div class="main">
   <h1>admin</h1>
-  <!-- after login buttons to ad voting choices and used codes will be displayed here -->
+  <!-- after login, buttons to add voting choices and used codes will be displayed here -->
 
-  <button v-on:click="enterVotings(1)">Enter Voting title</button>
-  <button v-on:click="enterVotings(3)">Enter Voting choices</button>
-  <button v-on:click="enterVotings(4)">Enter Voting codes</button>
+  <button v-on:click="enterVotings(2)">Enter Voting choices</button>
+  <button v-on:click="enterVotings(3)">Enter Voting codes</button>
 
-  <div>{{votings}}</div>
+  <div>{{validCodes}}</div>
 
 </div>
 </template>
@@ -17,28 +16,35 @@ module.exports = {
   data() {
     return {
       validCodes: [],
-      choices: []
-
     }
   },
   methods: {
     async enterVotings(id){
-      if (id === '1'){const votingName = prompt("enter voting title")}
-        else if (id === '2'){const votingName = prompt("enter voting title")}
-          else if (id === '3'){const votingId = prompt("enter id of voting")}
-            else if (id === '4'){const votingChoices = prompt("enter voting choices")}
+      if (id === 2){
+        const votingChoices = prompt("enter voting choices")
+        //save choices in array, send them to backend and then iterate tru the array
+        // in voting.vue to add as many buttons as there are items in array
 
-      await fetch("/gateway/validation/push-votings", {
-        method: "post",
-        body:   JSON.stringify([votingName, votingId, votingChoices, validCodes]),
-        headers: {
-          "content-type": "application/json"
-        }
-      });
+      }
 
-      this.votings = await ( await fetch("/gateway/validation/get-votings", {
-        method: "post"
-      })).json();
+      else if (id === 3){
+        const votingCodes = prompt("enter valid codes")
+
+        await fetch("/gateway/validation/set-valid-codes", {
+          method: "post",
+          body:   JSON.stringify([votingCodes]),
+          headers: {
+            "content-type": "application/json"
+          }
+        });
+
+        this.validCodes = await ( await fetch("/gateway/validation/get-valid-codes", {
+          method: "post"
+        })).json();
+
+      }
+
+
     },
 
   }
