@@ -5,12 +5,18 @@
     <!-- login and setting permissions
     based on those permissions rerouting to admin.vue or voting.vue
 
-    <div v-for="voting in votings" :key="voting.id">
-      <router-link :to="{ name: 'voting', params: {id: voting.id}}">{{votings.name}}</router-link>
+    <div v-if="{loginPerms} === 'admin'">
+      <router-link :to="{ name: 'Admin'}>Admin</router-link>
     </div>-->
 
+    <div v-if="isAdmin === true">
+      <router-link :to="{name : 'Admin'}">Admin</router-link>
+    </div>
+
     <button v-on:click="login()">login</button>
+
     <div>{{ loginPerms }}</div>
+
 
   </div>
 </template>
@@ -21,6 +27,7 @@ module.exports = {
   data() {
     return {
       loginPerms: [],
+      isAdmin: false,
     }
   },
   methods: {
@@ -29,12 +36,16 @@ module.exports = {
       if (pwd === "" || pwd.trim() === "") {
         alert("No input");
         return 0;
-      } else if (pwd) {
+      } else if (pwd==='1') {
+        // reroute to admin.vue
+        this.isAdmin = true;
+      }
+      else if (pwd) {
         // user typed something and hit OK
-      } else {
+      }else {
         return 0;
       }
-      console.log(pwd)
+
       await fetch("/gateway/validation/set-permissions", {
         method: "post",
         body:   JSON.stringify([pwd]),
