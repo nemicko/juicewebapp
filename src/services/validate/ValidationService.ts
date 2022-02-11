@@ -15,8 +15,9 @@ export class ValidationService implements IService{
     options: any;
     validCodes: [] = [];
     usedCodes: [] = [];
-    votings: [] = [];
-    votingEnab: boolean;
+    //votings: [] = [];
+    //votingEnab: boolean;
+    permissions: [] = [];
 
     constructor() {
 
@@ -33,38 +34,16 @@ export class ValidationService implements IService{
         return this.validCodes;
     }
 
-    @Remotable(["string"])
-    public async validateCode(code)
-    {
-        for (int i in this.votings){
-            if (this.votings[i].code != code){
-                this.votingEnab = true;
-            }
-        }
-    }
-
     @Remotable([])
     public async getUsedCodes() {
         return this.usedCodes;
     }
 
-
     @Remotable(["string"])
-    public async pushVotings(votingName, votingId,votingChoice, validCodes) {
-        this.votings.push({
-            name: votingName,
-            id: votingId,
-            choice: votingChoice,
-            code: validCodes
-        });
+    public async setValidCodes(codes) {
+        this.validCodes.push(codes)
         return true;
     }
-
-    @Remotable([])
-    public async getVotings() {
-        return this.votings.name;
-    }
-
 
     @Remotable(["string"])
     public async setUsedCodes(set_code)
@@ -72,6 +51,57 @@ export class ValidationService implements IService{
         this.usedCodes.push(set_code)
         return true;
     }
+
+
+    @Remotable([])
+    public async setPermissions(pwd)
+    {
+        if (pwd === '1'){
+            this.permissions.push({
+                pwd: pwd,
+                perm: 'admin'
+            })
+        }
+        else if(this.validCodes.includes(pwd)) {
+            this.permissions.push({
+                pwd: pwd,
+                perm: 'guest'
+            })
+        }
+        else
+        {
+            return 0;
+        }
+
+    }
+
+    @Remotable([])
+    public async getPermissions(pwd)
+    {
+        return this.permissions.perm;
+    }
+
+
+
+    /*@Remotable(["string"])
+    public async validateCode(code)
+    {
+        for (int i in this.votings){
+            if (this.votings[i].code != code){
+                this.votingEnab = true;
+            }
+        }
+    }*/
+
+
+
+
+    @Remotable([])
+    public async getVotings() {
+        return this.votings.name;
+    }
+
+
 
 
 }

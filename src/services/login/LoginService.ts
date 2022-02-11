@@ -22,23 +22,7 @@ export class LoginService implements IService {
         return true;
     }
 
-    @Remotable([])
-    public async setPermissons(pwd)
-    {
-        if (pwd === '1'){
-            this.permissions.push({
-                pwd: pwd,
-                perm: 'admin'
-            })
-        }
-        else if(validCodes.includes(pwd)) {
-            this.permissions.push({
-                pwd: pwd,
-                perm: 'guest'
-            })
-        }
 
-    }
 
     @Remotable([])
     public async getPermissons(pwd)

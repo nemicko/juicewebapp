@@ -1,7 +1,7 @@
 <template>
   <div class="main">
   <h1>Voting</h1>
-  <!-- pojedino glasanje dinamicki id-->
+  <!-- after login as guest voting choices will be displayed here as buttons -->
   </div>
 </template>
 

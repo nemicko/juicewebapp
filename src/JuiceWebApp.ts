@@ -23,7 +23,7 @@ export class JuiceWebApp implements IJuiceApplication {
         Juice.import(Networking);
         Juice.install(VotingService);
         Juice.install(ValidationService);
-        Juice.install(LoginService);
+        //Juice.install(LoginService);
     }
 
     async ready(): Promise<any> {

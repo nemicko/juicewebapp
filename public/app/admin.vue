@@ -1,9 +1,9 @@
 <template>
 <div class="main">
   <h1>admin</h1>
+  <!-- after login buttons to ad voting choices and used codes will be displayed here -->
 
   <button v-on:click="enterVotings(1)">Enter Voting title</button>
-  <button v-on:click="enterVotings(2)">Enter Voting ID</button>
   <button v-on:click="enterVotings(3)">Enter Voting choices</button>
   <button v-on:click="enterVotings(4)">Enter Voting codes</button>
 
@@ -16,7 +16,9 @@
 module.exports = {
   data() {
     return {
-      votings: []
+      validCodes: [],
+      choices: []
+
     }
   },
   methods: {
