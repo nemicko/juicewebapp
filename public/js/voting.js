@@ -4,6 +4,9 @@ module.exports = {
             votingChoices: [],
         }
     },
+    mounted:function(){
+        this.choices()
+    },
     //mounted: this.choices(),
     methods: {
             async choices() {

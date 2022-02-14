@@ -2,7 +2,7 @@
   <div class="main">
   <h1>Voting</h1>
   <!-- after login as guest voting choices will be displayed here as buttons -->
-    <button v-on:click="choices()">get</button>
+<!--    <button v-on:click="choices()">get</button>-->
     <div id="buttons"></div>
   </div>
 </template>
