@@ -32,8 +32,12 @@ export class ValidationService implements IService{
 
     @Remotable(["string"])
     public async setValidCodes(codes) {
-        this.validCodes.push(codes)
-        return true;
+        if(codes === "" || codes.trim() === "") {
+            return false;
+        } else {
+            this.validCodes.push(codes);
+            return true;
+        }
     }
 
     @Remotable(["string"])
