@@ -39,13 +39,4 @@ export class VotingService implements IService{
         return true;
     }
 
-    /*@Remotable(["string"])
-    public async validateCode(code)
-    {
-        for (i=0;i<votes.length(); i++){
-            if (votes[i].code != code){
-                this.votingEnab = true;
-            }
-        }
-    }*/
 }
