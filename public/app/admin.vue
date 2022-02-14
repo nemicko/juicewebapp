@@ -1,6 +1,6 @@
 <template>
 <div class="main">
-  <h1>admin</h1>
+  <h1>Admin</h1>
   <!-- after login, buttons to add voting choices and used codes will be displayed here -->
 
   <button v-on:click="enterVotings(2)">Enter Voting choices</button>

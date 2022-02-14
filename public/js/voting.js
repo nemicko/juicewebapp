@@ -14,5 +14,6 @@ module.exports = {
                 document.location.redirect("/#/assets");
             }
         }
+
     }
 }

@@ -10,12 +10,6 @@ module.exports = {
                 const votingChoices = prompt("Enter voting choices")
                 //save choices in array, send them to backend and then iterate tru the array
                 // in voting.vue to add as many buttons as there are items in array
-                for(var i = 0; i < votingChoices; i++) {
-                    let btn = document.createElement("button");
-                    btn.innerHTML = "Vote";
-                    document.body.appendChild(btn);
-                }
-
             }
 
             else if (id === 3){
