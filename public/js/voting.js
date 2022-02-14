@@ -17,7 +17,7 @@ module.exports = {
                 this.votingChoices.forEach( function(v) {
                     var button= document.createElement('button');
                     button.type= 'button';
-                    button.appendChild(document.createTextNode("Vote"));
+                    button.appendChild(document.createTextNode(v));
                     //button.setAttribute('onClick',v.press);
                     document.getElementById("buttons").appendChild(button);
                 } );

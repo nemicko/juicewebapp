@@ -12,7 +12,7 @@ module.exports = {
                 //save choices in array, send them to backend and then iterate tru the array
                 // in voting.vue to add as many buttons as there are items in array
                 for(var i = 0; i < choicesNumber; i++) {
-                    const choices = prompt("enter choices")
+                    const choices = prompt("Enter choices")
                     await fetch("/gateway/voting/set-choices", {
                         method: "post",
                         body:   JSON.stringify([choices]),
