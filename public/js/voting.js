@@ -17,6 +17,7 @@ module.exports = {
                     var button= document.createElement('button');
                     button.type= 'button';
                     button.appendChild(document.createTextNode(v));
+                    button.id = v;
                     document.getElementById("buttons").appendChild(button);
                 } );
             }

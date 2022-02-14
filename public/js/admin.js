@@ -24,7 +24,6 @@ module.exports = {
                     this.votingChoices = await ( await fetch("/gateway/voting/get-choices", {
                         method: "post"
                     })).json();
-
                 }
 
             }
