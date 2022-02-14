@@ -30,10 +30,19 @@ export class ValidationService implements IService{
         return this.validCodes;
     }
 
-
     @Remotable(["string"])
     public async setValidCodes(codes) {
         this.validCodes.push(codes)
+        return true;
+    }
+
+    @Remotable(["string"])
+    public async removeValidCodes(code) {
+        console.log('Not removed')
+        console.log(this.validCodes)
+        this.validCodes = this.validCodes.filter(e => e !== code);
+        console.log('Removed')
+        console.log(this.validCodes)
         return true;
     }
 }

@@ -21,14 +21,14 @@ module.exports = {
   methods: {
     async enterVotings(id){
       if (id === 2){
-        const votingChoices = prompt("enter voting choices")
+        const votingChoices = prompt("Enter voting choices")
         //save choices in array, send them to backend and then iterate tru the array
         // in voting.vue to add as many buttons as there are items in array
 
       }
 
       else if (id === 3){
-        const votingCodes = prompt("enter valid codes")
+        const votingCodes = prompt("Enter valid codes")
 
         await fetch("/gateway/validation/set-valid-codes", {
           method: "post",

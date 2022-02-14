@@ -53,13 +53,17 @@ module.exports = {
 
 
         if(this.validCodes.includes(pwd)) {
-          console.log(this.validCodes)
           await this.$router.push({name: 'Voting'})
-          this.validCodes = this.validCodes.filter(e => e !== pwd)
-          console.log(this.validCodes)
+          await fetch("/gateway/validation/remove-valid-codes", {
+            method: "post",
+            body:   JSON.stringify([pwd]),
+            headers: {
+              "content-type": "application/json"
+            }
+          });
         }
+
         else {
-          console.log(this.validCodes)
           alert("Wrong code");
         }
       }
