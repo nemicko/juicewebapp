@@ -7,6 +7,7 @@
   <button v-on:click="enterVotings(3)">Enter Voting codes</button>
 
   <div>{{validCodes}}</div>
+  <div>{{votingChoices}}</div>
 
 </div>
 </template>

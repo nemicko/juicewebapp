@@ -14,6 +14,8 @@ export class ValidationService implements IService{
 
     options: any;
     validCodes: any [] = [];
+    usedCodes: any [] = [];
+    isValidVoter: boolean;
 
     constructor() {
 
@@ -45,4 +47,25 @@ export class ValidationService implements IService{
         this.validCodes = this.validCodes.filter(e => e !== code);
         return true;
     }
+
+
+    @Remotable(["string"])
+    public async setUsedCodes(pwd)
+    {
+        if(this.validCodes.includes(pwd)) {
+
+            //this.validCodes = this.validCodes.filter(e => e !== pwd)
+            this.isValidVoter = true
+            //somehow delete the instance of the code in validCodes
+            this.usedCodes.push(pwd)
+        }
+        else
+        {
+            return 0;
+
+        }
+        return true;
+    }
+
+
 }

@@ -2,10 +2,9 @@
   <div class="main">
   <h1>Voting</h1>
   <!-- after login as guest voting choices will be displayed here as buttons -->
-  <div id="votes"></div>
+    <button v-on:click="choices()">get</button>
+    <div id="buttons"></div>
   </div>
-
 </template>
 
-<script src="/js/admin.js"></script>
 <script src="/js/voting.js"></script>

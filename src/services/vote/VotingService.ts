@@ -13,7 +13,7 @@ import { Injectable } from "@juice/juice/core/decorators/Injectable";
 export class VotingService implements IService{
 
     options: any;
-    votes: any [] = [];
+    choices: any [] = [];
 
     constructor() {
 
@@ -24,19 +24,17 @@ export class VotingService implements IService{
         return true;
     }
 
+
+    @Remotable(["string"])
+    public async setChoices(votingChoices) {
+        this.choices.push(votingChoices);
+    }
+
     @Remotable([])
-    public async getVotes() {
-        return this.votes;
+    public async getChoices() {
+        return this.choices;
     }
 
 
-    @Remotable(["string", "string"])
-    public async vote(vote, entered_code) {
-        this.votes.push({
-            vote: vote,
-            voter: entered_code,
-        });
-        return true;
-    }
 
 }
