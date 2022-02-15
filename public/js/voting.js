@@ -1,4 +1,5 @@
 module.exports = {
+
     data() {
         return {
             votingChoices: [],
@@ -30,11 +31,13 @@ module.exports = {
                         });
                     };
                     document.getElementById("buttons").appendChild(button);
+
                 } );
 
                 this.votes = await ( await fetch("/gateway/voting/get-counter", {
                     method: "post"
                 })).json();
+
             }
         }
     }

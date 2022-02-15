@@ -10,7 +10,7 @@ import { Injectable } from "@juice/juice/core/decorators/Injectable";
     options: {}
 })
 
-export class VotingService implements IService{
+export class VotingService implements IService {
 
     options: any;
     choices: any [] = [];
@@ -22,7 +22,7 @@ export class VotingService implements IService{
     }
 
     async onUpdate(options: any): Promise<boolean> {
-        this.options =  options;
+        this.options = options;
         return true;
     }
 
@@ -51,5 +51,11 @@ export class VotingService implements IService{
     @Remotable([])
     public async getVotes() {
         return this.votes;
+    }
+
+    @Remotable([])
+    public async setCounter() {
+        this.counter= null
+        return this.counter;
     }
 }

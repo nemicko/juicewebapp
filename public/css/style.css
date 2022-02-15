@@ -1,0 +1,9 @@
+body{
+    padding-top: 40px;
+    padding-right: 40px;
+    background: url("../src/images/back.jpg") no-repeat;
+    background-size: 100% 100%;
+}
+.lol{
+    color: #0dcaf0;
+}
