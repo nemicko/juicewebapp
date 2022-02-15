@@ -30,10 +30,6 @@ module.exports = {
                     };
                     document.getElementById("buttons").appendChild(button);
                 } );
-
-                this.votes = await ( await fetch("/gateway/voting/set-votes", {
-                    method: "post"
-                })).json();
             }
         }
     }
