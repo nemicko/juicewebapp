@@ -238,8 +238,8 @@ new Vue({
   <h1 class="header3">Voting</h1>
 
   <!-- after login as guest voting choices will be displayed here as buttons -->
-    <div id="buttons"></div>
-    <div>{{votes}}</div>
+    <div class="adminfont">{{votes}} - Times Clicked</div>
+    <div class="container" id="buttons"></div>
   </div>
 </template>
 
