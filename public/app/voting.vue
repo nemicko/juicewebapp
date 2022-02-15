@@ -235,7 +235,7 @@ new Vue({
 </script>
 <template>
   <div class="main">
-  <h1>Voting</h1>
+  <h1 class="header3">Voting</h1>
 
   <!-- after login as guest voting choices will be displayed here as buttons -->
     <div id="buttons"></div>
