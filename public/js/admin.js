@@ -54,8 +54,10 @@ module.exports = {
 
             }
 
+        },
+        async routeVoting(){
+            await this.$router.push({name: 'Voting'})
+        }
 
         },
-
-    }
 }

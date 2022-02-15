@@ -9,6 +9,9 @@
   <div>{{validCodes}}</div>
   <div>{{votingChoices}}</div>
 
+  <button v-on:click="routeVoting()">Route to Voting</button>
+
+
 </div>
 </template>
 
