@@ -16,7 +16,7 @@ module.exports = {
                     method: "post"
                 })).json();
 
-                this.votingChoices.forEach( function(v) {
+                this.votingChoices.forEach(function(v) {
                     let button = document.createElement('button');
                     button.type= 'button';
                     button.appendChild(document.createTextNode(v));
@@ -34,9 +34,7 @@ module.exports = {
 
                 } );
 
-                this.votes = await ( await fetch("/gateway/voting/get-counter", {
-                    method: "post"
-                })).json();
+
 
             }
         }

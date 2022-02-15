@@ -14,7 +14,7 @@ module.exports = {
                 for(var i = 0; i < choicesNumber; i++) {
                     const choices = prompt("Enter choices")
 
-                    this.votingChoices = await ( await fetch("/gateway/voting/get-choices", {
+                    this.votingChoices = await ( await fetch("/gateway/voting/fetch-votings", {
                         method: "post"
                     })).json();
 
@@ -26,15 +26,15 @@ module.exports = {
 
                     }
                     else {
-                    await fetch("/gateway/voting/set-choices", {
+                    await fetch("/gateway/voting/create-voting", {
                         method: "post",
-                        body:   JSON.stringify([choices.toLowerCase()]),
+                        body:   JSON.stringify([{choices:choices.toLowerCase()}]),
                         headers: {
                             "content-type": "application/json"
                         }
 
                     });
-                        this.votingChoices = await ( await fetch("/gateway/voting/get-choices", {
+                        this.votingChoices = await ( await fetch("/gateway/voting/fetch-votings", {
                             method: "post"
                         })).json();
                     }

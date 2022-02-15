@@ -16,6 +16,7 @@ export class ValidationService implements IService{
     validCodes: any [] = [];
     usedCodes: any [] = [];
     isValidVoter: boolean;
+    votingInfo: {};
 
     constructor() {
 
@@ -30,6 +31,11 @@ export class ValidationService implements IService{
     @Remotable([])
     public async getValidCodes() {
         return this.validCodes;
+    }
+
+    @Remotable([])
+    public async setFormInfo() {
+
     }
 
     @Remotable(["string"])
