@@ -45,7 +45,6 @@ export class VotingService implements IService{
             return acc;
         }, {});
         this.counter = uniqs
-        console.log(this.counter)
     }
 
     @Remotable([])
