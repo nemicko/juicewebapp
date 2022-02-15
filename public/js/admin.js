@@ -30,6 +30,9 @@ module.exports = {
                             "content-type": "application/json"
                         }
                     });
+                        this.votingChoices = await ( await fetch("/gateway/voting/get-choices", {
+                            method: "post"
+                        })).json();
                     }
                 }
             }
