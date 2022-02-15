@@ -19,9 +19,14 @@ module.exports = {
                     button.type= 'button';
                     button.appendChild(document.createTextNode(v));
                     button.id = v;
-                    button.onclick = function() {
-                        this.votes.push(button.id)
-                        console.log(this.votes)
+                    button.onclick = async function() {
+                        await fetch("/gateway/voting/set-votes", {
+                            method: "post",
+                            body:   JSON.stringify([v]),
+                            headers: {
+                                "content-type": "application/json"
+                            }
+                        });
                     };
                     document.getElementById("buttons").appendChild(button);
                 } );
