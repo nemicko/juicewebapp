@@ -15,6 +15,7 @@ export class VotingService implements IService{
     options: any;
     choices: any [] = [];
     votes: any [] = [];
+    counter: {};
 
     constructor() {
 
@@ -39,15 +40,21 @@ export class VotingService implements IService{
     @Remotable(["string"])
     public async setVotes(vote) {
         this.votes.push(vote);
-        var uniqs = this.votes.reduce((acc, val) => {
+        let uniqs = this.votes.reduce((acc, val) => {
             acc[val] = acc[val] === undefined ? 1 : acc[val] += 1;
             return acc;
         }, {});
-        console.log(uniqs)
+        this.counter = uniqs
+        console.log(this.counter)
     }
 
     @Remotable([])
     public async getVotes() {
         return this.votes;
+    }
+
+    @Remotable([])
+    public async getCounter() {
+        return this.counter;
     }
 }

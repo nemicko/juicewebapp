@@ -2,7 +2,7 @@ module.exports = {
     data() {
         return {
             votingChoices: [],
-            votes: []
+            votes: {}
         }
     },
     mounted:function(){
@@ -10,12 +10,16 @@ module.exports = {
     },
     methods: {
             async choices() {
+                this.votes = await ( await fetch("/gateway/voting/get-counter", {
+                    method: "post"
+                })).json();
+
                 this.votingChoices = await ( await fetch("/gateway/voting/get-choices", {
                     method: "post"
                 })).json();
 
                 this.votingChoices.forEach( function(v) {
-                    var button= document.createElement('button');
+                    var button = document.createElement('button');
                     button.type= 'button';
                     button.appendChild(document.createTextNode(v));
                     button.id = v;
@@ -30,6 +34,10 @@ module.exports = {
                     };
                     document.getElementById("buttons").appendChild(button);
                 } );
+
+                this.votes = await ( await fetch("/gateway/voting/get-counter", {
+                    method: "post"
+                })).json();
             }
         }
     }
