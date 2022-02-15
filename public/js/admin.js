@@ -20,7 +20,10 @@ module.exports = {
 
                     if(this.votingChoices.includes(choices.toLowerCase())){
                         alert("Can't input same choice twice");
+
+
                         return 0;
+
                     }
                     else {
                     await fetch("/gateway/voting/set-choices", {
@@ -29,6 +32,7 @@ module.exports = {
                         headers: {
                             "content-type": "application/json"
                         }
+
                     });
                         this.votingChoices = await ( await fetch("/gateway/voting/get-choices", {
                             method: "post"
