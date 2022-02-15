@@ -5,31 +5,36 @@ module.exports = {
             votes: []
         }
     },
-    mounted: function () {
+    mounted:function(){
         this.choices()
     },
     methods: {
-        async choices() {
-            this.votingChoices = await (await fetch("/gateway/voting/get-choices", {
-                method: "post"
-            })).json();
+            async choices() {
+                this.votingChoices = await ( await fetch("/gateway/voting/get-choices", {
+                    method: "post"
+                })).json();
 
                 this.votingChoices.forEach( function(v) {
                     var button= document.createElement('button');
                     button.type= 'button';
                     button.appendChild(document.createTextNode(v));
-                    //button.setAttribute('onClick', v.press());
-                    document.getElementById("buttons").appendChild(button);
                     button.id = v;
-                    button.onclick = function() {
-                        this.votes.push(v);
-                        console.log(this.votes)
+                    button.onclick = async function() {
+                        await fetch("/gateway/voting/set-votes", {
+                            method: "post",
+                            body:   JSON.stringify([v]),
+                            headers: {
+                                "content-type": "application/json"
+                            }
+                        });
                     };
-
+                    document.getElementById("buttons").appendChild(button);
                 } );
-            },
 
+                this.votes = await ( await fetch("/gateway/voting/set-votes", {
+                    method: "post"
+                })).json();
+            }
         }
     }
-
 
