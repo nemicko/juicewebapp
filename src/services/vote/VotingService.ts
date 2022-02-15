@@ -2,6 +2,7 @@ import {IService} from "@juice/juice/core/service/IService";
 import {Inject} from "@juice/juice/core/decorators/Inject";
 import {Remotable} from "@juice/juice/core/gateway/Remotable";
 import { Injectable } from "@juice/juice/core/decorators/Injectable";
+import {Voting} from "./Voting";
 
 @Injectable({
     key: "voting",
@@ -24,6 +25,20 @@ export class VotingService implements IService {
     async onUpdate(options: any): Promise<boolean> {
         this.options = options;
         return true;
+    }
+
+    @Remotable(["string"])
+    public async createVoting(data: any) {
+
+        let t = new Voting();
+        Object.assign(t, data);
+
+        await t.save();
+    }
+
+    @Remotable([])
+    public async fetchVotings() {
+        return await Voting.find({}).toArray();
     }
 
 
