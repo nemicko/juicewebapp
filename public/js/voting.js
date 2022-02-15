@@ -2,6 +2,7 @@ module.exports = {
     data() {
         return {
             votingChoices: [],
+            votes: []
         }
     },
     mounted:function(){
@@ -18,10 +19,13 @@ module.exports = {
                     button.type= 'button';
                     button.appendChild(document.createTextNode(v));
                     button.id = v;
+                    button.onclick = function() {
+                        this.votes.push(button.id)
+                        console.log(this.votes)
+                    };
                     document.getElementById("buttons").appendChild(button);
                 } );
             }
         }
-
     }
 
