@@ -16,7 +16,7 @@ module.exports = {
                 })).json();
 
                 this.votingChoices.forEach( function(v) {
-                    var button = document.createElement('button');
+                    let button = document.createElement('button');
                     button.type= 'button';
                     button.appendChild(document.createTextNode(v));
                     button.id = v;
@@ -28,7 +28,6 @@ module.exports = {
                                 "content-type": "application/json"
                             }
                         });
-                        window.location.reload();
                     };
                     document.getElementById("buttons").appendChild(button);
                 } );
