@@ -10,9 +10,6 @@ module.exports = {
     },
     methods: {
             async choices() {
-                this.votes = await ( await fetch("/gateway/voting/get-counter", {
-                    method: "post"
-                })).json();
 
                 this.votingChoices = await ( await fetch("/gateway/voting/get-choices", {
                     method: "post"
@@ -31,6 +28,7 @@ module.exports = {
                                 "content-type": "application/json"
                             }
                         });
+                        window.location.reload();
                     };
                     document.getElementById("buttons").appendChild(button);
                 } );
