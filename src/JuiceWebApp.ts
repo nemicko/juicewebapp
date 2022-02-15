@@ -33,6 +33,7 @@ export class JuiceWebApp implements IJuiceApplication {
             rewriteUrl: "*",
             targetPath: Path.join(__dirname, "../public"),
             targetFile: "index.html"
+
         });
 
         return true;
