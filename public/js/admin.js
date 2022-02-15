@@ -13,19 +13,25 @@ module.exports = {
                 // in voting.vue to add as many buttons as there are items in array
                 for(var i = 0; i < choicesNumber; i++) {
                     const choices = prompt("Enter choices")
-                    await fetch("/gateway/voting/set-choices", {
-                        method: "post",
-                        body:   JSON.stringify([choices]),
-                        headers: {
-                            "content-type": "application/json"
-                        }
-                    });
 
                     this.votingChoices = await ( await fetch("/gateway/voting/get-choices", {
                         method: "post"
                     })).json();
-                }
 
+                    if(this.votingChoices.includes(choices.toLowerCase())){
+                        alert("Can't input same choice twice");
+                        return 0;
+                    }
+                    else {
+                    await fetch("/gateway/voting/set-choices", {
+                        method: "post",
+                        body:   JSON.stringify([choices.toLowerCase()]),
+                        headers: {
+                            "content-type": "application/json"
+                        }
+                    });
+                    }
+                }
             }
 
             else if (id === 3){
