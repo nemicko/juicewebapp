@@ -53,29 +53,6 @@ body {
     box-shadow: #D6D6E7 0 3px 7px inset;
     transform: translateY(2px);
 }
-.header{
-    font-family: "JetBrains Mono",monospace;
-    position: absolute;
-    top: 15%;
-    left: 50%;
-    transform: translateX(-50%);
-}
-.header2{
-    font-family: "JetBrains Mono",monospace;
-    position: absolute;
-    top: 15%;
-    left: 50%;
-    transform: translateX(-50%);
-
-}
-.header3{
-    font-family: "JetBrains Mono",monospace;
-    position: absolute;
-    top: 15%;
-    left: 50%;
-    transform: translateX(-50%);
-
-}
 
 .choicestipka{
     appearance: none;
@@ -205,11 +182,7 @@ body {
     box-shadow: #D6D6E7 0 3px 7px inset;
     transform: translateY(2px);
 }
-.adminfont{
-    font-size: 28px;
-    font-family: "JetBrains Mono",monospace;
-}
-.landingfont{
+.headerfont{
     margin-top: 100px;
     margin-bottom: -60px;
     font-size: 36px;
@@ -228,7 +201,11 @@ body {
     padding: 12px;
     width: 40%;
     border: none;
+    outline: none;
     background: transparent;
+    border-bottom: 1px solid black;
+    font-family: "JetBrains Mono",monospace;
 }
+
 
 

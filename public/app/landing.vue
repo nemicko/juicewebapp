@@ -2,14 +2,14 @@
 
   <div class="main">
     <header>
-      <h1 class="text-center landingfont">Welcome</h1>
+      <h1 class="text-center headerfont">Welcome</h1>
     </header>
       <div class="text-center">
         <div class="col-md-12 cen lowerouterborder">
           <div class="h-50 w-50 p-15 text-white text-center bg-dark bg-opacity-10 rounded-3 bordercenter">
-            <input class="landinginput" type='text' name='title' id='title' placeholder="Enter Password">
+            <input  class="landinginput" type='text' name='title' id='title' placeholder="Enter Password">
             <p></p>
-            <button class="logintipka" v-on:click="login()">Login</button>
+            <button class="logintipka" id="login_button" v-on:click="login()">Login</button>
 
           </div>
         </div>

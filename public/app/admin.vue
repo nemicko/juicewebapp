@@ -39,7 +39,7 @@
 
   </main> -->
 <div class="main">
-  <h1 class="header2">Admin</h1>
+  <h1 class="headerfont text-center">Admin</h1>
   <!-- after login, buttons to add voting choices and used codes will be displayed here
 
   <button class="choicestipka" v-on:click="enterVotings(2)">Enter Voting choices</button>
