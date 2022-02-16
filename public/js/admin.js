@@ -2,30 +2,38 @@ module.exports = {
     data() {
         return {
             validCodes: [],
-            votingChoices: []
+            votingChoices: [],
+            votingTitle: "title",
+
         }
     },
     methods: {
-        async enterVotings(id){
+        async addTitle(){
+            var title = document.getElementById('title').value;
+        },
+        async addChoices() {
+            var text = document.getElementById('choices').value;
+            this.votingChoices = text.split(',').map(item=>item.trim());
+            console.log(this.votingChoices);
+        },
+        async addCodes() {
+            var text = document.getElementById('codes').value;
+            this.validCodes = text.split(',').map(item=>item.trim());
+
+            console.log(this.validCodes);
+        },
+
+
+
+
+        /*async enterVotings(id){
             if (id === 2){
                 const choicesNumber = prompt("Enter number of voting choices")
                 //save choices in array, send them to backend and then iterate tru the array
                 // in voting.vue to add as many buttons as there are items in array
                 for(var i = 0; i < choicesNumber; i++) {
                     const choices = prompt("Enter choices")
-
-                    this.votingChoices = await ( await fetch("/gateway/voting/fetch-votings", {
-                        method: "post"
-                    })).json();
-
-                    if(this.votingChoices.includes(choices.toLowerCase())){
-                        alert("Can't input same choice twice");
-
-
-                        return 0;
-
-                    }
-                    else {
+                    
                     await fetch("/gateway/voting/create-voting", {
                         method: "post",
                         body:   JSON.stringify([{choices:choices.toLowerCase()}]),
@@ -37,7 +45,7 @@ module.exports = {
                         this.votingChoices = await ( await fetch("/gateway/voting/fetch-votings", {
                             method: "post"
                         })).json();
-                    }
+
                 }
             }
 
@@ -63,5 +71,6 @@ module.exports = {
             await this.$router.push({name: 'Voting'})
         }
 
-        },
+        },*/
+    }
 }

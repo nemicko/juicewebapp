@@ -15,6 +15,7 @@ export class VotingService implements IService {
 
     options: any;
     choices: any [] = [];
+    codes: any [] = [];
     votes: any [] = [];
     counter: {};
 
@@ -31,7 +32,6 @@ export class VotingService implements IService {
     public async createVoting(data: any) {
         const voting = new Voting()
         voting.choices = data.choices
-
 
         await voting.save();
     }

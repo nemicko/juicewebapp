@@ -39,6 +39,29 @@
   <button class="choicestipka" v-on:click="enterVotings(2)">Enter Voting choices</button>
   <button class="codestipka" v-on:click="enterVotings(3)">Enter Voting codes</button>
 
+  <label>Title:
+    <input type='text' name='title' id='title' placeholder="Vote Title">
+  </label>
+  <br>
+  <br>
+
+  <label>Choices
+    <input type='text' name='choices' id='choices' placeholder="Choices">
+  </label>
+  <button type="button" v-on:click="addChoices()">Add Choice</button>
+  <br>
+  <br>
+
+  <label>Codes:
+    <input type='text' name='codes' id='codes' placeholder="Codes">
+  </label>
+  <button type="button" v-on:click="addCodes()">Add Code</button>  <br>
+  <br>
+
+  <button type="button" id="finish">Finish entry</button>
+  <button type="button" id="print">Print</button>
+
+
   <div class="adminfont">{{validCodes}} - Valid Codes</div>
   <div class="adminfont">{{votingChoices}} - Valid Choices</div>
 
