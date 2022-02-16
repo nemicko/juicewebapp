@@ -193,6 +193,25 @@ body {
     width: 50%;
     padding: 100px;
 }
+.bordercentertitle{
+    margin: auto;
+    width: 50%;
+    padding: 100px;
+    margin-top: 60px;
+}
+.bordercentertitle2{
+    margin: auto;
+    width: 50%;
+    padding: 100px;
+    left: 30%;
+}
+.bordercentertitle3{
+    margin: auto;
+    width: 50%;
+    padding: 100px;
+}
+
+
 .lowerouterborder{
     padding: 150px;
 }

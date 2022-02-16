@@ -44,7 +44,40 @@
 
   <button class="choicestipka" v-on:click="enterVotings(2)">Enter Voting choices</button>
   <button class="codestipka" v-on:click="enterVotings(3)">Enter Voting codes</button>-->
-<form name="form">
+
+  <form name="form">
+    <div class="text-center">
+      <div class="col-md-12 text-center">
+        <div class="h-15 w-50 p-15 text-white text-center bg-dark bg-opacity-10 rounded-3 bordercentertitle">
+          <input type='text' name='title' id='title' placeholder="Vote Title">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row align-items-md-stretch">
+          <div class="col-md-6">
+            <div class="h-15 p-15 text-white text-center bg-dark bg-opacity-10 rounded-3 bordercentertitle2">
+              <label>Choices
+                <br>
+                <input type='text' name='choices' id='choices' placeholder="Choices">
+              </label>
+              <br>
+              <button type="button" v-on:click="addChoices()">Add Choice</button>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="h-15 p-15 text-white text-center bg-dark bg-opacity-10 rounded-3 bordercentertitle2">
+              <label>Codes
+                <br>
+                <input type='text' name='codes' id='codes' placeholder="Codes" >
+              </label>
+              <br>
+              <button type="button" v-on:click="addCodes()">Add Code</button>
+            </div>
+          </div>
+    </div>
+
   <label>Title:
     <input type='text' name='title' id='title' placeholder="Vote Title">
   </label>
@@ -61,7 +94,8 @@
   <label>Codes:
     <input type='text' name='codes' id='codes' placeholder="Codes" >
   </label>
-  <button type="button" v-on:click="addCodes()">Add Code</button>  <br>
+  <button type="button" v-on:click="addCodes()">Add Code</button>
+    <br>
   <br>
 
   <button type="button" v-on:click="finishEntry()">Finish entry</button>
