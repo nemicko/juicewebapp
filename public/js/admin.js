@@ -8,9 +8,7 @@ module.exports = {
         }
     },
     methods: {
-        async addTitle(){
-            var title = document.getElementById('title').value;
-        },
+
         async addChoices() {
             var text = document.getElementById('choices').value;
             this.votingChoices = text.split(',').map(item=>item.trim());
@@ -22,13 +20,43 @@ module.exports = {
 
             console.log(this.validCodes);
         },
-        async routeVoting(){
-            await this.$router.push({name: 'Voting'})
-        },
-        async routeLanding(){
-            await this.$router.push({name: 'Landing'})
-        }
+        async finishEntry(){
+            var title = document.getElementById('title').value;
+            this.votingTitle = title;
 
+            if(this.validCodes.length == 0 || this.validCodes === undefined){
+                alert("unadded code enries")
+            }
+            else if(this.votingChoices.length == 0 || this.validCodes === undefined){
+                alert("unadded choices enries")
+            }
+            else if (this.votingTitle == ""){
+                alert("missing title")
+            }
+            else {
+                let arr = [];
+                let vote = {
+                    title: this.votingTitle,
+                    choices: this.votingChoices,
+                    codes: this.validCodes,
+                }
+                arr.push(vote);
+
+                await fetch("/gateway/voting/create-voting", {
+                    method: "post",
+                    body:   JSON.stringify([arr]),
+                    headers: {
+                        "content-type": "application/json"
+                    }
+
+                });
+                var form = document.getElementsByName('form')[0];
+                form.reset();
+                this.votingTitle = "";
+                this.validCodes = [];
+                this.votingChoices = [];
+            }
+        }
 
 
 
@@ -76,9 +104,6 @@ module.exports = {
         },
         async routeVoting(){
             await this.$router.push({name: 'Voting'})
-        },
-        async routeLanding(){
-            await this.$router.push({name: 'Landing'})
         }
 
         },*/

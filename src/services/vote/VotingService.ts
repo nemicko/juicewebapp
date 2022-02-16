@@ -30,11 +30,10 @@ export class VotingService implements IService {
 
     @Remotable(["json"])
     public async createVoting(data: any) {
-        const voting = new Voting()
-        voting.choices = data.choices
-
-        await voting.save();
-    }
+            let t = new Voting();
+            Object.assign(t,data);
+            await t.save();
+        }
 
     @Remotable([])
     public async fetchVotings() {

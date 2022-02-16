@@ -35,14 +35,16 @@
         &copy; 2022
       </footer>
     </div>
+
+
   </main> -->
 <div class="main">
   <h1 class="header2">Admin</h1>
-  <!-- after login, buttons to add voting choices and used codes will be displayed here -->
+  <!-- after login, buttons to add voting choices and used codes will be displayed here
 
-  <!--  <button class="choicestipka" v-on:click="enterVotings(2)">Enter Voting choices</button>
-  <button class="codestipka" v-on:click="enterVotings(3)">Enter Voting codes</button> -->
-
+  <button class="choicestipka" v-on:click="enterVotings(2)">Enter Voting choices</button>
+  <button class="codestipka" v-on:click="enterVotings(3)">Enter Voting codes</button>-->
+<form name="form">
   <label>Title:
     <input type='text' name='title' id='title' placeholder="Vote Title">
   </label>
@@ -57,20 +59,16 @@
   <br>
 
   <label>Codes:
-    <input type='text' name='codes' id='codes' placeholder="Codes">
+    <input type='text' name='codes' id='codes' placeholder="Codes" >
   </label>
   <button type="button" v-on:click="addCodes()">Add Code</button>  <br>
   <br>
 
-  <button type="button" id="finish">Finish entry</button>
-  <button type="button" id="print">Print</button>
-
+  <button type="button" v-on:click="finishEntry()">Finish entry</button>
+  </form>
 
   <div class="adminfont">{{validCodes}} - Valid Codes</div>
   <div class="adminfont">{{votingChoices}} - Valid Choices</div>
-
-  <button class="routetipka" v-on:click="routeLanding()">Route to Landing</button>
-  <button class="routetipka" v-on:click="routeVoting()">Route to Voting</button>
 
 
 </div>
