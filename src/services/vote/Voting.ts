@@ -8,3 +8,5 @@ export class Voting extends Model {
     codes: [];
 
 }
+
+

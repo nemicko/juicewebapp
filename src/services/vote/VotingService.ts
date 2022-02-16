@@ -15,7 +15,6 @@ export class VotingService implements IService {
 
     options: any;
     choices: any [] = [];
-    codes: any [] = [];
     votes: any [] = [];
     counter: {};
 
@@ -33,7 +32,7 @@ export class VotingService implements IService {
             let t = new Voting();
             Object.assign(t,data);
             await t.save();
-        }
+    }
 
     @Remotable([])
     public async fetchVotings() {
@@ -62,10 +61,6 @@ export class VotingService implements IService {
         console.log(this.counter)
     }
 
-    @Remotable([])
-    public async getVotes() {
-        return this.votes;
-    }
 
     @Remotable([])
     public async setCounter() {

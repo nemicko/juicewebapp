@@ -7,7 +7,14 @@ module.exports = {
     },
     methods: {
         async login(){
-            const pwd = prompt("Enter your password: ")
+            var login = document.getElementById('login').value;
+
+            this.validCodes = await ( await fetch("/gateway/voting/fetch-votings", {
+                method: "post"
+            })).json();
+
+            console.log(this.validCodes)
+            /*
             if (pwd === "" || pwd.trim() === "") {
                 alert("No input");
                 return 0;
@@ -40,7 +47,7 @@ module.exports = {
             }
             else {
                 return 0;
-            }
+            }*/
         },
     }
 }
