@@ -183,11 +183,16 @@ body {
     transform: translateY(2px);
 }
 .headerfont{
-    margin-top: 100px;
-    margin-bottom: -60px;
+    margin-top: 60px;
+    margin-bottom: -30px;
     font-size: 36px;
     font-family: "JetBrains Mono",monospace;
 }
+.font1{
+    font-family: "JetBrains Mono",monospace;
+    font-size: 22px;
+}
+
 .bordercenter{
     margin: auto;
     width: 50%;
@@ -195,22 +200,16 @@ body {
 }
 .bordercentertitle{
     margin: auto;
-    width: 50%;
-    padding: 100px;
+    padding: 50px;
     margin-top: 60px;
+    margin-bottom: 40px;
+
 }
 .bordercentertitle2{
     margin: auto;
-    width: 50%;
-    padding: 100px;
-    left: 30%;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
-.bordercentertitle3{
-    margin: auto;
-    width: 50%;
-    padding: 100px;
-}
-
 
 .lowerouterborder{
     padding: 150px;
@@ -222,9 +221,16 @@ body {
     border: none;
     outline: none;
     background: transparent;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid white;
     font-family: "JetBrains Mono",monospace;
 }
-
+.admininput{
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: "JetBrains Mono",monospace;
+    border-bottom: 1px solid white;
+    font-size: 20px;
+}
 
 

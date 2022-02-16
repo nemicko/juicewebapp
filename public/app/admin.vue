@@ -39,11 +39,10 @@
 
   </main> -->
 <div class="main">
-  <header class="pb-3 mb-4 border-bottom">
-    <div class="adminfont">{{validCodes}} - Valid Codes</div>
-    <div class="adminfont">{{votingChoices}} - Valid <Choices></Choices></div>
-    <h1 class=" text-center">Admin</h1>
-  </header>
+  <h1 class="headerfont text-center">Admin</h1>
+  <div class="adminfont">{{validCodes}} - Valid Codes</div>
+  <div class="adminfont">{{votingChoices}} - Valid <Choices></Choices></div>
+
   <div class="container py-4 h-15  p-15 text-white text-center bg-dark bg-opacity-10 rounded-3 ">
 
   <!-- after login, buttons to add voting choices and used codes will be displayed here
@@ -54,66 +53,44 @@
   <form name="form">
     <div class="text-center">
       <div class="col-md-12 text-center">
-        <div class="h-15  p-15 text-white text-center rounded-3 ">
-          <input type='text' name='title' id='title' placeholder="Vote Title">
-
+        <div class="h-15  p-15 text-white text-center rounded-3 bordercentertitle ">
+          <label class="font1">Enter Title
+            <br>
+          <input class="admininput text-center" type='text' name='title' id='title' placeholder="Title">
+          </label>
         </div>
       </div>
     </div>
 
     <div class="row align-items-md-stretch">
-      <div class="col-md-3">
-        </div>
-          <div class="col-md-3">
-            <div class="h-15 p-15 text-white text-center rounded-3 ">
-              <label>Choices
+          <div class="col-md-6">
+            <div class="h-15 p-15 text-white text-center rounded-3 bordercentertitle2 ">
+              <label class="font1">Enter Choices
                 <br>
-                <input type='text' name='choices' id='choices' placeholder="Choices">
+                <input class="admininput text-center" type='text' name='choices' id='choices' placeholder="Choices">
               </label>
               <br>
-              <button type="button" v-on:click="addChoices()">Add Choice</button>
+              <button class="logintipka" type="button" v-on:click="addChoices()">Add Choice</button>
             </div>
           </div>
-          <div class="col-md-3 ">
-            <div class="h-15 p-15 text-white text-center  rounded-3 ">
-              <label>Codes
+          <div class="col-md-6">
+            <div class="h-15 p-15 text-white text-center  rounded-3 bordercentertitle2">
+              <label class="font1">Enter Codes
                 <br>
-                <input type='text' name='codes' id='codes' placeholder="Codes" >
+                <input class="admininput text-center" type='text' name='codes' id='codes' placeholder="Codes">
               </label>
               <br>
-              <button type="button" v-on:click="addCodes()">Add Code</button>
+              <button class="logintipka" type="button" v-on:click="addCodes()">Add Code</button>
             </div>
           </div>
     </div>
-  </div>
 
-  <label>Title:
-    <input type='text' name='title' id='title' placeholder="Vote Title">
-  </label>
-  <br>
-  <br>
-
-  <label>Choices
-    <input type='text' name='choices' id='choices' placeholder="Choices">
-  </label>
-  <button type="button" v-on:click="addChoices()">Add Choice</button>
-  <br>
-  <br>
-
-  <label>Codes:
-    <input type='text' name='codes' id='codes' placeholder="Codes" >
-  </label>
-  <button type="button" v-on:click="addCodes()">Add Code</button>
-    <br>
-  <br>
-
-  <button type="button" v-on:click="finishEntry()">Finish entry</button>
+  <button class="logintipka" type="button" v-on:click="finishEntry()">Finish entry</button>
   </form>
 
-  <div class="adminfont">{{validCodes}} - Valid Codes</div>
-  <div class="adminfont">{{votingChoices}} - Valid Choices</div>
 
 
+</div>
 </div>
 </template>
 
