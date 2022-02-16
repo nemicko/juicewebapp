@@ -39,7 +39,13 @@
 
   </main> -->
 <div class="main">
-  <h1 class="headerfont text-center">Admin</h1>
+  <header class="pb-3 mb-4 border-bottom">
+    <div class="adminfont">{{validCodes}} - Valid Codes</div>
+    <div class="adminfont">{{votingChoices}} - Valid <Choices></Choices></div>
+    <h1 class=" text-center">Admin</h1>
+  </header>
+  <div class="container py-4 h-15  p-15 text-white text-center bg-dark bg-opacity-10 rounded-3 ">
+
   <!-- after login, buttons to add voting choices and used codes will be displayed here
 
   <button class="choicestipka" v-on:click="enterVotings(2)">Enter Voting choices</button>
@@ -48,7 +54,7 @@
   <form name="form">
     <div class="text-center">
       <div class="col-md-12 text-center">
-        <div class="h-15 w-50 p-15 text-white text-center bg-dark bg-opacity-10 rounded-3 bordercentertitle">
+        <div class="h-15  p-15 text-white text-center rounded-3 ">
           <input type='text' name='title' id='title' placeholder="Vote Title">
 
         </div>
@@ -56,8 +62,10 @@
     </div>
 
     <div class="row align-items-md-stretch">
-          <div class="col-md-6">
-            <div class="h-15 p-15 text-white text-center bg-dark bg-opacity-10 rounded-3 bordercentertitle2">
+      <div class="col-md-3">
+        </div>
+          <div class="col-md-3">
+            <div class="h-15 p-15 text-white text-center rounded-3 ">
               <label>Choices
                 <br>
                 <input type='text' name='choices' id='choices' placeholder="Choices">
@@ -66,8 +74,8 @@
               <button type="button" v-on:click="addChoices()">Add Choice</button>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="h-15 p-15 text-white text-center bg-dark bg-opacity-10 rounded-3 bordercentertitle2">
+          <div class="col-md-3 ">
+            <div class="h-15 p-15 text-white text-center  rounded-3 ">
               <label>Codes
                 <br>
                 <input type='text' name='codes' id='codes' placeholder="Codes" >
@@ -77,6 +85,7 @@
             </div>
           </div>
     </div>
+  </div>
 
   <label>Title:
     <input type='text' name='title' id='title' placeholder="Vote Title">
