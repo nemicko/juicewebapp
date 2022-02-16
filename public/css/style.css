@@ -14,7 +14,7 @@ body {
 .logintipka{
     appearance: none;
     background-color: #FCFCFD;
-    border-radius: 8px;
+    border-radius: 6px;
     border-width: 0;
     box-shadow: rgba(45, 35, 66, 0.4) 0 8px 16px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
     box-sizing: border-box;
@@ -22,12 +22,13 @@ body {
     cursor: pointer;
     display: inline-flex;
     font-family: "JetBrains Mono",monospace;
-    height: 150px;
+    height: 25px;
     justify-content: center;
-    line-height: 1;
+    line-height: 5px;
     list-style: none;
     overflow: hidden;
-    padding: 65px 65px;
+    padding: 32px 32px;
+    text-align: center;
     text-decoration: none;
     transition: box-shadow .15s,transform .15s;
     user-select: none;
@@ -35,8 +36,8 @@ body {
     touch-action: manipulation;
     white-space: nowrap;
     will-change: box-shadow,transform;
-    font-size: 36px;
-    margin: 0 auto 65px;
+    font-size: 20px;
+    margin: 15px 0px;
 }
 
 .logintipka:focus {
@@ -208,6 +209,12 @@ body {
     font-size: 28px;
     font-family: "JetBrains Mono",monospace;
 }
+.landingfont{
+    margin-top: 100px;
+    margin-bottom: -60px;
+    font-size: 36px;
+    font-family: "JetBrains Mono",monospace;
+}
 .bordercenter{
     margin: auto;
     width: 50%;
@@ -216,3 +223,12 @@ body {
 .lowerouterborder{
     padding: 150px;
 }
+.landinginput{
+    margin-top: 50px;
+    padding: 12px;
+    width: 40%;
+    border: none;
+    background: transparent;
+}
+
+
