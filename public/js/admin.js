@@ -4,7 +4,9 @@ module.exports = {
             validCodes: [],
             votingChoices: [],
             votingTitle: "title",
-
+            users: [],
+            type: 'type',
+            code: [],
         }
     },
     methods: {
@@ -12,13 +14,10 @@ module.exports = {
         async addChoices() {
             var text = document.getElementById('choices').value;
             this.votingChoices = text.split(',').map(item=>item.trim());
-            console.log(this.votingChoices);
         },
         async addCodes() {
             var text = document.getElementById('codes').value;
             this.validCodes = text.split(',').map(item=>item.trim());
-
-            console.log(this.validCodes);
         },
         async finishEntry(){
             var title = document.getElementById('title').value;
@@ -35,16 +34,31 @@ module.exports = {
             }
             else {
                 let arr = [];
+                let usr = [];
                 let vote = {
                     title: this.votingTitle,
                     choices: this.votingChoices,
                     codes: this.validCodes,
                 }
+                let users = {
+                    type: 'voter',
+                    code: this.validCodes
+                }
                 arr.push(vote);
+                usr.push(users);
 
                 await fetch("/gateway/voting/create-voting", {
                     method: "post",
                     body:   JSON.stringify([arr]),
+                    headers: {
+                        "content-type": "application/json"
+                    }
+
+                });
+
+                await fetch("/gateway/validation/create-user", {
+                    method: "post",
+                    body:   JSON.stringify([usr]),
                     headers: {
                         "content-type": "application/json"
                     }

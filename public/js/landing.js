@@ -9,7 +9,7 @@ module.exports = {
         async login(){
             var login = document.getElementById('login').value;
 
-            this.validCodes = await ( await fetch("/gateway/voting/fetch-votings", {
+            this.validCodes = await ( await fetch("/gateway/validation/fetch-users", {
                 method: "post"
             })).json();
 

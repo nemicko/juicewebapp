@@ -39,7 +39,6 @@ export class VotingService implements IService {
         return await Voting.find({}).toArray();
     }
 
-
     @Remotable(["string"])
     public async setChoices(votingChoices) {
         this.choices.push(votingChoices);
@@ -58,7 +57,6 @@ export class VotingService implements IService {
             return acc;
         }, {});
         this.counter = uniqs
-        console.log(this.counter)
     }
 
 

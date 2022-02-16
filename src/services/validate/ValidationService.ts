@@ -2,6 +2,8 @@ import {IService} from "@juice/juice/core/service/IService";
 import {Inject} from "@juice/juice/core/decorators/Inject";
 import {Remotable} from "@juice/juice/core/gateway/Remotable";
 import { Injectable } from "@juice/juice/core/decorators/Injectable";
+import {Admin} from "./Admin";
+import {Voting} from "../vote/Voting";
 
 @Injectable({
     key: "validation",
@@ -13,10 +15,9 @@ import { Injectable } from "@juice/juice/core/decorators/Injectable";
 export class ValidationService implements IService{
 
     options: any;
-    validCodes: any [] = [];
-    usedCodes: any [] = [];
-    isValidVoter: boolean;
-    votingInfo: {};
+/*    validCodes: any [] = [];*/
+/*    usedCodes: any [] = [];
+    isValidVoter: boolean;*/
 
     constructor() {
 
@@ -27,18 +28,31 @@ export class ValidationService implements IService{
         return true;
     }
 
+    @Remotable(["json"])
+    public async createUser(data: any) {
+        let t = new Admin();
+        Object.assign(t,data);
+        await t.save();
+    }
 
+    @Remotable([])
+    public async fetchUsers() {
+        return await Admin.find({}).toArray();
+    }
+
+/*
     @Remotable([])
     public async getValidCodes() {
         return this.validCodes;
     }
+*/
 
-    @Remotable([])
+/*    @Remotable([])
     public async setFormInfo() {
 
-    }
+    }*/
 
-    @Remotable(["string"])
+/*    @Remotable(["string"])
     public async setValidCodes(codes) {
         if(codes === "" || codes.trim() === "") {
             return false;
@@ -52,26 +66,5 @@ export class ValidationService implements IService{
     public async removeValidCodes(code) {
         this.validCodes = this.validCodes.filter(e => e !== code);
         return true;
-    }
-
-
-    @Remotable(["string"])
-    public async setUsedCodes(pwd)
-    {
-        if(this.validCodes.includes(pwd)) {
-
-            //this.validCodes = this.validCodes.filter(e => e !== pwd)
-            this.isValidVoter = true
-            //somehow delete the instance of the code in validCodes
-            this.usedCodes.push(pwd)
-        }
-        else
-        {
-            return 0;
-
-        }
-        return true;
-    }
-
-
+    }*/
 }
