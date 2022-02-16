@@ -3,7 +3,7 @@ Vue.use(VueRouter);
 
 const router = new VueRouter({
     routes : [
-        { path: '/', component: httpVueLoader('/app/landing.vue'), beforeEnter: (to, from, next) => {
+        { path: '/', component: httpVueLoader('/app/landing.vue'), name:'Landing',beforeEnter: (to, from, next) => {
                 next();
             }},
         { path: '/admin', component: httpVueLoader('/app/admin.vue'), name:'Admin' },

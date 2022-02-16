@@ -22,6 +22,13 @@ module.exports = {
 
             console.log(this.validCodes);
         },
+        async routeVoting(){
+            await this.$router.push({name: 'Voting'})
+        },
+        async routeLanding(){
+            await this.$router.push({name: 'Landing'})
+        }
+
 
 
 
@@ -69,6 +76,9 @@ module.exports = {
         },
         async routeVoting(){
             await this.$router.push({name: 'Voting'})
+        },
+        async routeLanding(){
+            await this.$router.push({name: 'Landing'})
         }
 
         },*/
