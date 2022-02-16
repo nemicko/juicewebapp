@@ -40,8 +40,8 @@
   <h1 class="header2">Admin</h1>
   <!-- after login, buttons to add voting choices and used codes will be displayed here -->
 
-  <button class="choicestipka" v-on:click="enterVotings(2)">Enter Voting choices</button>
-  <button class="codestipka" v-on:click="enterVotings(3)">Enter Voting codes</button>
+  <!--  <button class="choicestipka" v-on:click="enterVotings(2)">Enter Voting choices</button>
+  <button class="codestipka" v-on:click="enterVotings(3)">Enter Voting codes</button> -->
 
   <label>Title:
     <input type='text' name='title' id='title' placeholder="Vote Title">

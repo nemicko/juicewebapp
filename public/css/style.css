@@ -208,3 +208,11 @@ body {
     font-size: 28px;
     font-family: "JetBrains Mono",monospace;
 }
+.bordercenter{
+    margin: auto;
+    width: 50%;
+    padding: 100px;
+}
+.lowerouterborder{
+    padding: 150px;
+}
