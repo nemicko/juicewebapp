@@ -6,14 +6,49 @@ module.exports = {
         }
     },
     methods: {
-        async login(){
+        async login() {
             var login = document.getElementById('login').value;
 
-            this.validCodes = await ( await fetch("/gateway/validation/fetch-users", {
+            this.validCodes = await (await fetch("/gateway/validation/fetch-users", {
                 method: "post"
             })).json();
 
-            console.log(this.validCodes)
+
+            if (login === "" || login.trim() === "") {
+                alert("No input");
+                return 0;
+            }
+
+            for (let i = 0; i < this.validCodes.length; i++)
+            {
+                if(login == this.validCodes[i][0].code && this.validCodes[i][0].type == 'admin') {
+                    this.isAdmin = true;
+                    await this.$router.push({name: 'Admin'})
+                }
+
+                for(let j=0; j<this.validCodes[i][0].code.length; j++)
+                {
+                    if(login == this.validCodes[i][0].code[j] && this.validCodes[i][0].type == 'voter') {
+                        this.isAdmin = false;
+                        await this.$router.push({name: 'Voting'})
+                    }
+                }
+            }
+
+/*            for(let i=0; i<user.length; i++) {
+                if(login == user.code) {
+                    console.log('bok')
+                }
+            }*/
+            /*          for (let property in this.validCodes) {
+
+                          if (this.validCodes.type == 'admin') {
+                              this.isAdmin = true;
+                              await this.$router.push({name: 'Admin'})
+                          }
+            }*/
+
+            /*console.log(this.validCodes)*/
             /*
             if (pwd === "" || pwd.trim() === "") {
                 alert("No input");

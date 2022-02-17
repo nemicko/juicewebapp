@@ -2,6 +2,7 @@ module.exports = {
 
     data() {
         return {
+/*            voting: {},*/
             votingChoices: [],
             votes: {}
         }
@@ -11,6 +12,12 @@ module.exports = {
     },
     methods: {
             async choices() {
+
+/*                this.voting = await ( await fetch("/gateway/voting/fetch-votings", {
+                    method: "post"
+                })).json();
+
+                console.log(this.voting)*/
 
                 this.votingChoices = await ( await fetch("/gateway/voting/get-choices", {
                     method: "post"
