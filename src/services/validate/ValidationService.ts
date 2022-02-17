@@ -40,12 +40,18 @@ export class ValidationService implements IService{
         return await Admin.find({}).toArray();
     }
 
-/*
-    @Remotable([])
-    public async getValidCodes() {
-        return this.validCodes;
-    }
-*/
+/*    @Remotable(["json"])
+    public async removeUser(code: any) {
+        console.log('radim')
+    }*/
+
+
+    /*
+        @Remotable([])
+        public async getValidCodes() {
+            return this.validCodes;
+        }
+    */
 
 /*    @Remotable([])
     public async setFormInfo() {

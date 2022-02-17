@@ -7,20 +7,21 @@ module.exports = {
             users: [],
             type: 'type',
             code: [],
+            availableVotings: []
         }
     },
     methods: {
 
         async addChoices() {
-            var text = document.getElementById('choices').value;
+            let text = document.getElementById('choices').value;
             this.votingChoices = text.split(',').map(item=>item.trim());
         },
         async addCodes() {
-            var text = document.getElementById('codes').value;
+            let text = document.getElementById('codes').value;
             this.validCodes = text.split(',').map(item=>item.trim());
         },
         async finishEntry(){
-            var title = document.getElementById('title').value;
+            let title = document.getElementById('title').value;
             this.votingTitle = title;
 
             if(this.validCodes.length == 0 || this.validCodes === undefined){
@@ -33,28 +34,35 @@ module.exports = {
                 alert("missing title")
             }
             else {
-                let arr = [];
+                let vot = [];
                 let usr = [];
                 let vote = {
                     title: this.votingTitle,
                     choices: this.votingChoices,
                     codes: this.validCodes,
                 }
-                let users = {
-                    type: 'voter',
-                    code: this.validCodes
-                }
-                arr.push(vote);
-                usr.push(users);
+                vot.push(vote);
+
 
                 await fetch("/gateway/voting/create-voting", {
                     method: "post",
-                    body:   JSON.stringify([arr]),
+                    body:   JSON.stringify([vot]),
                     headers: {
                         "content-type": "application/json"
                     }
 
                 });
+
+                this.availableVotings = await ( await fetch("/gateway/voting/fetch-votings", {
+                    method: "post"
+                })).json();
+
+                let users = {
+                    type: 'voter',
+                    code: this.validCodes,
+                    votingId: this.availableVotings[this.availableVotings.length -1]._id
+                }
+                usr.push(users);
 
                 await fetch("/gateway/validation/create-user", {
                     method: "post",
@@ -62,9 +70,9 @@ module.exports = {
                     headers: {
                         "content-type": "application/json"
                     }
-
                 });
-                var form = document.getElementsByName('form')[0];
+
+                let form = document.getElementsByName('form')[0];
                 form.reset();
                 this.votingTitle = "";
                 this.validCodes = [];

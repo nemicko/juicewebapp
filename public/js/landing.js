@@ -2,16 +2,40 @@ module.exports = {
     data() {
         return {
             isAdmin: false,
-            validCodes: [],
+            users: [],
+            availableVotings: [],
         }
     },
     methods: {
         async login() {
-            var login = document.getElementById('login').value;
 
-            this.validCodes = await (await fetch("/gateway/validation/fetch-users", {
+            let login = document.getElementById('login').value;
+
+            this.users = await (await fetch("/gateway/validation/fetch-users", {
                 method: "post"
             })).json();
+
+            this.availableVotings = await ( await fetch("/gateway/voting/fetch-votings", {
+                method: "post"
+            })).json();
+
+/*            for (let v = 0; v < this.availableVotings.length; v++) {
+                console.log(this.availableVotings[v])
+            }*/
+
+/*            let votingIds = []
+
+           for (let v = 0; v < this.availableVotings.length; v++) {
+               votingIds.push(this.availableVotings[v]._id)
+            }
+
+           for (let u = 0; u < this.validCodes.length; u++)
+           {
+               for (let id = 0; id < u.length; id++) {
+                   this.validCodes.votingId = votingIds[id]
+               }
+           }*/
+
 
 
             if (login === "" || login.trim() === "") {
@@ -19,70 +43,26 @@ module.exports = {
                 return 0;
             }
 
-            for (let i = 0; i < this.validCodes.length; i++)
-            {
-                if(login == this.validCodes[i][0].code && this.validCodes[i][0].type == 'admin') {
+            for (let i = 0; i < this.users.length; i++) {
+                if(login == this.users[i][0].code && this.users[i][0].type == 'admin') {
                     this.isAdmin = true;
                     await this.$router.push({name: 'Admin'})
                 }
 
-                for(let j=0; j<this.validCodes[i][0].code.length; j++)
-                {
-                    if(login == this.validCodes[i][0].code[j] && this.validCodes[i][0].type == 'voter') {
-                        this.isAdmin = false;
-                        await this.$router.push({name: 'Voting'})
+                for(let j=0; j<this.users[i][0].code.length; j++) {
+                    if(login == this.users[i][0].code[j] && this.users[i][0].type == 'voter') {
+                        let id = this.users[i][0].votingId
+                        await this.$router.push({name: 'Voting', params: {id: id}})
+/*                        await fetch("/gateway/validation/remove-user", {
+                            method: "post",
+                            body:   JSON.stringify(login),
+                            headers: {
+                                "content-type": "application/json"
+                            }
+                        });*/
                     }
                 }
             }
-
-/*            for(let i=0; i<user.length; i++) {
-                if(login == user.code) {
-                    console.log('bok')
-                }
-            }*/
-            /*          for (let property in this.validCodes) {
-
-                          if (this.validCodes.type == 'admin') {
-                              this.isAdmin = true;
-                              await this.$router.push({name: 'Admin'})
-                          }
-            }*/
-
-            /*console.log(this.validCodes)*/
-            /*
-            if (pwd === "" || pwd.trim() === "") {
-                alert("No input");
-                return 0;
-            }
-            else if (pwd==='1') {
-                this.isAdmin = true;
-                await this.$router.push({name: 'Admin'})
-            }
-            else if (pwd) {
-                // user typed something and hit OK
-                //call set function that validates AND if valid sends it to usedCodes array
-                this.validCodes = await ( await fetch("/gateway/validation/get-valid-codes", {
-                    method: "post"
-                })).json();
-
-
-                if(this.validCodes.includes(pwd)) {
-                    await this.$router.push({name: 'Voting'})
-                    await fetch("/gateway/validation/remove-valid-codes", {
-                        method: "post",
-                        body:   JSON.stringify([pwd]),
-                        headers: {
-                            "content-type": "application/json"
-                        }
-                    });
-                }
-                else {
-                    alert("Wrong code");
-                }
-            }
-            else {
-                return 0;
-            }*/
         },
     }
 }
