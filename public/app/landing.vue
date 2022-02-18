@@ -4,7 +4,7 @@
     <header>
       <h1 class="text-center headerfont">Welcome</h1>
     </header>
-      <div class="text-center">
+      <div class="text-center" id="loginPage">
         <div class="col-md-12 cen lowerouterborder">
           <div class="h-50 w-50 p-15 text-white text-center bg-dark bg-opacity-10 rounded-3 bordercenter">
             <input class="landinginput" type='text' name='login' id='login' placeholder="Enter Password">
@@ -14,6 +14,9 @@
           </div>
         </div>
       </div>
+    <div id="links" style="display: none">
+
+    </div>
 
   </div>
 </template>
