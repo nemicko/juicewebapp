@@ -24,12 +24,14 @@ module.exports = {
 
                 let id = this.$route.params.id
                 let choices = []
+                let title = ''
 
                 for(let i = 0; i < this.voting.length; i++) {
                     if(this.voting[i]._id == id)
                     {
                         for(let j = 0; j < this.voting[i][0].choices.length; j++)
                         {
+                            title = this.voting[i][0].title
                             choices.push(this.voting[i][0].choices[j])
                         }
                     }
@@ -50,7 +52,7 @@ module.exports = {
                         });
                     };
                     document.getElementById("buttons").appendChild(button);
-
+                    document.getElementById("title").innerHTML = title;
                 } );
 
 
@@ -63,27 +65,6 @@ module.exports = {
                 for(let i = 0; i < this.votingChoices.length; i++) {
                     console.log(this.votingChoices[i])
                 }*/
-
-/*                this.votingChoices.forEach(function(v) {
-                    let button = document.createElement('button');
-                    button.type= 'button';
-                    button.appendChild(document.createTextNode(v));
-                    button.id = v;
-                    button.onclick = async function() {
-                        await fetch("/gateway/voting/set-votes", {
-                            method: "post",
-                            body:   JSON.stringify([v]),
-                            headers: {
-                                "content-type": "application/json"
-                            }
-                        });
-                    };
-                    document.getElementById("buttons").appendChild(button);
-
-                } );*/
-
-
-
             }
         }
     }
