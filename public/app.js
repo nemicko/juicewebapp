@@ -18,7 +18,5 @@ const app = new Vue({
     data() {
         return {}
     },
-    methods: {
-
-    }
+    methods: {}
 });

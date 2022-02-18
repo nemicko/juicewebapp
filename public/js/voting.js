@@ -2,9 +2,10 @@ module.exports = {
 
     data() {
         return {
-/*            voting: {},*/
-            votingChoices: [],
-            votes: {}
+            voting: [],
+            users: [],
+            votes: {},
+            title: ''
         }
     },
     mounted:function(){
@@ -13,17 +14,28 @@ module.exports = {
     methods: {
             async choices() {
 
-/*                this.voting = await ( await fetch("/gateway/voting/fetch-votings", {
+                this.users = await (await fetch("/gateway/validation/fetch-users", {
                     method: "post"
                 })).json();
 
-                console.log(this.voting)*/
-
-                this.votingChoices = await ( await fetch("/gateway/voting/get-choices", {
+                this.voting = await ( await fetch("/gateway/voting/fetch-votings", {
                     method: "post"
                 })).json();
 
-                this.votingChoices.forEach(function(v) {
+                let id = this.$route.params.id
+                let choices = []
+
+                for(let i = 0; i < this.voting.length; i++) {
+                    if(this.voting[i]._id == id)
+                    {
+                        for(let j = 0; j < this.voting[i][0].choices.length; j++)
+                        {
+                            choices.push(this.voting[i][0].choices[j])
+                        }
+                    }
+                }
+
+                choices.forEach(function(v) {
                     let button = document.createElement('button');
                     button.type= 'button';
                     button.appendChild(document.createTextNode(v));
@@ -40,6 +52,35 @@ module.exports = {
                     document.getElementById("buttons").appendChild(button);
 
                 } );
+
+
+/*                console.log('Users')
+                for (let i = 0; i < this.users.length; i++) {
+                            console.log(this.users[i][0].votingId)
+                }
+
+                console.log('Votings')
+                for(let i = 0; i < this.votingChoices.length; i++) {
+                    console.log(this.votingChoices[i])
+                }*/
+
+/*                this.votingChoices.forEach(function(v) {
+                    let button = document.createElement('button');
+                    button.type= 'button';
+                    button.appendChild(document.createTextNode(v));
+                    button.id = v;
+                    button.onclick = async function() {
+                        await fetch("/gateway/voting/set-votes", {
+                            method: "post",
+                            body:   JSON.stringify([v]),
+                            headers: {
+                                "content-type": "application/json"
+                            }
+                        });
+                    };
+                    document.getElementById("buttons").appendChild(button);
+
+                } );*/
 
 
 

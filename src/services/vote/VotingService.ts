@@ -18,9 +18,7 @@ export class VotingService implements IService {
     votes: any [] = [];
     counter: {};
 
-    constructor() {
-
-    }
+    constructor() {}
 
     async onUpdate(options: any): Promise<boolean> {
         this.options = options;

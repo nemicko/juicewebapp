@@ -19,25 +19,6 @@ module.exports = {
                 method: "post"
             })).json();
 
-/*            for (let v = 0; v < this.availableVotings.length; v++) {
-                console.log(this.availableVotings[v])
-            }*/
-
-/*            let votingIds = []
-
-           for (let v = 0; v < this.availableVotings.length; v++) {
-               votingIds.push(this.availableVotings[v]._id)
-            }
-
-           for (let u = 0; u < this.validCodes.length; u++)
-           {
-               for (let id = 0; id < u.length; id++) {
-                   this.validCodes.votingId = votingIds[id]
-               }
-           }*/
-
-
-
             if (login === "" || login.trim() === "") {
                 alert("No input");
                 return 0;

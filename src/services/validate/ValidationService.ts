@@ -19,9 +19,7 @@ export class ValidationService implements IService{
 /*    usedCodes: any [] = [];
     isValidVoter: boolean;*/
 
-    constructor() {
-
-    }
+    constructor() {}
 
     async onUpdate(options: any): Promise<boolean> {
         this.options =  options;
