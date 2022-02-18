@@ -41,7 +41,7 @@
 <div class="main">
   <h1 class="headerfont text-center">Admin</h1>
   <div class="adminfont">{{validCodes}} - Valid Codes</div>
-  <div class="adminfont">{{votingChoices}} - Valid <Choices></Choices></div>
+  <div class="adminfont">{{votingChoices}} - Valid </div>
 
   <div class="container py-4 h-15  p-15 text-white text-center bg-dark bg-opacity-10 rounded-3 ">
 

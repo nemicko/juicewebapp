@@ -43,14 +43,18 @@ module.exports = {
                 return 0;
             }
 
+            let userFound = false;
+
             for (let i = 0; i < this.users.length; i++) {
                 if(login == this.users[i][0].code && this.users[i][0].type == 'admin') {
+                    userFound = true;
                     this.isAdmin = true;
                     await this.$router.push({name: 'Admin'})
                 }
 
                 for(let j=0; j<this.users[i][0].code.length; j++) {
                     if(login == this.users[i][0].code[j] && this.users[i][0].type == 'voter') {
+                        userFound = true;
                         let id = this.users[i][0].votingId
                         await this.$router.push({name: 'Voting', params: {id: id}})
 /*                        await fetch("/gateway/validation/remove-user", {
@@ -62,6 +66,10 @@ module.exports = {
                         });*/
                     }
                 }
+            }
+
+            if(!userFound) {
+                alert('Please enter a valid login code.')
             }
         },
     }
