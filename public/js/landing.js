@@ -70,9 +70,6 @@ module.exports = {
                                 }
                             }
                         }
-/*                        let links = document.createElement('a');
-                        links.innerHTML =
-                        links.href = '/voting/' + id;*/
                     }
                 }
             }
