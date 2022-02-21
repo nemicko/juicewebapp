@@ -1,7 +1,7 @@
 module.exports = {
     data() {
         return {
-            validCodes: [],
+/*            validCodes: [],*/
             votingChoices: [],
             votingTitle: "title",
             users: [],
@@ -16,22 +16,23 @@ module.exports = {
             let text = document.getElementById('choices').value;
             this.votingChoices = text.split(',').map(item=>item.trim());
         },
-        async addCodes() {
-            /*let text = document.getElementById('codes').value;
+/*        async addCodes() {
+            let text = document.getElementById('codes').value;
             this.validCodes = text.split(',').map(item=>item.trim());
-            this.votingChoices.forEach(element => web3.eth.accounts.create());*/
-        },
-        async finishEntry(){
+        },*/
+        async finishEntry() {
+            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+
             let title = document.getElementById('title').value;
             this.votingTitle = title;
 
-            if(this.validCodes.length == 0 || this.validCodes === undefined){
+/*            if(this.validCodes.length == 0 || this.validCodes === undefined) {
                 alert("unadded code enries")
-            }
-            else if(this.votingChoices.length == 0 || this.validCodes === undefined){
+            }*/
+            if(this.votingChoices.length == 0) {
                 alert("unadded choices enries")
             }
-            else if (this.votingTitle == ""){
+            else if (this.votingTitle == "") {
                 alert("missing title")
             }
             else {
@@ -39,8 +40,7 @@ module.exports = {
                 let usr = [];
                 let vote = {
                     title: this.votingTitle,
-                    choices: this.votingChoices,
-                    codes: this.validCodes,
+                    choices: accounts
                 }
                 vot.push(vote);
 
@@ -60,8 +60,8 @@ module.exports = {
 
                 let users = {
                     type: 'voter',
-                    code: this.validCodes,
-                    votingId: this.availableVotings[this.availableVotings.length -1]._id
+/*                    code: this.validCodes,*/
+/*                    votingId: this.availableVotings[this.availableVotings.length -1]._id*/
                 }
                 usr.push(users);
 
@@ -76,7 +76,7 @@ module.exports = {
                 let form = document.getElementsByName('form')[0];
                 form.reset();
                 this.votingTitle = "";
-                this.validCodes = [];
+/*                this.validCodes = [];*/
                 this.votingChoices = [];
             }
         }

@@ -40,7 +40,7 @@
   </main> -->
 <div class="main">
   <h1 class="headerfont text-center">Admin</h1>
-  <div class="adminfont">{{validCodes}} - Valid Codes</div>
+<!--  <div class="adminfont">{{validCodes}} - Valid Codes</div>-->
   <div class="adminfont">{{votingChoices}} - Valid </div>
 
   <div class="container py-4 h-15  p-15 text-white text-center bg-dark bg-opacity-10 rounded-3 ">
@@ -73,7 +73,7 @@
               <button class="logintipka" type="button" v-on:click="addChoices()">Add Choice</button>
             </div>
           </div>
-          <div class="col-md-6">
+<!--          <div class="col-md-6">
             <div class="h-15 p-15 text-white text-center  rounded-3 bordercentertitle2">
               <label class="font1">Enter Codes
                 <br>
@@ -82,7 +82,7 @@
               <br>
               <button class="logintipka" type="button" v-on:click="addCodes()">Add Code</button>
             </div>
-          </div>
+          </div>-->
     </div>
 
   <button class="logintipka" type="button" v-on:click="finishEntry()">Finish entry</button>

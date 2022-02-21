@@ -43,8 +43,10 @@ module.exports = {
                 }
 
                 choices.forEach(function(v) {
+                    let Accounts = require('web3-eth-accounts');
+                    let accounts = new Accounts('ws://localhost:8546');
+                    web3.eth.accounts.create();
                     let button = document.createElement('button');
-                    let votes = document.createElement('p');
                     let counter = 0;
                     button.type= 'button';
                     button.className = 'buttons'
@@ -69,9 +71,6 @@ module.exports = {
                             btn.disabled = true;
                         }
                     }
-
-                    document.getElementById("votes").appendChild(votes).innerHTML = v + ': ' + counter;
-
                 } );
             }
         }
