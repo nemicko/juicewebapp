@@ -11,7 +11,7 @@
             <p></p>
             <!-- <button class="logintipka" id="login_button" v-on:click="login">Login</button> -->
             <button class="MMlogin" id="MMlogin" >metamask login</button>
-            <div>{{userWallet}}</div>
+            <div>{{userWalletAddress}}</div>
 
           </div>
         </div>

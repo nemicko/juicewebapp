@@ -4,7 +4,7 @@ module.exports = {
             isAdmin: false,
             users: [],
             availableVotings: [],
-            userWalletAdress: [],
+            userWalletAddress: [],
         }
     },
     mounted:function(){
@@ -30,7 +30,22 @@ module.exports = {
 
             if (!accounts) { return }
             else {
-               this.userWalletAdress = accounts
+                this.userWalletAddress = accounts //account on which we need to send one eth with which the voter will cast their vote
+                //also mby store it in used adress array so he cant wote twice?
+                let usr = [];
+                let users = {
+                    type: 'voter',
+                    address: this.userWalletAddress,
+                }
+                usr.push(users);
+
+                await fetch("/gateway/validation/create-user", {
+                    method: "post",
+                    body:   JSON.stringify([usr]),
+                    headers: {
+                        "content-type": "application/json"
+                    }
+                });
             }
         },
 
