@@ -21,7 +21,6 @@ module.exports = {
             this.validCodes = text.split(',').map(item=>item.trim());
         },*/
         async finishEntry() {
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
 
             let title = document.getElementById('title').value;
             this.votingTitle = title;
@@ -40,7 +39,7 @@ module.exports = {
                 let usr = [];
                 let vote = {
                     title: this.votingTitle,
-                    choices: accounts
+                    choices: this.votingChoices
                 }
                 vot.push(vote);
 
@@ -60,6 +59,7 @@ module.exports = {
 
                 let users = {
                     type: 'voter',
+                    address: []
 /*                    code: this.validCodes,*/
 /*                    votingId: this.availableVotings[this.availableVotings.length -1]._id*/
                 }

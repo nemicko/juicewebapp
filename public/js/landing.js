@@ -72,39 +72,40 @@ module.exports = {
             let multipleIds = []
             let titles = []
 
-
             //cheching if inputed code is in db, if it is send it to codesForLinks array - for each instance of code in multiple votings
-            for(let i = 0; i < this.availableVotings.length; i++) {
+/*            for(let i = 0; i < this.availableVotings.length; i++) {
                 for(let j = 0; j < this.availableVotings[i][0].codes.length; j++) {
                     if(login == this.availableVotings[i][0].codes[j]) {
                         codesForLinks.push(this.availableVotings[i][0].codes)
                     }
                 }
-            }
-
+            }*/
+            console.log(this.users.length)
             for (let i = 0; i < this.users.length; i++) {
+                console.log(this.users[i])
                 //if inputed code is admin reroute to admin page
-                if(login == this.users[i][0].code && this.users[i][0].type == 'admin') {
+                if(login == this.users[i][0].address && this.users[i][0].type == 'admin') {
                     userFound = true;
                     this.isAdmin = true;
                     await this.$router.push({name: 'Admin'})
                 }
 
                 //if login code is valid, type is voter and only one code for link, rerout to voting with that id
-                for(let j=0; j<this.users[i][0].code.length; j++) {
-                    if(login == this.users[i][0].code[j] && this.users[i][0].type == 'voter' && codesForLinks.length == 1) {
-                        userFound = true;
-                        let id = this.users[i][0].votingId
-                        await this.$router.push({name: 'Voting', params: {id: id}})
-/*                        await fetch("/gateway/validation/remove-user", {
+/*                for(let j=0; j<this.users[i][0].address.length; j++) {
+                    if(this.users[i][0].type == 'voter' && codesForLinks.length == 1) {
+/!*                        userFound = true;*!/
+/!*                        let id = this.users[i][0].votingId*!/
+                        await this.$router.push({name: 'Voting'}) /!*, params: {id: id}*!/
+/!*                        await fetch("/gateway/validation/remove-user", {
                             method: "post",
                             body:   JSON.stringify(login),
                             headers: {
                                 "content-type": "application/json"
                             }
-                        });*/
+                        });*!/
 
-                    } else if (login == this.users[i][0].code[j] && this.users[i][0].type == 'voter' && codesForLinks.length > 1) {
+                    }
+/!*                    else if (login == this.users[i][0].address[j] && this.users[i][0].type == 'voter' && codesForLinks.length > 1) {
                         userFound = true;
                         document.getElementById("loginPage").style.display = "none";
                         document.getElementById("links").style.display = "block";
@@ -117,8 +118,8 @@ module.exports = {
                                 }
                             }
                         }
-                    }
-                }
+                    }*!/
+                }*/
             }
             let uniqTitles = [...new Set(titles)];
 

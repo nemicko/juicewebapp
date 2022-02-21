@@ -1,3 +1,4 @@
+const Accounts = require("web3-eth-accounts");
 module.exports = {
 
     data() {
@@ -36,16 +37,18 @@ module.exports = {
                     }
                 }
 
-                for(let i = 0; i < this.users.length; i++) {
+/*                for(let i = 0; i < this.users.length; i++) {
                     if(this.users[i][0].type == 'voter') {
                         console.log(this.users[i])
                     }
-                }
+                }*/
+
+/*                let Accounts = require('web3-eth-accounts');
+                let accounts = new Accounts('ws://localhost:8546');
+                web3.eth.accounts.create();
+                console.log(accounts)*/
 
                 choices.forEach(function(v) {
-                    let Accounts = require('web3-eth-accounts');
-                    let accounts = new Accounts('ws://localhost:8546');
-                    web3.eth.accounts.create();
                     let button = document.createElement('button');
                     let counter = 0;
                     button.type= 'button';
