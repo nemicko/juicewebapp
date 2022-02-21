@@ -32,6 +32,7 @@ module.exports = {
             else {
                 this.userWalletAddress = accounts //account on which we need to send one eth with which the voter will cast their vote
                 //also mby store it in used adress array so he cant wote twice?
+
                 let usr = [];
                 let users = {
                     type: 'voter',
@@ -46,6 +47,9 @@ module.exports = {
                         "content-type": "application/json"
                     }
                 });
+
+                await this.$router.push({name: 'Voting'})
+
             }
         },
 

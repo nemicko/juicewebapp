@@ -1,4 +1,4 @@
-const Accounts = require("web3-eth-accounts");
+//const Accounts = require("web3-eth-accounts");
 module.exports = {
 
     data() {
@@ -22,19 +22,15 @@ module.exports = {
                     method: "post"
                 })).json();
 
-                let id = this.$route.params.id
                 let choices = []
                 let title = ''
 
                 for(let i = 0; i < this.voting.length; i++) {
-                    if(this.voting[i]._id == id)
-                    {
                         for(let j = 0; j < this.voting[i][0].choices.length; j++)
                         {
                             title = this.voting[i][0].title
                             choices.push(this.voting[i][0].choices[j])
                         }
-                    }
                 }
 
 /*                for(let i = 0; i < this.users.length; i++) {
@@ -50,6 +46,7 @@ module.exports = {
 
                 choices.forEach(function(v) {
                     let button = document.createElement('button');
+                    //let choiceAdr = window.ethereum.accounts.create();
                     let counter = 0;
                     button.type= 'button';
                     button.className = 'buttons'
