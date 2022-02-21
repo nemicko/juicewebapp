@@ -4,7 +4,6 @@ module.exports = {
         return {
             voting: [],
             users: [],
-            votes: {},
             title: ''
         }
     },
@@ -37,11 +36,20 @@ module.exports = {
                     }
                 }
 
+                for(let i = 0; i < this.users.length; i++) {
+                    if(this.users[i][0].type == 'voter') {
+                        console.log(this.users[i])
+                    }
+                }
+
                 choices.forEach(function(v) {
                     let button = document.createElement('button');
+                    let votes = document.createElement('p');
+                    let counter = 0;
                     button.type= 'button';
-                    button.appendChild(document.createTextNode(v));
+                    button.className = 'buttons'
                     button.id = v;
+                    button.appendChild(document.createTextNode(v));
                     button.onclick = async function() {
                         await fetch("/gateway/voting/set-votes", {
                             method: "post",
@@ -53,18 +61,18 @@ module.exports = {
                     };
                     document.getElementById("buttons").appendChild(button);
                     document.getElementById("title").innerHTML = title;
+
+                    button.onclick = function() {
+                        counter++
+                        alert(v + ' clicked')
+                        for (let btn of document.querySelectorAll('.buttons')) {
+                            btn.disabled = true;
+                        }
+                    }
+
+                    document.getElementById("votes").appendChild(votes).innerHTML = v + ': ' + counter;
+
                 } );
-
-
-/*                console.log('Users')
-                for (let i = 0; i < this.users.length; i++) {
-                            console.log(this.users[i][0].votingId)
-                }
-
-                console.log('Votings')
-                for(let i = 0; i < this.votingChoices.length; i++) {
-                    console.log(this.votingChoices[i])
-                }*/
             }
         }
     }

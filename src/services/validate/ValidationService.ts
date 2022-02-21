@@ -2,7 +2,7 @@ import {IService} from "@juice/juice/core/service/IService";
 import {Inject} from "@juice/juice/core/decorators/Inject";
 import {Remotable} from "@juice/juice/core/gateway/Remotable";
 import { Injectable } from "@juice/juice/core/decorators/Injectable";
-import {Admin} from "./Admin";
+import {User} from "./User";
 import {Voting} from "../vote/Voting";
 
 @Injectable({
@@ -28,14 +28,14 @@ export class ValidationService implements IService{
 
     @Remotable(["json"])
     public async createUser(data: any) {
-        let t = new Admin();
+        let t = new User();
         Object.assign(t,data);
         await t.save();
     }
 
     @Remotable([])
     public async fetchUsers() {
-        return await Admin.find({}).toArray();
+        return await User.find({}).toArray();
     }
 
 /*    @Remotable(["json"])

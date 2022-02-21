@@ -7,9 +7,9 @@
       <div class="text-center" id="loginPage">
         <div class="col-md-12 cen lowerouterborder">
           <div class="h-50 w-50 p-15 text-white text-center bg-dark bg-opacity-10 rounded-3 bordercenter">
-            <input class="landinginput" type='text' name='login' id='login' placeholder="Enter Password">
+            <input class="landinginput" type='text' name='login' id='login' placeholder="Enter Password" v-on:keyup.enter="login">
             <p></p>
-            <button class="logintipka" id="login_button" v-on:click="login()">Login</button>
+            <button class="logintipka" id="login_button" v-on:click="login">Login</button>
 
           </div>
         </div>

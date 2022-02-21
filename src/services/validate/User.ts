@@ -1,7 +1,8 @@
 import {Collection, Model} from "sunshine-dao/lib/Model";
 
 @Collection("users")
-export class Admin extends Model {
+export class User extends Model {
     type: string;
     code: [];
+    disabled: string;
 }
