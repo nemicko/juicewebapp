@@ -4,9 +4,36 @@ module.exports = {
             isAdmin: false,
             users: [],
             availableVotings: [],
+            userWalletAdress: [],
         }
     },
+    mounted:function(){
+        this.checkMetamask()
+    },
     methods: {
+        async checkMetamask(){
+            if (typeof window.ethereum === 'undefined'){
+                document.getElementById("MMlogin").innerText = 'Metamask not installed'
+                return false
+            }
+            else{
+                document.getElementById("MMlogin").addEventListener('click', this.loginMetaMask)
+            }
+        },
+
+        async loginMetaMask(){
+            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+                .catch((e) => {
+                    console.error(e.message)
+                    return
+                })
+
+            if (!accounts) { return }
+            else {
+               this.userWalletAdress = accounts
+            }
+        },
+
         async login() {
 
             document.getElementById("loginPage").style.display = "block";
@@ -30,6 +57,8 @@ module.exports = {
             let multipleIds = []
             let titles = []
 
+
+            //cheching if inputed code is in db, if it is send it to codesForLinks array - for each instance of code in multiple votings
             for(let i = 0; i < this.availableVotings.length; i++) {
                 for(let j = 0; j < this.availableVotings[i][0].codes.length; j++) {
                     if(login == this.availableVotings[i][0].codes[j]) {
@@ -39,12 +68,14 @@ module.exports = {
             }
 
             for (let i = 0; i < this.users.length; i++) {
+                //if inputed code is admin reroute to admin page
                 if(login == this.users[i][0].code && this.users[i][0].type == 'admin') {
                     userFound = true;
                     this.isAdmin = true;
                     await this.$router.push({name: 'Admin'})
                 }
 
+                //if login code is valid, type is voter and only one code for link, rerout to voting with that id
                 for(let j=0; j<this.users[i][0].code.length; j++) {
                     if(login == this.users[i][0].code[j] && this.users[i][0].type == 'voter' && codesForLinks.length == 1) {
                         userFound = true;
@@ -57,11 +88,12 @@ module.exports = {
                                 "content-type": "application/json"
                             }
                         });*/
+
                     } else if (login == this.users[i][0].code[j] && this.users[i][0].type == 'voter' && codesForLinks.length > 1) {
                         userFound = true;
                         document.getElementById("loginPage").style.display = "none";
                         document.getElementById("links").style.display = "block";
-
+                        //if one code for many votings get their ids and titles
                         for(let i = 0; i < this.availableVotings.length; i++) {
                             for(let j = 0; j < this.availableVotings[i][0].codes.length; j++) {
                                 if(login == this.availableVotings[i][0].codes[j]) {
@@ -75,6 +107,7 @@ module.exports = {
             }
             let uniqTitles = [...new Set(titles)];
 
+            //for every title display link
             for(let i = 0; i < uniqTitles.length; i++) {
                 let links = document.createElement('a');
                 links.appendChild(document.createTextNode(uniqTitles[i]));

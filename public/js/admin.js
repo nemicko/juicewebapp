@@ -17,8 +17,9 @@ module.exports = {
             this.votingChoices = text.split(',').map(item=>item.trim());
         },
         async addCodes() {
-            let text = document.getElementById('codes').value;
+            /*let text = document.getElementById('codes').value;
             this.validCodes = text.split(',').map(item=>item.trim());
+            this.votingChoices.forEach(element => web3.eth.accounts.create());*/
         },
         async finishEntry(){
             let title = document.getElementById('title').value;
