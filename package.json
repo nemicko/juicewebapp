@@ -20,7 +20,9 @@
     "@juice/juice": "^1.4.18",
     "@juice/networking": "^2.3.3",
     "mongodb-memory-server": "^8.2.0",
+    "typescript": "^4.5.5",
     "vue-router": "^3.5.3",
-    "web3": "^1.7.0"
+    "web3": "^1.7.0",
+    "web3-eth-accounts": "^1.7.0"
   }
 }

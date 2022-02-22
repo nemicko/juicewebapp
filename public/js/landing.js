@@ -29,7 +29,6 @@ module.exports = {
                     console.error(e.message)
                     return
                 })
-
             if (!accounts) { return }
             else {
                 this.userWalletAddress = accounts //account on which we need to send one eth with which the voter will cast their vote
@@ -39,12 +38,21 @@ module.exports = {
                     method: "post"
                 })).json();
 
+                let userFound = false;
+
                 //pokusaj sprijecavanja upisivanja duplih adresa :
-                if(this.users.includes(this.userWalletAddress)){
-                    alert("already stored address")
-                    return true
+                for(let i=0; i<this.users.length; i++)
+                {
+                    if(this.userWalletAddress == this.users[i][0].address[0])
+                    {
+                        alert("Already stored address");
+                        userFound = true;
+                        break;
+                    }
+
                 }
-                else {
+                if(!userFound) {
+                    alert("User stored")
                     //store them in arr, push to object, post to db
                     let usr = [];
                     let newUser = {
