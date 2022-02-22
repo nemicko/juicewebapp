@@ -40,7 +40,6 @@ module.exports = {
 
                 let userFound = false;
 
-                //pokusaj sprijecavanja upisivanja duplih adresa :
                 for(let i=0; i<this.users.length; i++)
                 {
                     if(this.userWalletAddress == this.users[i][0].address[0])

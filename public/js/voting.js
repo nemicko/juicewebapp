@@ -28,14 +28,14 @@ module.exports = {
                 let type = ''
 
                 for(let i = 0; i < this.voting.length; i++) {
-                        for(let j = 0; j < this.voting[i][0].choices.length; j++)
-                        {
-                            title = this.voting[i][0].title
-                            choices.push(this.voting[i][0].choices[j])
-                        }
+                    for(let j = 0; j < this.voting[i][0].choices.length; j++)
+                    {
+                        title = this.voting[i][0].title
+                        choices.push(this.voting[i][0].choices[j])
+                    }
                 }
                 for(let i = 0; i < this.users.length; i++) {
-                    for(let j = 0; j < this.users[i][1].address.length; j++)
+                    for(let j = 0; j < this.users[i][0].address.length; j++)
                     {
                         type = this.users[i][0].type
                         address.push(this.users[i][0].address[j])
@@ -73,17 +73,8 @@ module.exports = {
                     document.getElementById("buttons").appendChild(button);
                     document.getElementById("title").innerHTML = title;
 
-                    button.addEventListener('click', () => {
-                        ethereum.request({
-                            method: 'eth_sendTransaction',
-                            params: [
-                                {
-                                    from: address[0], //needs to be th CURRENT users address
-                                    to: v,
-                                },
-                            ],
-                        });
-                    })
+                    console.log(v)
+
                     /*button.onclick = function() {
                         counter++
                         alert(v + ' clicked')
@@ -92,6 +83,22 @@ module.exports = {
                         }
                     }*/
                 } );
+                const currentAddr = await window.ethereum.request({ method: 'eth_requestAccounts' })
+                    .catch((e) => {
+                        console.error(e.message)
+                        return
+                    })
+                document.getElementById("buttons").addEventListener('click', () => {
+                    ethereum.request({
+                        method: 'eth_sendTransaction',
+                        params: [
+                            {
+                                from: currentAddr[0], //needs to be the CURRENT users address
+                                to: '0xd19e71FeF69535e4814eBB1253cf047D3E8586Ef', //choice address
+                            },
+                        ],
+                    });
+                })
             }
         }
     }
