@@ -24,6 +24,8 @@ module.exports = {
 
                 let choices = []
                 let title = ''
+                let address = []
+                let type = ''
 
                 for(let i = 0; i < this.voting.length; i++) {
                         for(let j = 0; j < this.voting[i][0].choices.length; j++)
@@ -31,6 +33,13 @@ module.exports = {
                             title = this.voting[i][0].title
                             choices.push(this.voting[i][0].choices[j])
                         }
+                }
+                for(let i = 0; i < this.users.length; i++) {
+                    for(let j = 0; j < this.users[i][1].address.length; j++)
+                    {
+                        type = this.users[i][0].type
+                        address.push(this.users[i][0].address[j])
+                    }
                 }
 
 /*                for(let i = 0; i < this.users.length; i++) {
@@ -64,15 +73,27 @@ module.exports = {
                     document.getElementById("buttons").appendChild(button);
                     document.getElementById("title").innerHTML = title;
 
-                    button.onclick = function() {
+                    button.addEventListener('click', () => {
+                        ethereum.request({
+                            method: 'eth_sendTransaction',
+                            params: [
+                                {
+                                    from: address[0], //needs to be th CURRENT users address
+                                    to: v,
+                                },
+                            ],
+                        });
+                    })
+                    /*button.onclick = function() {
                         counter++
                         alert(v + ' clicked')
                         for (let btn of document.querySelectorAll('.buttons')) {
                             btn.disabled = true;
                         }
-                    }
+                    }*/
                 } );
             }
         }
     }
+
 

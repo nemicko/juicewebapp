@@ -22,7 +22,9 @@ module.exports = {
         },
 
         async loginMetaMask(){
-            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+            //gets metamask accounts
+            let accounts = [];
+            accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
                 .catch((e) => {
                     console.error(e.message)
                     return
@@ -31,24 +33,37 @@ module.exports = {
             if (!accounts) { return }
             else {
                 this.userWalletAddress = accounts //account on which we need to send one eth with which the voter will cast their vote
-                //also mby store it in used adress array so he cant wote twice?
+                //also mby store it in used address array so he cant vote twice?
 
-                let usr = [];
-                let users = {
-                    type: 'voter',
-                    address: this.userWalletAddress,
+                this.users = await ( await fetch("/gateway/validation/fetch-users", {
+                    method: "post"
+                })).json();
+
+                //pokusaj sprijecavanja upisivanja duplih adresa :
+                if(this.users.includes(this.userWalletAddress)){
+                    alert("already stored address")
+                    return true
                 }
-                usr.push(users);
-
-                await fetch("/gateway/validation/create-user", {
-                    method: "post",
-                    body:   JSON.stringify([usr]),
-                    headers: {
-                        "content-type": "application/json"
+                else {
+                    //store them in arr, push to object, post to db
+                    let usr = [];
+                    let newUser = {
+                        type: 'voter',
+                        address: this.userWalletAddress,
                     }
-                });
+                    usr.push(newUser);
 
-                await this.$router.push({name: 'Voting'})
+                    await fetch("/gateway/validation/create-user", {
+                        method: "post",
+                        body: JSON.stringify([usr]),
+                        headers: {
+                            "content-type": "application/json"
+                        }
+                    });
+
+                    //reroute to voting
+                    await this.$router.push({name: 'Voting'})
+                }
 
             }
         },
