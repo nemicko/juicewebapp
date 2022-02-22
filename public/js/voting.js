@@ -52,7 +52,11 @@ module.exports = {
                 let accounts = new Accounts('ws://localhost:8546');
                 web3.eth.accounts.create();
                 console.log(accounts)*/
-
+                const currentAddr = await window.ethereum.request({ method: 'eth_requestAccounts' })
+                    .catch((e) => {
+                        console.error(e.message)
+                        return
+                    })
                 choices.forEach(function(v) {
                     let button = document.createElement('button');
                     //let choiceAdr = window.ethereum.accounts.create();
@@ -62,18 +66,18 @@ module.exports = {
                     button.id = v;
                     button.appendChild(document.createTextNode(v));
                     button.onclick = async function() {
-                        await fetch("/gateway/voting/set-votes", {
-                            method: "post",
-                            body:   JSON.stringify([v]),
-                            headers: {
-                                "content-type": "application/json"
-                            }
+                        await window.ethereum.request({
+                            method: 'eth_sendTransaction',
+                            params: [
+                                {
+                                    from: currentAddr[0], //needs to be the CURRENT users address
+                                    to: v, //choice address, get it from button id?
+                                },
+                            ],
                         });
                     };
                     document.getElementById("buttons").appendChild(button);
                     document.getElementById("title").innerHTML = title;
-
-                    console.log(v)
 
                     /*button.onclick = function() {
                         counter++
@@ -83,22 +87,7 @@ module.exports = {
                         }
                     }*/
                 } );
-                const currentAddr = await window.ethereum.request({ method: 'eth_requestAccounts' })
-                    .catch((e) => {
-                        console.error(e.message)
-                        return
-                    })
-                document.getElementById("buttons").addEventListener('click', () => {
-                    ethereum.request({
-                        method: 'eth_sendTransaction',
-                        params: [
-                            {
-                                from: currentAddr[0], //needs to be the CURRENT users address
-                                to: '0xd19e71FeF69535e4814eBB1253cf047D3E8586Ef', //choice address
-                            },
-                        ],
-                    });
-                })
+
             }
         }
     }
