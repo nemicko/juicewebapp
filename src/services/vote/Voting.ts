@@ -4,6 +4,7 @@ import {Collection, Model} from "sunshine-dao/lib/Model";
 export class Voting extends Model {
     title: string;
     choices: [];
+    address: [];
 }
 
 

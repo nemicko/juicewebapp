@@ -9,7 +9,7 @@
           <div class="h-50 w-50 p-15 text-white text-center bg-dark bg-opacity-10 rounded-3 bordercenter">
             <input class="landinginput" type='text' name='login' id='login' placeholder="Enter Password" v-on:keyup.enter="login">
             <p></p>
-             <button class="logintipka" id="login_button" v-on:click="login()">Admin Login</button>
+             <!--<button class="logintipka" id="login_button" v-on:click="login()">Admin Login</button>-->
             <button class="MMlogin" id="MMlogin" >metamask login</button>
             <div>{{userWalletAddress}}</div>
 

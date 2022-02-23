@@ -1,45 +1,64 @@
 module.exports = {
     data() {
         return {
-/*            validCodes: [],*/
+            choiceAddress: [],
             votingChoices: [],
             votingTitle: "title",
             users: [],
             type: 'type',
             code: [],
-            availableVotings: []
+            availableVotings: [],
+            adm: 'login',
         }
     },
+    mounted:function(){
+        this.adminLogin()
+    },
     methods: {
+
+        async adminLogin(){
+            let adm = prompt("input admin login: ");
+            //this can be checked from database but for now it can be a simple if, mby implement later
+            if (adm == '1'){
+                return true
+            }
+            else{
+                alert("wrong admin login")
+                await this.$router.push({name: 'Landing'})
+            }
+        },
 
         async addChoices() {
             let text = document.getElementById('choices').value;
             this.votingChoices = text.split(',').map(item=>item.trim());
         },
-/*        async addCodes() {
-            let text = document.getElementById('codes').value;
-            this.validCodes = text.split(',').map(item=>item.trim());
-        },*/
+        async addAddress() {
+            let text = document.getElementById('address').value;
+            this.choiceAddress = text.split(',').map(item=>item.trim());
+        },
         async finishEntry() {
 
             let title = document.getElementById('title').value;
             this.votingTitle = title;
 
-/*            if(this.validCodes.length == 0 || this.validCodes === undefined) {
-                alert("unadded code enries")
-            }*/
+            if(this.choiceAddress.length == 0 || this.choiceAddress === undefined) {
+                alert("unadded address enries")
+            }
             if(this.votingChoices.length == 0) {
                 alert("unadded choices enries")
             }
             else if (this.votingTitle == "") {
                 alert("missing title")
             }
+            else if (this.choiceAddress.length != this.votingChoices.length){
+                alert("not the same number of choices and their addresses")
+            }
             else {
                 let vot = [];
-                let usr = [];
                 let vote = {
                     title: this.votingTitle,
-                    choices: this.votingChoices
+                    choices: this.votingChoices,
+                    address: this.choiceAddress
                 }
                 vot.push(vote);
 
@@ -57,11 +76,11 @@ module.exports = {
                     method: "post"
                 })).json();
 
+                /*let usr = [];
                 let users = {
                     type: 'voter',
                     address: []
-/*                    code: this.validCodes,*/
-/*                    votingId: this.availableVotings[this.availableVotings.length -1]._id*/
+                    votingId: this.availableVotings[this.availableVotings.length -1]._id
                 }
                 usr.push(users);
 
@@ -71,12 +90,12 @@ module.exports = {
                     headers: {
                         "content-type": "application/json"
                     }
-                });
+                });*/
 
                 let form = document.getElementsByName('form')[0];
                 form.reset();
                 this.votingTitle = "";
-/*                this.validCodes = [];*/
+                this.choiceAddress = [];
                 this.votingChoices = [];
             }
         }

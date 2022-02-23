@@ -29,10 +29,11 @@ module.exports = {
                     console.error(e.message)
                     return
                 })
-            if (!accounts) { return }
+            if (!accounts) {
+                alert("Please connect to metamask")
+            }
             else {
-                this.userWalletAddress = accounts //account on which we need to send one eth with which the voter will cast their vote
-                //also mby store it in used address array so he cant vote twice?
+                this.userWalletAddress = accounts
 
                 this.users = await ( await fetch("/gateway/validation/fetch-users", {
                     method: "post"
@@ -46,6 +47,7 @@ module.exports = {
                     {
                         alert("Already stored address");
                         userFound = true;
+                        await this.$router.push({name: 'Voting'})
                         break;
                     }
 
