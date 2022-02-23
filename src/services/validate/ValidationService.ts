@@ -15,9 +15,6 @@ import {Voting} from "../vote/Voting";
 export class ValidationService implements IService{
 
     options: any;
-/*    validCodes: any [] = [];*/
-/*    usedCodes: any [] = [];
-    isValidVoter: boolean;*/
 
     constructor() {}
 
@@ -37,38 +34,4 @@ export class ValidationService implements IService{
     public async fetchUsers() {
         return await User.find({}).toArray();
     }
-
-/*    @Remotable(["json"])
-    public async removeUser(code: any) {
-        console.log('radim')
-    }*/
-
-
-    /*
-        @Remotable([])
-        public async getValidCodes() {
-            return this.validCodes;
-        }
-    */
-
-/*    @Remotable([])
-    public async setFormInfo() {
-
-    }*/
-
-/*    @Remotable(["string"])
-    public async setValidCodes(codes) {
-        if(codes === "" || codes.trim() === "") {
-            return false;
-        } else {
-            this.validCodes.push(codes);
-            return true;
-        }
-    }
-
-    @Remotable(["string"])
-    public async removeValidCodes(code) {
-        this.validCodes = this.validCodes.filter(e => e !== code);
-        return true;
-    }*/
 }

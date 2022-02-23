@@ -17,13 +17,13 @@ module.exports = {
     methods: {
 
         async adminLogin(){
-            let adm = prompt("input admin login: ");
+            let adm = prompt("Input ADMIN Login: ");
             //this can be checked from database but for now it can be a simple if, mby implement later
             if (adm == '1'){
                 return true
             }
             else{
-                alert("wrong admin login")
+                alert("Wrong ADMIN Login")
                 await this.$router.push({name: 'Landing'})
             }
         },
@@ -42,16 +42,16 @@ module.exports = {
             this.votingTitle = title;
 
             if(this.choiceAddress.length == 0 || this.choiceAddress === undefined) {
-                alert("unadded address enries")
+                alert("Unadded ADDRESS Enries")
             }
             if(this.votingChoices.length == 0) {
-                alert("unadded choices enries")
+                alert("Unadded CHOICES Entries")
             }
             else if (this.votingTitle == "") {
-                alert("missing title")
+                alert("Missing TITLE")
             }
             else if (this.choiceAddress.length != this.votingChoices.length){
-                alert("not the same number of choices and their addresses")
+                alert("Not the same number of CHOICES and their ADDRESSES")
             }
             else {
                 let vot = [];

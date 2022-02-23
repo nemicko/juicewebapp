@@ -22,10 +22,9 @@ module.exports = {
                     method: "post"
                 })).json();
 
-                let choices = []
-                let title = ''
-                let address = []
-                let type = ''
+                let choices = [];
+                let title = '';
+                let address = [];
 
                 for(let i = 0; i < this.voting.length; i++) {
                     for(let j = 0; j < this.voting[i][0].choices.length; j++)
@@ -42,16 +41,6 @@ module.exports = {
                     }
                 }
 
-/*                for(let i = 0; i < this.users.length; i++) {
-                    if(this.users[i][0].type == 'voter') {
-                        console.log(this.users[i])
-                    }
-                }*/
-
-/*                let Accounts = require('web3-eth-accounts');
-                let accounts = new Accounts('ws://localhost:8546');
-                web3.eth.accounts.create();
-                console.log(accounts)*/
                 const currentAddr = await window.ethereum.request({ method: 'eth_requestAccounts' })
                     .catch((e) => {
                         console.error(e.message)
@@ -60,10 +49,8 @@ module.exports = {
 
                 choices.forEach(function(v) {
                     let button = document.createElement('button');
-                    //let choiceAdr = window.ethereum.accounts.create();
-                    let counter = 0;
                     button.type= 'button';
-                    button.className = 'buttons'
+                    button.className = 'buttons btn btn-lg voting-button'
                     button.id = v;
                     button.appendChild(document.createTextNode(v));
                     button.onclick = async function() {
@@ -81,16 +68,7 @@ module.exports = {
                     };
                     document.getElementById("buttons").appendChild(button);
                     document.getElementById("title").innerHTML = title;
-
-                    /*button.onclick = function() {
-                        counter++
-                        alert(v + ' clicked')
-                        for (let btn of document.querySelectorAll('.buttons')) {
-                            btn.disabled = true;
-                        }
-                    }*/
-                } );
-
+                });
             }
         }
     }

@@ -70,7 +70,7 @@
                 <input class="admininput text-center" type='text' name='choices' id='choices' placeholder="Choices">
               </label>
               <br>
-              <button class="logintipka" type="button" v-on:click="addChoices()">Add Choice</button>
+              <button class="btn btn-lg login-button" type="button" v-on:click="addChoices()">Add Choice</button>
             </div>
           </div>
           <div class="col-md-6">
@@ -80,12 +80,12 @@
                 <input class="admininput text-center" type='text' name='address' id='address' placeholder="Address">
               </label>
               <br>
-              <button class="logintipka" type="button" v-on:click="addAddress()">Add Address</button>
+              <button class="btn btn-lg login-button" type="button" v-on:click="addAddress()">Add Address</button>
             </div>
           </div>
     </div>
 
-  <button class="logintipka" type="button" v-on:click="finishEntry()">Finish entry</button>
+  <button class="btn btn-lg login-button" type="button" v-on:click="finishEntry()">Finish Entry</button>
   </form>
 
 

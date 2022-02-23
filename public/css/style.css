@@ -1,17 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
 body {
     display: block;
     height: auto;
     float: none;
-    margin: 0;
-    padding: 0;
-    background-image: url("https://images.unsplash.com/photo-1520531158340-44015069e78e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1272&q=80");
+    background-image: url("https://images.unsplash.com/photo-1508615070457-7baeba4003ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
 
 }
 
-.logintipka{
+.login-button {
     appearance: none;
     background-color: #FCFCFD;
     border-radius: 6px;
@@ -40,18 +44,43 @@ body {
     margin: 15px 0px;
 }
 
-.logintipka:focus {
+.login-button:focus {
     box-shadow: #D6D6E7 0 0 0 4.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
 }
 
-.logintipka:hover {
+.login-button:hover {
     box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
     transform: translateY(-2px);
 }
 
-.logintipka:active {
+.login-button:active {
     box-shadow: #D6D6E7 0 3px 7px inset;
     transform: translateY(2px);
+}
+
+.voting-button {
+    padding: .125em 1em;
+    border: 2px solid rgb(0 116 204);
+    margin: 1rem;
+    font-family: inherit;
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: .1ch;
+    transition: background-color .15s, color .15s;
+    background-color: rgb(0 116 204);
+    color: white;
+    border-radius: 1em;
+}
+
+.voting-button:hover {
+    background-color: white;
+    color: rgb(0 116 204);
+    cursor: pointer;
+}
+
+.voting-button:active {
+    background-color: rgb(0 116 204);
+    color: white;
 }
 
 .choicestipka{
@@ -196,7 +225,7 @@ body {
 .bordercenter{
     margin: auto;
     width: 50%;
-    padding: 100px;
+    padding: 50px;
 }
 .bordercentertitle{
     margin: auto;
@@ -215,14 +244,15 @@ body {
     padding: 150px;
 }
 .landinginput{
-    margin-top: 50px;
+    margin-bottom: 30px;
     padding: 12px;
-    width: 40%;
+    width: 100%;
     border: none;
     outline: none;
     background: transparent;
     border-bottom: 1px solid white;
     font-family: "JetBrains Mono",monospace;
+    font-size: 13px;
 }
 .admininput{
     border: none;

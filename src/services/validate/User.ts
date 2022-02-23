@@ -4,4 +4,5 @@ import {Collection, Model} from "sunshine-dao/lib/Model";
 export class User extends Model {
     type: string;
     address: [];
+    voted: boolean;
 }
