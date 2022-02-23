@@ -39,7 +39,7 @@
 
   </main> -->
 <div class="main">
-  <h1 class="headerfont text-center">Admin</h1>
+  <h1 class="headerfont text-center">Admin Page</h1>
   <div class="adminfont">{{choiceAddress}} - Valid Codes</div>
   <div class="adminfont">{{votingChoices}} - Valid </div>
 
