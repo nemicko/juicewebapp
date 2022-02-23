@@ -76,22 +76,6 @@ module.exports = {
                     method: "post"
                 })).json();
 
-                /*let usr = [];
-                let users = {
-                    type: 'voter',
-                    address: []
-                    votingId: this.availableVotings[this.availableVotings.length -1]._id
-                }
-                usr.push(users);
-
-                await fetch("/gateway/validation/create-user", {
-                    method: "post",
-                    body:   JSON.stringify([usr]),
-                    headers: {
-                        "content-type": "application/json"
-                    }
-                });*/
-
                 let form = document.getElementsByName('form')[0];
                 form.reset();
                 this.votingTitle = "";

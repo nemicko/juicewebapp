@@ -5,7 +5,7 @@ module.exports = {
         return {
             voting: [],
             users: [],
-            title: ''
+            title: '',
         }
     },
     mounted:function(){
@@ -22,44 +22,65 @@ module.exports = {
                     method: "post"
                 })).json();
 
-                let choices = [];
-                let title = '';
-                let address = [];
+                //voting
+                let choices = []
+                let title = ''
+                let choiceAddress = []
+
+                //user
+                let type = ''
+                let userAddress = []
+
 
                 for(let i = 0; i < this.voting.length; i++) {
-                    for(let j = 0; j < this.voting[i][0].choices.length; j++)
-                    {
-                        title = this.voting[i][0].title
-                        choices.push(this.voting[i][0].choices[j])
+
+                    if(this.voting[i][0].address){
+                        choiceAddress.push(this.voting[i][0].address)
                     }
+                    else {
+                        console.log('Nema adresu')
+                    }
+                    if(this.voting[i][0].)
                 }
+                //console.log(choiceAddress)
                 for(let i = 0; i < this.users.length; i++) {
                     for(let j = 0; j < this.users[i][0].address.length; j++)
                     {
                         type = this.users[i][0].type
-                        address.push(this.users[i][0].address[j])
+                        userAddress.push(this.users[i][0].address[j])
                     }
                 }
 
+/*                for(let i = 0; i < this.users.length; i++) {
+                    if(this.users[i][0].type == 'voter') {
+                        console.log(this.users[i])
+                    }
+                }*/
+
+/*                let Accounts = require('web3-eth-accounts');
+                let accounts = new Accounts('ws://localhost:8546');
+                web3.eth.accounts.create();
+                console.log(accounts)*/
                 const currentAddr = await window.ethereum.request({ method: 'eth_requestAccounts' })
                     .catch((e) => {
                         console.error(e.message)
                         return
                     })
 
-                choices.forEach(function(v) {
+                /*for (let i = 0; i < choices.length; i++){
                     let button = document.createElement('button');
+                    let counter = 0;
                     button.type= 'button';
                     button.className = 'buttons btn btn-lg voting-button'
-                    button.id = v;
-                    button.appendChild(document.createTextNode(v));
+                    button.id = choiceAddress[i];
+                    button.appendChild(document.createTextNode(choices[i]));
                     button.onclick = async function() {
                         await window.ethereum.request({
                             method: 'eth_sendTransaction',
                             params: [
                                 {
                                     from: currentAddr[0], //needs to be the CURRENT users address
-                                    to: v, //choice address, get it from button id?
+                                    to: choiceAddress[i], //choice address, get it from button id?
                                     value: web3.utils.toWei('0.0000001', 'ether')
 
                                 },
@@ -68,7 +89,50 @@ module.exports = {
                     };
                     document.getElementById("buttons").appendChild(button);
                     document.getElementById("title").innerHTML = title;
-                });
+                }*/
+
+
+
+
+                console.log(choices)
+                console.log(choiceAddress)
+
+                choices.forEach(function(v) {
+                    let button = document.createElement('button');
+                    let counter = 0;
+                    button.type= 'button';
+                    button.className = 'buttons btn btn-lg voting-button'
+
+                    for (let i = 0; i < choiceAddress.length; i++){
+                        button.id = choiceAddress[i];
+                    }
+
+                    button.appendChild(document.createTextNode(v));
+                    button.onclick = async function() {
+                        await window.ethereum.request({
+                            method: 'eth_sendTransaction',
+                            params: [
+                                {
+                                    from: currentAddr[0], //needs to be the CURRENT users address
+                                    to: button.id, //choice address, get it from button id?
+                                    value: web3.utils.toWei('0.0000001', 'ether')
+
+                                },
+                            ],
+                        });
+                    };
+                    document.getElementById("buttons").appendChild(button);
+                    document.getElementById("title").innerHTML = title;
+
+                    /*button.onclick = function() {
+                        counter++
+                        alert(v + ' clicked')
+                        for (let btn of document.querySelectorAll('.buttons')) {
+                            btn.disabled = true;
+                        }
+                    }*/
+                } );
+
             }
         }
     }
