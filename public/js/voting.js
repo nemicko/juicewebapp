@@ -57,6 +57,7 @@ module.exports = {
                         console.error(e.message)
                         return
                     })
+
                 choices.forEach(function(v) {
                     let button = document.createElement('button');
                     //let choiceAdr = window.ethereum.accounts.create();
@@ -72,6 +73,8 @@ module.exports = {
                                 {
                                     from: currentAddr[0], //needs to be the CURRENT users address
                                     to: v, //choice address, get it from button id?
+                                    value: web3.utils.toWei('0.0000001', 'ether')
+
                                 },
                             ],
                         });
