@@ -24,7 +24,7 @@ module.exports = {
                 })
 
             let response = await votingContract.methods
-                .getVotingOptions(0)  //function in contract
+                .getVotingOptions()  //function in contract
                 .call();
             console.log("response: ", response.args);
 

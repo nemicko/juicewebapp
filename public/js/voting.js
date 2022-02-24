@@ -1,12 +1,16 @@
 //const Accounts = require("web3-eth-accounts");
+const {numberToHex} = require("web3-utils");
 module.exports = {
 
     data() {
         return {
-            voting: [],
             users: [],
             title: '',
-            votings: [],
+            votings: [{
+                name: string,
+                id: string,
+            }]
+
         }
     },
     mounted:function(){
@@ -18,7 +22,7 @@ module.exports = {
                 const abi = await (await fetch("/js/Voting.json")).json();
 
                 const web3 = new Web3(window.ethereum);
-                const votingContract = await new web3.eth.Contract(abi.abi, "0x6905915e0a77E78d94b3d71a9B718e272F1f7fcC");
+                const votingContract = await new web3.eth.Contract(abi.abi, "0x3d8533e4ea8D1d6fA0b033c89Fc8240EcfE75bd3");
 
                 let accounts = [];
                 accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
@@ -30,9 +34,15 @@ module.exports = {
                 let response = await votingContract.methods
                     .availableVotings()  //function in contract
                     .call();
-                console.log("response: ", response);
+                console.log("response: ", response[0].name);
 
-                //this.votings = response.args // args iz kojeg izvuces votings nekako??
+                for(let i = 0; i < response.length; i++){
+                    this.votings.id = response[i].id
+                }
+
+                for(let i = 0; i < response.length; i++){
+                    this.votings.name = response[i].name
+                }
 
 
                 /*for(let i = 0; i < this.voting.length; i++) {
