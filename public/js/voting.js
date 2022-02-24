@@ -6,6 +6,7 @@ module.exports = {
             voting: [],
             users: [],
             title: '',
+            votings: [],
         }
     },
     mounted:function(){
@@ -14,25 +15,27 @@ module.exports = {
     methods: {
             async choices() {
 
-                this.users = await (await fetch("/gateway/validation/fetch-users", {
-                    method: "post"
-                })).json();
+                const abi = await (await fetch("/js/Voting.json")).json();
 
-                this.voting = await ( await fetch("/gateway/voting/fetch-votings", {
-                    method: "post"
-                })).json();
+                const web3 = new Web3(window.ethereum);
+                const votingContract = await new web3.eth.Contract(abi.abi, "0x6905915e0a77E78d94b3d71a9B718e272F1f7fcC");
 
-                //voting
-                let choices = []
-                let title = ''
-                let choiceAddress = []
+                let accounts = [];
+                accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+                    .catch((e) => {
+                        console.error(e.message)
+                        return
+                    })
 
-                //user
-                let type = ''
-                let userAddress = []
+                let response = await votingContract.methods
+                    .availableVotings()  //function in contract
+                    .call();
+                console.log("response: ", response);
+
+                //this.votings = response.args // args iz kojeg izvuces votings nekako??
 
 
-                for(let i = 0; i < this.voting.length; i++) {
+                /*for(let i = 0; i < this.voting.length; i++) {
 
                     if(this.voting[i][0].address){
                         choiceAddress.push(this.voting[i][0].address)
@@ -49,23 +52,13 @@ module.exports = {
                         type = this.users[i][0].type
                         userAddress.push(this.users[i][0].address[j])
                     }
-                }
+                }*/
 
 /*                for(let i = 0; i < this.users.length; i++) {
                     if(this.users[i][0].type == 'voter') {
                         console.log(this.users[i])
                     }
                 }*/
-
-/*                let Accounts = require('web3-eth-accounts');
-                let accounts = new Accounts('ws://localhost:8546');
-                web3.eth.accounts.create();
-                console.log(accounts)*/
-                const currentAddr = await window.ethereum.request({ method: 'eth_requestAccounts' })
-                    .catch((e) => {
-                        console.error(e.message)
-                        return
-                    })
 
                 /*for (let i = 0; i < choices.length; i++){
                     let button = document.createElement('button');
@@ -94,6 +87,7 @@ module.exports = {
 
 
 
+                /*
                 console.log(choices)
                 console.log(choiceAddress)
 
@@ -130,8 +124,8 @@ module.exports = {
                         for (let btn of document.querySelectorAll('.buttons')) {
                             btn.disabled = true;
                         }
-                    }*/
-                } );
+                    }
+                } );*/
 
             }
         }

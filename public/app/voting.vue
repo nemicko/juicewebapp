@@ -6,6 +6,16 @@
 <!--    <div class="adminfont">{{votes}} - Times Clicked</div>-->
     <div class="container" id="buttons"></div>
     <div id="votes"></div>
+
+    <!-- router links koji getvotings, svaki ode na voting:id koji onda zove vailable votings i displaya botune-->
+    <div v-for="vote in votings" :key="vote.id">
+      <router-link :to="{ name: 'votingDetails', params: { id: vote.id }}">
+
+        <span>{{vote.name}}</span>
+
+      </router-link>
+    </div>
+
   </div>
 </template>
 
