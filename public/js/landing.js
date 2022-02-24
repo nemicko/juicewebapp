@@ -120,7 +120,6 @@ module.exports = {
             }
 
 
-
             if(!userFound) {
                 alert('Please enter a valid login code.')
             }

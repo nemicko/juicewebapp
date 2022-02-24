@@ -1,13 +1,17 @@
 module.exports = {
     data() {
         return {
-            choiceAddress: [],
-            votingChoices: [],
+            //choiceAddress: [],
+            //votingChoices: [],
+            choices: [{
+                name: "",
+                address: ""
+            }],
             votingTitle: "title",
             users: [],
             type: 'type',
             code: [],
-            availableVotings: [],
+            //availableVotings: [],
             adm: 'login',
         }
     },
@@ -30,15 +34,10 @@ module.exports = {
 
         async addChoices() {
             let text = document.getElementById('choices').value;
-            this.votingChoices = text.split(',').map(item=>item.trim());
+            this.choices.name = text.split(',').map(item=>item.trim());
         },
-        async addAddress() {
-            let text = document.getElementById('address').value;
-            this.choiceAddress = text.split(',').map(item=>item.trim());
-        },
-        async finishEntry() {
 
-            debugger;
+        async finishEntry() {
 
             const abi = await (await fetch("/js/Voting.json")).json();
 
@@ -58,7 +57,8 @@ module.exports = {
                     from: accounts[0],
                     gasPrice: '20000000000'
                 });
-            console.log("response: ", response);
+            console.log("response: ", response.events);
+
 
 
             /*
@@ -72,24 +72,27 @@ module.exports = {
             let title = document.getElementById('title').value;
             this.votingTitle = title;
 
-            if(this.choiceAddress.length == 0 || this.choiceAddress === undefined) {
+            /*
+            if(this.choices.address.length == 0 || this.choices.address === undefined) {
                 alert("Unadded ADDRESS Enries")
             }
-            if(this.votingChoices.length == 0) {
+            if(this.choices.name.length == 0) {
                 alert("Unadded CHOICES Entries")
             }
             else if (this.votingTitle == "") {
                 alert("Missing TITLE")
             }
-            else if (this.choiceAddress.length != this.votingChoices.length){
+            else if (this.choices.address.length != this.choices.name.length){
                 alert("Not the same number of CHOICES and their ADDRESSES")
             }
             else {
                 let vot = [];
                 let vote = {
                     title: this.votingTitle,
-                    choices: this.votingChoices,
-                    address: this.choiceAddress
+                    choices: [{
+                        name: this.choices.name,
+                        address: this.choices.address
+                    }]
                 }
                 vot.push(vote);
 
@@ -112,10 +115,9 @@ module.exports = {
                 let form = document.getElementsByName('form')[0];
                 form.reset();
                 this.votingTitle = "";
-                this.choiceAddress = [];
-                this.votingChoices = [];
-                */
-            }
+
+
+            }*/
         }
     }
 }
