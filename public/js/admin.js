@@ -38,6 +38,37 @@ module.exports = {
         },
         async finishEntry() {
 
+            debugger;
+
+            const abi = await (await fetch("/js/Voting.json")).json();
+
+            const web3 = new Web3(window.ethereum);
+            const votingContract = await new web3.eth.Contract(abi.abi, "0x20D8CE9790ADEe71d41Ccbd91dFeA6f970a5eEDc");
+
+            let accounts = [];
+            accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+                .catch((e) => {
+                    console.error(e.message)
+                    return
+                })
+
+            let response = await votingContract.methods
+                .createVoting()  //function in contract
+                .send({
+                    from: accounts[0],
+                    gasPrice: '20000000000'
+                });
+            console.log("response: ", response);
+
+
+            /*
+            let response = await votingContract.methods
+                .getVotes(0)  //function in contract
+                .call();
+            console.log("response: ", response);
+
+             */
+
             let title = document.getElementById('title').value;
             this.votingTitle = title;
 
@@ -63,6 +94,8 @@ module.exports = {
                 vot.push(vote);
 
 
+
+                /*
                 await fetch("/gateway/voting/create-voting", {
                     method: "post",
                     body:   JSON.stringify([vot]),
@@ -81,6 +114,7 @@ module.exports = {
                 this.votingTitle = "";
                 this.choiceAddress = [];
                 this.votingChoices = [];
+                */
             }
         }
     }
