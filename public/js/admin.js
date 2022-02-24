@@ -43,7 +43,7 @@ module.exports = {
             const abi = await (await fetch("/js/Voting.json")).json();
 
             const web3 = new Web3(window.ethereum);
-            const votingContract = await new web3.eth.Contract(abi.abi, "0x20D8CE9790ADEe71d41Ccbd91dFeA6f970a5eEDc");
+            const votingContract = await new web3.eth.Contract(abi.abi, "0x6905915e0a77E78d94b3d71a9B718e272F1f7fcC");
 
             let accounts = [];
             accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
@@ -53,7 +53,7 @@ module.exports = {
                 })
 
             let response = await votingContract.methods
-                .createVoting()  //function in contract
+                .createVoting("Test Voting")  //function in contract
                 .send({
                     from: accounts[0],
                     gasPrice: '20000000000'

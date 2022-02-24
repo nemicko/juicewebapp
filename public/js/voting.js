@@ -40,7 +40,7 @@ module.exports = {
                     else {
                         console.log('Nema adresu')
                     }
-                    if(this.voting[i][0].)
+
                 }
                 //console.log(choiceAddress)
                 for(let i = 0; i < this.users.length; i++) {
