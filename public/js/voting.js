@@ -71,10 +71,15 @@ module.exports = {
 
 
             for (let voting of response) {
-                this.votings.push({
+                let index = this.votings.findIndex(voting => voting.name == voting.name);
+// here you can check specific property for an object whether it exist in your array or not
+
+                index === -1 ? this.votings.push({
                     id: parseInt(voting.id),
                     name: voting.name
-                })
+                }) : console.log("object already exists")
+
+
             }
 
         }
