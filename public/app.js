@@ -8,7 +8,7 @@ const router = new VueRouter({
             }},
         { path: '/admin', component: httpVueLoader('/app/admin.vue'), name:'Admin' },
         { path: '/voting', component: httpVueLoader('/app/voting.vue'), name:'Voting' },
-        { path: '/vote/:id', component: httpVueLoader('/app/vote.vue'), name:'votingDetails' },
+        { path: '/vote/:id', component: httpVueLoader('/app/vote.vue'), name:'vote' },
     ]
 });
 

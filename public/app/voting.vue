@@ -10,12 +10,15 @@
     <!-- router links koji getvotings, svaki ode na voting:id koji onda zove vailable votings i displaya botune-->
     <div v-for="vote in votings" :key="vote.id">
       <router-link :to="{ name: 'votingDetails', params: { id: vote.id }}">
-
         <span>{{vote.name}}</span>
-
       </router-link>
     </div>
 
+
+    <button @click="connect()">Connect Wallet</button>
+
+    <button @click="disconnect()">Disconnect Wallet</button>
+    disconnect
   </div>
 </template>
 

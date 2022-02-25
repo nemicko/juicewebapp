@@ -7,9 +7,11 @@
     <div class="container" id="buttons"></div>
     <div id="votes"></div>
 
-    <!-- zove avilable votings i displaya botune -->
-
-
+    <div>
+      <button v-promise-btn v-for="(option, index) in options" @click="vote(index)">
+        {{option}} ({{results[index]}})
+      </button>
+    </div>
 
   </div>
 </template>

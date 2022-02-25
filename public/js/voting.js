@@ -1,144 +1,84 @@
-//const Accounts = require("web3-eth-accounts");
-const {numberToHex} = require("web3-utils");
+
 module.exports = {
 
     data() {
         return {
             users: [],
             title: '',
-            votings: [{
-                name: string,
-                id: string,
-            }]
-
+            votings: []
         }
     },
-    mounted:function(){
-        this.choices()
+    mounted: function () {
+        this.test();
+        //this.choices()
     },
     methods: {
-            async choices() {
+        async test(){
 
-                const abi = await (await fetch("/js/Voting.json")).json();
+            const Web3Modal = window.Web3Modal.default;
+            const WalletConnectProvider = window.WalletConnectProvider.default;
 
-                const web3 = new Web3(window.ethereum);
-                const votingContract = await new web3.eth.Contract(abi.abi, "0x3d8533e4ea8D1d6fA0b033c89Fc8240EcfE75bd3");
-
-                let accounts = [];
-                accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-                    .catch((e) => {
-                        console.error(e.message)
-                        return
-                    })
-
-                let response = await votingContract.methods
-                    .availableVotings()  //function in contract
-                    .call();
-                console.log("response: ", response[0].name);
-
-                for(let i = 0; i < response.length; i++){
-                    this.votings.id = response[i].id
-                }
-
-                for(let i = 0; i < response.length; i++){
-                    this.votings.name = response[i].name
-                }
-
-
-                /*for(let i = 0; i < this.voting.length; i++) {
-
-                    if(this.voting[i][0].address){
-                        choiceAddress.push(this.voting[i][0].address)
-                    }
-                    else {
-                        console.log('Nema adresu')
-                    }
-
-                }
-                //console.log(choiceAddress)
-                for(let i = 0; i < this.users.length; i++) {
-                    for(let j = 0; j < this.users[i][0].address.length; j++)
-                    {
-                        type = this.users[i][0].type
-                        userAddress.push(this.users[i][0].address[j])
-                    }
-                }*/
-
-/*                for(let i = 0; i < this.users.length; i++) {
-                    if(this.users[i][0].type == 'voter') {
-                        console.log(this.users[i])
-                    }
-                }*/
-
-                /*for (let i = 0; i < choices.length; i++){
-                    let button = document.createElement('button');
-                    let counter = 0;
-                    button.type= 'button';
-                    button.className = 'buttons btn btn-lg voting-button'
-                    button.id = choiceAddress[i];
-                    button.appendChild(document.createTextNode(choices[i]));
-                    button.onclick = async function() {
-                        await window.ethereum.request({
-                            method: 'eth_sendTransaction',
-                            params: [
-                                {
-                                    from: currentAddr[0], //needs to be the CURRENT users address
-                                    to: choiceAddress[i], //choice address, get it from button id?
-                                    value: web3.utils.toWei('0.0000001', 'ether')
-
-                                },
-                            ],
-                        });
-                    };
-                    document.getElementById("buttons").appendChild(button);
-                    document.getElementById("title").innerHTML = title;
-                }*/
-
-
-
-
-                /*
-                console.log(choices)
-                console.log(choiceAddress)
-
-                choices.forEach(function(v) {
-                    let button = document.createElement('button');
-                    let counter = 0;
-                    button.type= 'button';
-                    button.className = 'buttons btn btn-lg voting-button'
-
-                    for (let i = 0; i < choiceAddress.length; i++){
-                        button.id = choiceAddress[i];
-                    }
-
-                    button.appendChild(document.createTextNode(v));
-                    button.onclick = async function() {
-                        await window.ethereum.request({
-                            method: 'eth_sendTransaction',
-                            params: [
-                                {
-                                    from: currentAddr[0], //needs to be the CURRENT users address
-                                    to: button.id, //choice address, get it from button id?
-                                    value: web3.utils.toWei('0.0000001', 'ether')
-
-                                },
-                            ],
-                        });
-                    };
-                    document.getElementById("buttons").appendChild(button);
-                    document.getElementById("title").innerHTML = title;
-
-                    /*button.onclick = function() {
-                        counter++
-                        alert(v + ' clicked')
-                        for (let btn of document.querySelectorAll('.buttons')) {
-                            btn.disabled = true;
+            const providerOptions = {
+                walletconnect: {
+                    package: WalletConnectProvider,
+                    options: {
+                        rpc: {
+                            4: "https://rinkeby.infura.io/v3/0259ffc6b3224ad18604966261aeb502"
                         }
                     }
-                } );*/
+                }
+            };
 
+            this.web3Modal = new Web3Modal({
+                cacheProvider: false, // optional
+                providerOptions, // required
+                disableInjectedProvider: false, // optional. For MetaMask / Brave / Opera.
+            });
+        },
+        async connect(){
+            console.log("Opening a dialog", this.web3Modal);
+            try {
+                this.provider = await this.web3Modal.connect();
+                await this.choices();
+            } catch (e) {
+                console.log("Could not get a wallet connection", e);
+                return;
             }
+
+        },
+        async disconnect() {
+            if (this.provider.close)
+                await this.provider.close();
+        },
+        async choices() {
+            const abi = await (await fetch("/js/Voting.json")).json();
+
+            const web3 = new Web3(this.provider);
+            const votingContract = await new web3.eth.Contract(abi.abi, "0x3d8533e4ea8D1d6fA0b033c89Fc8240EcfE75bd3");
+
+            let accounts = await web3.eth.getAccounts();
+            /*
+            let accounts = [];
+            accounts = await window.ethereum.request({method: 'eth_requestAccounts'})
+                .catch((e) => {
+                    console.error(e.message)
+                    return;
+                })*/
+
+            let response = await votingContract.methods
+                .availableVotings()
+                .call({from: accounts[0]});
+
+
+            for (let voting of response) {
+                this.votings.push({
+                    id: parseInt(voting.id),
+                    name: voting.name
+                })
+            }
+
         }
     }
+}
 
 
