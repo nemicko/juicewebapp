@@ -8,6 +8,7 @@ module.exports = {
         }
     },
     mounted:function(){
+        location.href = "/#/voting";
         this.checkMetamask()
     },
     methods: {

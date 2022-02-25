@@ -102,6 +102,8 @@ module.exports = {
                     .send({from: this.accounts[0]});
 
                 alert("Vielen dank für deine Wahl");
+
+                document.location.reload();
             }
         }
     }
