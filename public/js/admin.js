@@ -52,7 +52,7 @@ module.exports = {
                 })
 
             let response = await votingContract.methods
-                .addVoter("0xECF5A576A949aEE5915Afb60E0e62D09825Cd61B", 0, 3)  //function in contract
+                .addVoter("0x9762fdD6BFF2906C3ae62ae6b4836aC89328e1D0", 0, 10)  //function in contract
                 .send({
                     from: accounts[0],
                     gasPrice: '20000000000'

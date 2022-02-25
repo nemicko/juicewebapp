@@ -5,7 +5,8 @@ module.exports = {
         return {
             users: [],
             title: '',
-            votings: []
+            votings: [],
+            connected: false
         }
     },
     mounted: function () {
@@ -14,7 +15,6 @@ module.exports = {
     },
     methods: {
         async test(){
-
             const Web3Modal = window.Web3Modal.default;
             const WalletConnectProvider = window.WalletConnectProvider.default;
 
@@ -39,20 +39,18 @@ module.exports = {
             console.log("Opening a dialog", this.web3Modal);
             try {
                 this.provider = await this.web3Modal.connect();
+                this.connected = true;
                 await this.choices();
             } catch (e) {
                 console.log("Could not get a wallet connection", e);
                 return;
             }
-
         },
         async disconnect() {
             if (this.provider.close)
                 await this.provider.close();
             document.getElementById('toggle').style.visibility ='visible';
             document.getElementById('togglevotings').style.visibility ='hidden';
-
-
         },
         async choices() {
             const abi = await (await fetch("/js/Voting.json")).json();
@@ -61,6 +59,7 @@ module.exports = {
             const votingContract = await new web3.eth.Contract(abi.abi, "0x3d8533e4ea8D1d6fA0b033c89Fc8240EcfE75bd3");
 
             let accounts = await web3.eth.getAccounts();
+
             /*
             let accounts = [];
             accounts = await window.ethereum.request({method: 'eth_requestAccounts'})
@@ -76,7 +75,7 @@ module.exports = {
 
             for (let voting of response) {
                 let index = this.votings.findIndex(voting => voting.name == voting.name);
-// here you can check specific property for an object whether it exist in your array or not
+                // here you can check specific property for an object whether it exist in your array or not
 
                 index === -1 ? this.votings.push({
                     id: parseInt(voting.id),
