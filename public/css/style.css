@@ -10,17 +10,19 @@ body {
     height: auto;
     float: none;
     background-image: url("https://images.unsplash.com/photo-1508615070457-7baeba4003ab?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
-    background-repeat: no-repeat;
-    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
-
+    background-position: center;
 }
 
 .min-width{
-    min-width:800px;
+    min-width:700px;
 }
 
 .login-button {
+    width: 100%;
     appearance: none;
     background-color: #FCFCFD;
     border-radius: 6px;
@@ -32,7 +34,6 @@ body {
     line-height: 5px;
     list-style: none;
     padding: 32px 32px;
-    text-align: center;
     text-decoration: none;
     transition: box-shadow .15s,transform .15s;
     user-select: none;
@@ -41,7 +42,6 @@ body {
     will-change: box-shadow,transform;
     font-size: 20px;
     margin: 15px -150px;
-    size: auto;
 }
 
 .login-button:focus {
@@ -224,7 +224,8 @@ body {
 
 .bordercenter{
     margin: auto;
-    width: 50%;
+    width: 100%;
+    margin-top: 200px;
     padding: 50px;
     size: auto;
 }
