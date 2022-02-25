@@ -24,18 +24,13 @@ body {
     appearance: none;
     background-color: #FCFCFD;
     border-radius: 6px;
-    border-width: 0;
     box-shadow: rgba(45, 35, 66, 0.4) 0 8px 16px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
-    box-sizing: border-box;
     color: #36395A;
     cursor: pointer;
-    display: inline-flex;
     font-family: "JetBrains Mono",monospace;
-    height: 25px;
     justify-content: center;
     line-height: 5px;
     list-style: none;
-    overflow: hidden;
     padding: 32px 32px;
     text-align: center;
     text-decoration: none;
@@ -43,7 +38,6 @@ body {
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-    white-space: nowrap;
     will-change: box-shadow,transform;
     font-size: 20px;
     margin: 15px -150px;

@@ -49,6 +49,10 @@ module.exports = {
         async disconnect() {
             if (this.provider.close)
                 await this.provider.close();
+            document.getElementById('toggle').style.visibility ='visible';
+            document.getElementById('togglevotings').style.visibility ='hidden';
+
+
         },
         async choices() {
             const abi = await (await fetch("/js/Voting.json")).json();
@@ -78,6 +82,9 @@ module.exports = {
                     id: parseInt(voting.id),
                     name: voting.name
                 }) : console.log("object already exists")
+                document.getElementById('toggle').style.visibility ='hidden';
+                document.getElementById('togglevotings').style.visibility ='visible';
+
 
 
             }

@@ -11,11 +11,11 @@
       <div class="text-center" id="loginPage">
         <div class="col-md-12 col-xl-12 col-lg-12 col-sm-12 text-center bordercentertitle">
             <div v-for="vote in votings" :key="vote.id">
-              <router-link style="text-decoration: none;" :to="{ name: 'vote', params: { id: vote.id }}">
+              <router-link id="togglevotings" style="text-decoration: none;" :to="{ name: 'vote', params: { id: vote.id }}">
                 <span class="text-center font1 hyperlink">{{vote.name}}</span>
               </router-link>
             </div>
-            <button class="btn btn-lg login-button" type="button" @click="connect()">Connect Wallet</button>
+            <button class="btn btn-lg login-button" type="button" id="toggle" @click="connect()">Connect Wallet</button>
             <br>
             <button class="btn btn-lg login-button" type="button" @click="disconnect()">Disconnect Wallet</button>
             <br>
