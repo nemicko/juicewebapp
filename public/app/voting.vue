@@ -28,7 +28,8 @@
               </router-link>
             </div>
 
-            <button class="btn btn-lg login-button" type="button" id="toggle" @click="connect()">Connect Wallet</button>
+            <div style="color:white;" v-if="connected && votings.length == 0">Es stehen aktuell keine wahlen zur verfügung</div>
+            <button v-if="!connected" class="btn btn-lg login-button" type="button" id="toggle" @click="connect()">Connect Wallet</button>
         </div>
       </div>
     </div>

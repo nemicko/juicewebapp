@@ -6,15 +6,14 @@ module.exports = {
             accounts: [],
             options: [],
             results: [],
-            votes: 0
+            votesLeft: 0,
         }
     },
     mounted: async function() {
-        await this.test();
-
+        await this.connect();
     },
     methods: {
-        async test(){
+        async connect(){
 
             const Web3Modal = window.Web3Modal.default;
             const WalletConnectProvider = window.WalletConnectProvider.default;
@@ -62,21 +61,29 @@ module.exports = {
                 .getVotingOptions(votingId)  //function in contract
                 .call({from: this.accounts[0]});
 
-            this.votes = await this.contract.methods
-                .myVotes(votingId)  //function in contract
-                .call({from: this.accounts[0]});
-
             await this.loadResults();
         },
         async loadResults(){
+            debugger;
             const votingId = this.$router.history.current.params.id;
 
+            const voted = await this.contract.methods
+                .myVotes(votingId)
+                .call({from: this.accounts[0]});
+
+            const votes = await this.contract.methods
+                .canIVote(votingId)
+                .call({from: this.accounts[0]});
+
+            this.votesLeft = parseInt(votes) - parseInt(voted);
+
+            const results = [];
             for(let i=0;i<this.options.length;i++){
                 const voted = await this.contract.methods
                     .getVoters(votingId, i)
                     .call({from: this.accounts[0]})
 
-                const results = [];
+
                 for(let vote of voted){
                     if (vote == this.accounts[0]) {
                         if (results.length > i){
@@ -86,10 +93,8 @@ module.exports = {
                         }
                     }
                 }
-
-                this.results = [...results];
-                console.log(this.results);
             }
+            this.results = [...results];
         },
         async vote(index) {
             const votingId = this.$router.history.current.params.id;
@@ -102,7 +107,6 @@ module.exports = {
                     .send({from: this.accounts[0]});
 
                 alert("Vielen dank für deine Wahl");
-
                 document.location.reload();
             }
         }

@@ -5,8 +5,8 @@
       <small>Steisslingen am Bodensee</small>
     </h1>
 
-    <div v-if="!connected" style="text-align: center;padding: 10%;font-size: 1.2em;">
-      Stimme über Button abgeben. Sie haben noch <span style="font-weight: bold;">(5)</span> stimmen abzugeben.
+    <div style="text-align: center;padding: 10%;font-size: 1.2em;">
+      Stimme über Button abgeben. Sie haben noch <span style="font-weight: bold;">({{votesLeft}})</span> stimmen abzugeben.
     </div>
 
     <div id="votes"></div>

@@ -1,4 +1,3 @@
-
 module.exports = {
 
     data() {
@@ -11,7 +10,6 @@ module.exports = {
     },
     mounted: function () {
         this.test();
-        //this.choices()
     },
     methods: {
         async test(){
@@ -49,45 +47,28 @@ module.exports = {
         async disconnect() {
             if (this.provider.close)
                 await this.provider.close();
-            document.getElementById('toggle').style.visibility ='visible';
-            document.getElementById('togglevotings').style.visibility ='hidden';
         },
         async choices() {
             const abi = await (await fetch("/js/Voting.json")).json();
 
             const web3 = new Web3(this.provider);
             const votingContract = await new web3.eth.Contract(abi.abi, "0x3d8533e4ea8D1d6fA0b033c89Fc8240EcfE75bd3");
+            const accounts = await web3.eth.getAccounts();
 
-            let accounts = await web3.eth.getAccounts();
-
-            /*
-            let accounts = [];
-            accounts = await window.ethereum.request({method: 'eth_requestAccounts'})
-                .catch((e) => {
-                    console.error(e.message)
-                    return;
-                })*/
-
-            let response = await votingContract.methods
+            const response = await votingContract.methods
                 .availableVotings()
                 .call({from: accounts[0]});
 
+            this.votings = [...response.reduce((last, value) => {
+                if (value.name.length > 0)
+                    last.push({
+                        id: parseInt(value.id),
+                        name: value.name
+                    });
+                return last;
+            }, [])];
 
-            for (let voting of response) {
-                let index = this.votings.findIndex(voting => voting.name == voting.name);
-                // here you can check specific property for an object whether it exist in your array or not
-
-                index === -1 ? this.votings.push({
-                    id: parseInt(voting.id),
-                    name: voting.name
-                }) : console.log("object already exists")
-                document.getElementById('toggle').style.visibility ='hidden';
-                document.getElementById('togglevotings').style.visibility ='visible';
-
-
-
-            }
-
+            debugger;
         }
     }
 }
