@@ -11,7 +11,7 @@
       <br/>
       Diese wahl wird dezentral ausgeführt, basierend
       auf Blockchain Technologie. Zur teilname wird
-      "Metatask" benötigt.
+      "MetaMask" benötigt.
     </div>
 
     <div v-if="connected" style="text-align: center;padding: 10%;font-size: 1.2em;">

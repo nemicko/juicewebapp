@@ -1,14 +1,34 @@
+import PieChart from './PieChart.js'
 module.exports = {
+    components: {
+        PieChart,
+    },
     data() {
         return {
             votings: [],
-            options: []
+            options: [],
+            datacollection: null
         }
     },
     mounted: function () {
         this.stats();
+        this.fillData();
     },
     methods: {
+        async fillData () {
+            this.datacollection = {
+                labels: this.options,
+                datasets: [
+                    {
+                        label: 'Votes',
+                        data: this.votings,
+                        backgroundColor: [
+                            'rgba(246,187,20,0.9)',
+                            'rgba(13,219,22,0.9)']
+                    },
+                ]
+            }
+        },
         async test(){
             const Web3Modal = window.Web3Modal.default;
             const WalletConnectProvider = window.WalletConnectProvider.default;
@@ -70,5 +90,3 @@ module.exports = {
         }
     }
 }
-
-
