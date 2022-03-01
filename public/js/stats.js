@@ -1,8 +1,9 @@
-import PieChart from './PieChart.js'
+//import PieChart from './PieChart.js'
+//const {Chart} = require("Chart.js");
 module.exports = {
-    components: {
+    /*components: {
         PieChart,
-    },
+    },*/
     data() {
         return {
             votings: [],
@@ -12,22 +13,54 @@ module.exports = {
     },
     mounted: function () {
         this.stats();
-        this.fillData();
+        //this.fillData();
     },
     methods: {
         async fillData () {
-            this.datacollection = {
-                labels: this.options,
-                datasets: [
-                    {
-                        label: 'Votes',
-                        data: this.votings,
-                        backgroundColor: [
-                            'rgba(246,187,20,0.9)',
-                            'rgba(13,219,22,0.9)']
+            new Chart("myBarChart", {
+                type: "bar",
+                data: {
+                    labels: this.options,
+                    datasets: [{
+                        backgroundColor: ["#89a0c1", "#d9b9a1"],
+                        data: this.votings
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    legend: {display: false},
+                    title: {
+                        display: true,
+                        text: "Voting 0 results",
                     },
-                ]
-            }
+                    scales: {
+                        yAxes: [{
+                            ticks:{
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            })
+
+            new Chart("myPieChart", {
+                type: "pie",
+                data: {
+                    labels: this.options,
+                    datasets: [{
+                        backgroundColor: ["#89a0c1", "#d9b9a1"],
+                        data: this.votings
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    legend: {display: false},
+                    title: {
+                        display: true,
+                        text: "Voting 0 results",
+                    }
+                }
+            })
         },
         async test(){
             const Web3Modal = window.Web3Modal.default;
