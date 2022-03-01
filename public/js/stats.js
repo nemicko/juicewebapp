@@ -15,10 +15,7 @@ module.exports = {
                     categories: ["Coca Cola", "Fanta", "Spezi"]
                 }
             },
-            series: [{
-                name: 'series-1',
-                data: []
-            }]
+            series: []
         }
     },
     mounted: function () {
@@ -92,13 +89,20 @@ module.exports = {
                 .call({from: accounts[0]});
 
 
+            const series = {
+                name: "Options",
+                data: []
+            };
+
             for(let i=0;i<this.options.length;i++){
                 const response = await votingContract.methods
                     .getVoters(votingId, i)
                     .call({from: accounts[0]});
                 this.votings.push(response.length);
-                this.series[0].data.push(response.length);
+                series.data.push(response.length);
             }
+
+            this.series =[series];
 
         }
     }
