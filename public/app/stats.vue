@@ -10,10 +10,6 @@
       <canvas id="myPieChart" style="width:100%;max-width:400px"></canvas>
 
       <button @click="fillData()">Update data</button>
-
-      <!--<div>
-        <pie-chart :chart-data="datacollection"></pie-chart>
-      </div>-->
     </div>
     <div class="col-1"></div>
   </div>

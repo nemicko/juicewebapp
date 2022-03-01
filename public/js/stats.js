@@ -1,9 +1,5 @@
-//import PieChart from './PieChart.js'
-//const {Chart} = require("Chart.js");
+
 module.exports = {
-    /*components: {
-        PieChart,
-    },*/
     data() {
         return {
             votings: [],
@@ -22,7 +18,7 @@ module.exports = {
                 data: {
                     labels: this.options,
                     datasets: [{
-                        backgroundColor: ["#89a0c1", "#d9b9a1"],
+                        backgroundColor: ["#89a0c1", "#85D491"],
                         data: this.votings
                     }]
                 },
@@ -31,7 +27,7 @@ module.exports = {
                     legend: {display: false},
                     title: {
                         display: true,
-                        text: "Voting 0 results",
+                        text: "Voting "+this.$router.history.current.params.id+" results",
                     },
                     scales: {
                         yAxes: [{
@@ -48,7 +44,7 @@ module.exports = {
                 data: {
                     labels: this.options,
                     datasets: [{
-                        backgroundColor: ["#89a0c1", "#d9b9a1"],
+                        backgroundColor: ["#89a0c1", "#85D491"],
                         data: this.votings
                     }]
                 },
@@ -57,7 +53,7 @@ module.exports = {
                     legend: {display: false},
                     title: {
                         display: true,
-                        text: "Voting 0 results",
+                        text: "Voting "+this.$router.history.current.params.id+" results",
                     }
                 }
             })
