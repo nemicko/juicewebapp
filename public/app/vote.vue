@@ -6,7 +6,8 @@
     </h1>
 
     <div style="text-align: center;padding: 10%;font-size: 1.2em;">
-      Stimme über Button abgeben. Sie haben noch <span style="font-weight: bold;">({{votesLeft}})</span> stimmen abzugeben.
+      Bitte gib Deine Stimme über den Button ab. Wiederhole den Vorgang bis Du alle Stimmen verteilt hast.
+      Du hast noch <span style="font-weight: bold;">({{votesLeft}})</span> Stimmen abzugeben.
     </div>
 
     <div id="votes"></div>
@@ -27,9 +28,11 @@
       </div>
     </div>
 
+    <!--
     <div style="position:absolute;bottom: 50px;margin: 0 auto;width: 100%;text-align: center;">
       <button style="display:inline-block">BACK</button>
     </div>
+    -->
 
   </div>
 </template>

@@ -1,4 +1,10 @@
 <template>
+  <div class="main">
+  <h1 class="headerfont">
+    Wahl Jugendversammlung
+    <small>Steisslingen am Bodensee</small>
+  </h1>
+
 
   <div class="row">
     <div class="col-1"></div>
@@ -7,13 +13,13 @@
         {{option}} : {{votings[index]}}
       </div>
       <div>
-        <pie-chart :chart-data="datacollection"></pie-chart>
+        <apexchart  type="bar" :options="optionsChart" :series="series"></apexchart>
         <button @click="fillData()">Update data</button>
       </div>
     </div>
     <div class="col-1"></div>
   </div>
-
+  </div>
 </template>
 
 <script src="/js/stats.js"></script>

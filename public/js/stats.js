@@ -1,13 +1,24 @@
-import PieChart from './PieChart.js'
 module.exports = {
     components: {
-        PieChart,
+        apexchart: VueApexCharts
     },
     data() {
         return {
             votings: [],
             options: [],
-            datacollection: null
+            datacollection: null,
+            optionsChart: {
+                chart: {
+                    id: 'vuechart-example'
+                },
+                xaxis: {
+                    categories: ["Coca Cola", "Fanta", "Spezi"]
+                }
+            },
+            series: [{
+                name: 'series-1',
+                data: []
+            }]
         }
     },
     mounted: function () {
@@ -80,11 +91,13 @@ module.exports = {
                 .getVotingOptions(votingId)  //function in contract
                 .call({from: accounts[0]});
 
+
             for(let i=0;i<this.options.length;i++){
                 const response = await votingContract.methods
                     .getVoters(votingId, i)
                     .call({from: accounts[0]});
                 this.votings.push(response.length);
+                this.series[0].data.push(response.length);
             }
 
         }

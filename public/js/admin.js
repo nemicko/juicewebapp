@@ -51,8 +51,28 @@ module.exports = {
                     return
                 })
 
+            debugger;
+
+            /*
             let response = await votingContract.methods
-                .addVoter("0xe076855b4cfc724619D6A7caf1693d333d888B8a", 0, 10)  //function in contract
+                .addOption(1, "Spezi")  //function in contract
+                .send({
+                    from: accounts[0]
+                });
+            console.log("response: ", response);
+            */
+            /*
+            let response = await votingContract.methods
+                .createVoting("PreTest")  //function in contract
+                .send({
+                    from: accounts[0]
+                });
+            console.log("response: ", response);
+            */
+
+
+            let response = await votingContract.methods
+                .addVoter("0x963c73C47b748870Db9682bc09d4ae0C2c7826BE", 1, 2)  //function in contract
                 .send({
                     from: accounts[0],
                     gasPrice: '20000000000'
@@ -65,7 +85,6 @@ module.exports = {
                 .availableVotings()  //function in contract
                 .call();
             console.log("response: ", response);
-
              */
 
             let title = document.getElementById('title').value;

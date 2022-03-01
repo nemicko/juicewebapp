@@ -6,16 +6,14 @@
     </h1>
 
     <div v-if="!connected" style="text-align: center;padding: 10%;font-size: 1.2em;">
-      Willkommen bei der Wahl zur Jugendversammlung,
-      in Steisslingen am Bodensee am 05.03.2022.
-      <br/>
-      Diese wahl wird dezentral ausgeführt, basierend
-      auf Blockchain Technologie. Zur teilname wird
-      "MetaMask" benötigt.
+      Willkommen zur Wahl der Jugendversammlung in Steisslingen am 05.03.2022.
+      Bei dieser Wahl wird ein Prototyp einer digitalen Wahl getestet. Wissenschaftlich wird der Test durch die Hochschule für öffentliche Verwaltung Kehl begleitet.
+      Die technischen Systeme sind dezentral organisiert und stellen ein höchstes Maß an Sicherheit basierend auf der Blockchain Technologie dar.
+      Zur Teilnahme wird die App "Metamask" benötigt.
     </div>
 
     <div v-if="connected" style="text-align: center;padding: 10%;font-size: 1.2em;">
-      Bitte wählen sie die Wahl zur teilnahme aus.
+      Bitte wähle die Wahl an der Du teilnehmen möchtest aus:
     </div>
 
     <div class="container py-20 h-40 p-15 text-white text-center bg-dark bg-opacity-10 rounded-3">
