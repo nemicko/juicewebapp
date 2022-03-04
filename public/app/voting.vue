@@ -2,14 +2,14 @@
   <div class="main">
     <h1 class="headerfont">
       Wahl Jugendversammlung
-      <small>Steisslingen am Bodensee</small>
+      <small>Steißlingen am Bodensee</small>
     </h1>
 
     <div v-if="!connected" style="text-align: center;padding: 10%;font-size: 1.2em;">
-      Willkommen zur Wahl der Jugendversammlung in Steisslingen am 05.03.2022.
+      Willkommen zur Wahl der Jugendversammlung in Steißlingen am 05.03.2022.
       Bei dieser Wahl wird ein Prototyp einer digitalen Wahl getestet. Wissenschaftlich wird der Test durch die Hochschule für öffentliche Verwaltung Kehl begleitet.
-      Die technischen Systeme sind dezentral organisiert und stellen ein höchstes Maß an Sicherheit basierend auf der Blockchain Technologie dar.
-      Zur Teilnahme wird die App "Metamask" benötigt.
+      <br/>
+      Zur Teilnahme wird die App "Trust Wallet" benötigt.
     </div>
 
     <div v-if="connected" style="text-align: center;padding: 10%;font-size: 1.2em;">
@@ -26,7 +26,7 @@
               </router-link>
             </div>
 
-            <div style="color:white;" v-if="connected && votings.length == 0">Es stehen aktuell keine wahlen zur verfügung</div>
+            <div style="color:white;" v-if="connected && votings.length == 0">Es stehen aktuell keine Wahlen zur verfügung</div>
             <button v-if="!connected" class="btn btn-lg login-button" type="button" id="toggle" @click="connect()">Connect Wallet</button>
         </div>
       </div>

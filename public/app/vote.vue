@@ -2,7 +2,7 @@
   <div class="main">
     <h1 class="headerfont">
       Wahl Jugendversammlung
-      <small>Steisslingen am Bodensee</small>
+      <small>Steißlingen am Bodensee</small>
     </h1>
 
     <div style="text-align: center;padding: 10%;font-size: 1.2em;">
