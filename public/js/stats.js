@@ -46,7 +46,7 @@ module.exports = {
                     package: WalletConnectProvider,
                     options: {
                         rpc: {
-                            1: "https://mainnet.infura.io/v3/9866d71dd4694c5cb8dca31a8822e2c6"
+                            4: "https://rinkeby.infura.io/ws/v3/0259ffc6b3224ad18604966261aeb502"
                         }
                     }
                 }
@@ -79,7 +79,7 @@ module.exports = {
             const abi = await (await fetch("/js/Voting.json")).json();
 
             const web3 = new Web3(window.ethereum);
-            const votingContract = await new web3.eth.Contract(abi.abi, "0x3079E3D3eebD999110d2f199C62c88aD90D226CD");
+            const votingContract = await new web3.eth.Contract(abi.abi, "0xeD24ae82E68bAC247d77e3cd17F8dfC0e8B04dCB");
 
             let accounts = [];
             accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });

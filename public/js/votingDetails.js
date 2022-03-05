@@ -23,7 +23,7 @@ module.exports = {
                     package: WalletConnectProvider,
                     options: {
                         rpc: {
-                            1: "https://mainnet.infura.io/v3/9866d71dd4694c5cb8dca31a8822e2c6"
+                            4: "https://rinkeby.infura.io/ws/v3/0259ffc6b3224ad18604966261aeb502"
                         }
                     }
                 }
@@ -50,7 +50,7 @@ module.exports = {
             const abi = await (await fetch("/js/Voting.json")).json();
 
             this.web3 = new Web3(this.provider);
-            this.contract = await new this.web3.eth.Contract(abi.abi, "0x3079E3D3eebD999110d2f199C62c88aD90D226CD");
+            this.contract = await new this.web3.eth.Contract(abi.abi, "0xeD24ae82E68bAC247d77e3cd17F8dfC0e8B04dCB");
 
             this.accounts = await this.web3.eth.getAccounts();
         },
