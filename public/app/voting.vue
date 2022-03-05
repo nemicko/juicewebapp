@@ -9,7 +9,7 @@
       Willkommen zur Wahl der Jugendversammlung in Steißlingen am 05.03.2022.
       Bei dieser Wahl wird ein Prototyp einer digitalen Wahl getestet. Wissenschaftlich wird der Test durch die Hochschule für öffentliche Verwaltung Kehl begleitet.
       <br/>
-      Zur Teilnahme wird die App "Trust Wallet" benötigt.
+      Zur Teilnahme wird die App "Meta Mask" benötigt.
     </div>
 
     <div v-if="connected" style="text-align: center;padding: 10%;font-size: 1.2em;">
@@ -26,7 +26,7 @@
               </router-link>
             </div>
 
-            <div style="color:white;" v-if="connected && votings.length == 0">Es stehen aktuell keine Wahlen zur verfügung</div>
+            <div style="color:white;" v-if="connected && votings.length == 0">Es stehen aktuell keine Wahlen zur Verfügung</div>
             <button v-if="!connected" class="btn btn-lg login-button" type="button" id="toggle" @click="connect()">Connect Wallet</button>
         </div>
       </div>

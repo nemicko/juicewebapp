@@ -17,7 +17,7 @@
         <button class="text-center voteButton" v-promise-btn v-for="(option, index) in options" @click="vote(index)">
           <div class="row">
               <div class="col-8">
-                {{option}}
+                {{getName(option)}}
               </div>
               <div class="col-2">
                 <span class="badge bg-secondary">{{results[index]}}</span>

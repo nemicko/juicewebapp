@@ -46,6 +46,13 @@ module.exports = {
             await this.init();
             await this.choices()
         },
+        getName(option){
+            let names = {
+                'option_a': "OP1",
+                'option_b': "OP2"
+            };
+            return names[option];
+        },
         async init() {
             const abi = await (await fetch("/js/Voting.json")).json();
 
@@ -99,14 +106,14 @@ module.exports = {
         async vote(index) {
             const votingId = this.$router.history.current.params.id;
 
-            const doIt = confirm("Wollen Sie für '" + this.options[index] + "' ihre Stimme abgeben");
+            const doIt = confirm("Willst du für '" + this.options[index] + "' deine Stimme abgeben");
 
             if (doIt) {
                 await this.contract.methods
                     .vote(votingId, index)  //function in contract
                     .send({from: this.accounts[0]});
 
-                alert("Vielen dank für deine Wahl");
+                alert("Vielen Dank für deine Wahl");
                 document.location.reload();
             }
         }
