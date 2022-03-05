@@ -12,7 +12,7 @@ module.exports = {
                     id: 'vuechart-example'
                 },
                 xaxis: {
-                    categories: ["Coca Cola", "Fanta", "Spezi"]
+                    categories: ["Frederik Metz", "Finn Alber", "Luca Metz", "Leonie Boos", "Aileen Lettau", "Richarda Maier" ]
                 }
             },
             series: []
@@ -46,7 +46,7 @@ module.exports = {
                     package: WalletConnectProvider,
                     options: {
                         rpc: {
-                            4: "https://rinkeby.infura.io/ws/v3/0259ffc6b3224ad18604966261aeb502"
+                            4: "https://mainnet.infura.io/v3/9866d71dd4694c5cb8dca31a8822e2c6"
                         }
                     }
                 }

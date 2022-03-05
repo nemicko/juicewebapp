@@ -23,7 +23,7 @@ module.exports = {
                     package: WalletConnectProvider,
                     options: {
                         rpc: {
-                            4: "https://rinkeby.infura.io/ws/v3/0259ffc6b3224ad18604966261aeb502"
+                            4: "https://mainnet.infura.io/v3/9866d71dd4694c5cb8dca31a8822e2c6"
                         }
                     }
                 }
@@ -48,8 +48,12 @@ module.exports = {
         },
         getName(option){
             let names = {
-                'option_a': "OP1",
-                'option_b': "OP2"
+                'option_a': "Frederik Metz",
+                'option_b': "Finn Alber",
+                'option_c': "Luca Metz",
+                'option_d': "Leonie Boos",
+                'option_e': "Aileen Lettau",
+                'option_f': "Richarda Maier"
             };
             return names[option];
         },
