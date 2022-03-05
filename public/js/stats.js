@@ -46,7 +46,7 @@ module.exports = {
                     package: WalletConnectProvider,
                     options: {
                         rpc: {
-                            56: "https://bsc-dataseed.binance.org"
+                            1: "wss://mainnet.infura.io/ws/v3/9866d71dd4694c5cb8dca31a8822e2c6"
                         }
                     }
                 }
@@ -79,7 +79,7 @@ module.exports = {
             const abi = await (await fetch("/js/Voting.json")).json();
 
             const web3 = new Web3(window.ethereum);
-            const votingContract = await new web3.eth.Contract(abi.abi, "0x281C2f279c0A32d7DF6Ff8eBc9445Bc3d801D455");
+            const votingContract = await new web3.eth.Contract(abi.abi, "0x3079E3D3eebD999110d2f199C62c88aD90D226CD");
 
             let accounts = [];
             accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });

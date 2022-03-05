@@ -23,7 +23,7 @@ module.exports = {
                     package: WalletConnectProvider,
                     options: {
                         rpc: {
-                            56: "https://bsc-dataseed.binance.org"
+                            1: "wss://mainnet.infura.io/ws/v3/9866d71dd4694c5cb8dca31a8822e2c6"
                         }
                     }
                 }
@@ -50,7 +50,7 @@ module.exports = {
             const abi = await (await fetch("/js/Voting.json")).json();
 
             this.web3 = new Web3(this.provider);
-            this.contract = await new this.web3.eth.Contract(abi.abi, "0x281C2f279c0A32d7DF6Ff8eBc9445Bc3d801D455");
+            this.contract = await new this.web3.eth.Contract(abi.abi, "0x3079E3D3eebD999110d2f199C62c88aD90D226CD");
 
             this.accounts = await this.web3.eth.getAccounts();
         },
@@ -99,7 +99,7 @@ module.exports = {
         async vote(index) {
             const votingId = this.$router.history.current.params.id;
 
-            const doIt = confirm("Wollen sie für '" + this.options[index] + "' ihre stimme abgeben");
+            const doIt = confirm("Wollen Sie für '" + this.options[index] + "' ihre Stimme abgeben");
 
             if (doIt) {
                 await this.contract.methods
