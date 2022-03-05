@@ -21,9 +21,6 @@ module.exports = {
     mounted: function () {
         this.stats();
         this.fillData();
-        setInterval(() => {
-            window.location.reload();
-        }, 4000);
     },
     methods: {
         async fillData () {
