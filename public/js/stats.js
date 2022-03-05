@@ -12,7 +12,7 @@ module.exports = {
                     id: 'vuechart-example'
                 },
                 xaxis: {
-                    categories: ["Frederik Metz", "Finn Alber", "Luca Metz", "Leonie Boos", "Aileen Lettau", "Richarda Maier" ]
+                    categories: ["Frederik Metz", "Finn Alber", "Luca Metz", "Leonie Boos", "Aileen Lettau", "Riccarda Maier" ]
                 }
             },
             series: []
@@ -21,6 +21,9 @@ module.exports = {
     mounted: function () {
         this.stats();
         this.fillData();
+        setInterval(() => {
+            window.location.reload();
+        }, 4000);
     },
     methods: {
         async fillData () {

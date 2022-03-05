@@ -53,7 +53,7 @@ module.exports = {
                 'option_c': "Luca Metz",
                 'option_d': "Leonie Boos",
                 'option_e': "Aileen Lettau",
-                'option_f': "Richarda Maier"
+                'option_f': "Riccarda Maier"
             };
             return names[option];
         },
