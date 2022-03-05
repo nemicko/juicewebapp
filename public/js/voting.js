@@ -21,7 +21,7 @@ module.exports = {
                     package: WalletConnectProvider,
                     options: {
                         rpc: {
-                            1: "wss://mainnet.infura.io/ws/v3/9866d71dd4694c5cb8dca31a8822e2c6"
+                            1: "https://mainnet.infura.io/v3/9866d71dd4694c5cb8dca31a8822e2c6"
                         }
                     }
                 }
