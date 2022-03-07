@@ -88,7 +88,7 @@ module.exports = {
 
             this.votesLeft = parseInt(votes) - parseInt(voted);
 
-            const results = [];
+            const results = [0, 0, 0, 0, 0, 0];
             for(let i=0;i<this.options.length;i++){
                 const voted = await this.contract.methods
                     .getVoters(votingId, i)
@@ -97,11 +97,7 @@ module.exports = {
 
                 for(let vote of voted){
                     if (vote == this.accounts[0]) {
-                        if (results.length > i){
-                            results[i]++;
-                        }  else {
-                            results.push(1);
-                        }
+                        results[i]++;
                     }
                 }
             }

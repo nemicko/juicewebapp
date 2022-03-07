@@ -20,7 +20,7 @@
                 {{getName(option)}}
               </div>
               <div class="col-2">
-                <span class="badge bg-secondary">{{results[index]}}</span>
+                <span class="badge bg-secondary">{{results[index] != 0 ? results[index] : ''}}</span>
               </div>
           </div>
 
